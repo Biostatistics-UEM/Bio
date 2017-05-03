@@ -1,0 +1,19 @@
+---
+title: "Introdução"
+output: html_document
+---
+
+```{r,setup, include=FALSE}
+knitr::opts_chunk$set(comment = NULL,
+               message = FALSE)
+library(knitrBootstrap)
+```
+
+<!--A Estatística é um conjunto de métodos usados para analisar quantitativamente conjuntos de dados. A análise e modelagem dos dados tem por finalidade fazer inferência para uma população da qual os dados foi coletado e portanto desempenha um importante papel nos processos de tomada de decisão. -->
+A Estatística é um conjunto de métodos usados para analisar quantitativamente conjuntos de dados como evidência científica. O seu conhecimento desempenha um importante papel nos processos de tomada de decisão. 
+A Bioestatística é o termo que designa as aplicações da Estatística em Ciências Biológicas e da Saúde
+desde o splanejamento, coleta, avaliação e interpretação dos dados, ou seja, é o ramo da estatística responsável pela interpretação adequada dos dados científicos gerados na biologia, saúde pública e outras ciências da saúde. A bioestatística pode ser aplicada, por exemplo, em pesquisas sobre o tratamento de pacientes com duas terapias para justificar qual delas é melhor do que o outra. Os bioestatísticos participam e colaboram estreitamente de forma interdisciplinar com profissionais da área biomédica quando esses necessitam da aplicação da teoria estatística na condução de experimentos, ensaios clínicos ou estudos de algoritmos computacionais na área da saúde. A Bioestatística é parte integrante do avanço do conhecimento em biologia, política de saúde, medicina clínica, política de saúde pública, economia da saúde, genômica e outras disciplinas.
+A Bioestatística é uma das áreas da Estatística que mais cresceu nas últimas décadas, muito devido ao desenvolvimento e aprimoramento de técnicas estatísticas combinando com o avanço computacional. Muito da credibilidade dos resultados desta área em franca evolução depende da validação das pesquisas, o que vem tornando a Bioestatística como umas das área pioneiras oo princípio de gerar pesquisas científicas reprodutíveis seguindo o pressuposto da disponibilidade dos códigos fontes e dados utilizados.
+
+
+

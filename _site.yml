@@ -1,0 +1,25 @@
+name: "DES4024"
+output_dir: "."
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+    theme: cosmo
+navbar:
+  title: "Bioestatística"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Aulas"
+      href: aulas.html
+    - text: "Introdução"
+      href: bio.html
+    - text: "Análise Descritiva"
+      href: descritiva.html
+    - text: "Recursos Gráficos"  
+      href: graficos.html  
+    - text: "Introdução a Probabilidade"
+      href: probabilidade.html
+    - text: "Intervalo de Confiança"
+      href: IC.html

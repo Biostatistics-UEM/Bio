@@ -1,0 +1,128 @@
+\documentclass[9pt]{beamer}
+\usetheme[progressstyle=movCircCnt]{PBEsimple}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{animate}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{array,booktabs}
+\newcommand{\PR}[1]{\ensuremath{\left[#1\right]}}
+\newcommand{\PC}[1]{\ensuremath{\left(#1\right)}}
+\newcommand{\chav}[1]{\ensuremath{\left\{#1\right\}}}
+
+\title[Bioestatística]{\bf Bioestatística\\
+\vspace{.3\baselineskip}}
+\subtitle[]{\bf}
+
+\date{ 30 de Março de 2017}
+\author[Isolde Previdelli]{
+  Isolde Previdelli\\
+  \href{itsprevidelli@uem.br}{{\tt itsprevidelli@uem.br \\
+isoldeprevidelli@gmail.com \\ \vspace{8mm} \tt \textbf{\LARGE{AULA 6 -
+    Distribuição discreta}}}}
+}
+\institute[PBE/UEM]{}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{document}
+% Página Título
+{\pbebg
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}}
+
+%%%%%%%%%%%%%%
+\begin{frame}{Sumário}{}
+\tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%
+
+\section{Distribuição de Bernoulli}
+%\subsection{Etapas na análise de dados}
+
+\begin{frame}{Bernoulli}{}
+
+Uma variável aleatória que assume apenas valores 0 e 1 com função de
+probabilidade é representada por:
+$$X \sim Ber(p)$$
+
+$$
+    p(x)=p^{x}(1-p)^{1-x}
+$$
+
+$$E(x)=p$$
+
+$$Var(x)=p(1-p)$$
+
+\end{frame}
+
+
+\section{Distribuição Binomial}
+\begin{frame}{Binomial}{}
+Uma variável aleatória segue uma distribuição Binomial quando repetimos
+um ensaio Bernoulli $n$ vezes, ou seja, quando temos uma amostra de
+tamanho $n$ de uma distribuição Bernoulli.
+
+$$X \sim Bin(n,p)$$
+
+$$
+p(x)=\binom{n}{x}  p^{x}(1-p)^{n-x}
+$$
+
+
+$$E(x)=np$$
+
+$$Var(x)=np(1-p)$$
+
+
+\end{frame}
+
+\section{Distribuição Poisson}
+\begin{frame}{Poisson}{}
+
+O modelo Poisson tem sido muito utilizado em experimentos físicos e
+biológicos em que $\lambda$ mede a taxa de oorrência por unidade de
+medida, ou seja, o parâmetro $\lambda$ é frequência média ou esperada de
+ocorrências num determinado intervalo de tempo.
+
+$$X \sim Pois(\lambda)$$
+
+$$p(x)=\displaystyle\frac{e^{-\lambda}\lambda^{x}}{x!}$$
+
+$$E(x)=\lambda$$
+
+$$Var(x)=\lambda$$
+
+\end{frame}
+
+
+%\section{Distribuição Poison}
+\begin{frame}{Exemplos}{}
+
+\textbf{Alguns exemplos para aplicação das distribuições Bernoulli,
+Binomial e Poisson podem ser vistos no endereço abaixo:\\}
+\indent
+
+\url{https://biostatistics-uem.github.io/Bio/probabilidade.html}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%
+
+{\pbebg
+\begin{frame}[plain,noframenumbering]
+
+\finalpage{\begin{figure}[!htb]
+    \centering
+   \includegraphics[scale=0.475]{probII.jpg}
+  \end{figure}
+Obrigada!}
+
+\end{frame}}
+%%%%%%%%%%%%%%%%
+\end{document}

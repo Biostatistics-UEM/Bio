@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {portuguese}
+\beamer@sectionintoc {1}{Vari\IeC {\'a}vel Aleat\IeC {\'o}ria}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Fun\IeC {\c c}\IeC {\~a}o de distribui\IeC {\c c}\IeC {\~a}o}{5}{0}{1}
+\beamer@subsectionintoc {1}{2}{Fun\IeC {\c c}\IeC {\~a}o de probabilidade e densidade de probabilidade}{6}{0}{1}
+\beamer@subsectionintoc {1}{3}{Esperan\IeC {\c c}a matem\IeC {\'a}tica}{7}{0}{1}
+\beamer@subsectionintoc {1}{4}{Vari\IeC {\^a}ncia}{11}{0}{1}

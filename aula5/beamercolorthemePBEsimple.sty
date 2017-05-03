@@ -1,0 +1,45 @@
+% Esse e o arquivo adaptado de:
+% Copyright (c) 2014 by Jesper Kjær Nielsen <jkn@es.aau.dk>
+% para as paginas inicial e final do Tema PBE Simple.
+% 
+%
+% Esse programa e um software livre: voce pode reditribuir e/ou 
+% modifica-lo sob os termos da Licenca Geral Publica GNU como 
+% publicado pela Fundacao de Softwares Livres, ou pela versao 3 
+% da licenca, ou (opcionalmente) qualquer versao atual.
+%
+% Esse programa e distribuido na esperença de que possa ser util, 
+% mas, SEM QUALQUER GARANTIAS; mesmo sem a garantia implicita de 
+% COMERCIALIZACAO ou ADEQUACAO A PROPOSITOS PARTICULARES. Veja a 
+% Licenca Publica Geral GNU para mais detalhes.
+%
+% Voce pode encontrar a Licenca Publica Geral em 
+% <http://www.gnu.org/licenses/>.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemePBEsimple}[2014/04/08 v1.2.1 The PBE Simple Beamer Theme]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theme options and definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%beamer specific options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>%refers to the first four modes (beamer,handout,second and trans). That is, to all modes except the article mode
+{
+	\definecolor{beamer@barcolor}{RGB}{2,77,107}% light blue
+	\definecolor{beamer@headercolor}{RGB}{144,52,43}% dark red
+	\definecolor{beamer@normaltextcolor}{RGB}{0,0,0}% gray blue
+	\definecolor{black}{RGB}{0,0,0}
+	\definecolor{red}{RGB}{144,52,43}
+	\definecolor{blue}{RGB}{2,77,107}
+	\setbeamercolor{frametitle}{use=structure, fg=structure.fg, bg=structure.bg}
+	\setbeamercolor{PBEsimple}{bg=beamer@headercolor, fg=white}
+	\setbeamercolor{sidebar}{bg=beamer@normaltextcolor!30}
+	\setbeamercolor{structure}{fg=beamer@normaltextcolor}
+	\setbeamercolor{frametitle}{fg=white, bg=beamer@headercolor}
+	\setbeamercolor{title}{fg=white, bg=beamer@normaltextcolor}
+	\setbeamercolor{normal text}{fg=beamer@normaltextcolor, bg=white}
+	\newcommand{\chref}[2]{\href{#1}{{\usebeamercolor[bg]{PBEsimple}#2}}}
+}%end of beamer specific options
+\mode<all>

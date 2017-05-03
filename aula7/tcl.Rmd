@@ -1,0 +1,129 @@
+---
+title: "Teorema central do limite"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      comment=NA,
+                      warning = FALSE,
+                      message=FALSE,
+                      cache = TRUE)
+```
+
+Nesta aula será apresentado o **Teorema central do limite** que trata do estudo da convergência da soma de $n$ variáveis aleatórias para um modelo gaussiano. O Teorema central do limite possui várias versões e a demonstração de seus resultados serão omitidos aqui, mas alguns de seus teoremas e suas respectivas demonstrações podem ser encontradas no livro **Probabilidade e variáveis aletórias**, Marcos Nascimento Magalhães.
+
+Agora será apresentado um resultado muito importante decorrente deste teorema. Considere qualquer que seja a distribuição da variável de interesse para uma grande amostra e se calcularmos a média para $n$ amostras de mesmo tamanho, a distribuição dessas médias amostrais seguirá aproximadamente uma distribuição gaussiana, e tenderá a uma distribuição gaussiana à medida que o tamanho de amostra crescer. Então podemos ter uma variável original com uma distribuição discreta como a Binomial ou Poisson, por exemplo, e então se fizermos um gráfico da densidade das médias amostrais irá se aproximar empiricamente da distribuição teórica gaussiana.
+
+>Abaixo um exemplo no $R$
+
+Primeiro calculando médias de 10 amostras cada uma com 15 observações de uma certa população que pode seguir qualquer distribuição. A segunda distribuição teremos 30 amostras, depois 200 amostras e por fim 5000.
+Portanto as amostras com as médias amostrais terão tamanhos 10, 30, 200 e 5000 respectivamente.
+
+
+```{R}
+#====== N 10 ========
+set.seed(1999)
+y <- rnorm(1000)
+ystar <- NULL
+nBoot <- 10
+#número de amostras bootstrap 
+B <- array(0,dim=c(nBoot, 1)) # array p/ guardar o bootstrap
+for(i in 1:nBoot){
+#laço p/ bootstrap
+    ystar <- sample(y,size=15,replace=F)
+    B[i] <- mean(ystar)
+    }
+
+par(mfrow=c(2,2))
+hist(B,breaks='Sturges',prob=T,col='grey90',border='white',axes=F,
+     ylab='',cex.axis=0.65,main='',xlab='Dist. amostral das médias',
+     cex.lab=0.8,cex.main=0.8,ylim=c(0,1.8),font=2)
+axis(1, at=seq(-0.8,0.8,0.1), cex.axis=0.7)
+lines(density(B),col='darkblue')
+lines(sort(B),dnorm(sort(B), mean(B),sd(B)),col='darkorange')
+legend(0,1.5, legend = c("Empírica", "Teórica"),
+       bty='n',fill=c("darkblue", "darkorange"),
+       xjust = 1, yjust = 1,
+       text.col=c('darkblue','darkorange'),
+       col=c('darkblue','darkorange'))
+title(main=substitute(paste(italic('Amostra de tamanho'),bold(' 10'))),cex.main=1)
+
+#====== N 30 ========
+ystar <- NULL
+nBoot <- 30
+#número de amostras bootstrap 
+B <- array(0,dim=c(nBoot, 1)) # array p/ guardar o bootstrap
+for(i in 1:nBoot){
+#laço p/ bootstrap
+    ystar <- sample(y,size=15,replace=F)
+    B[i] <- mean(ystar)
+    }
+
+hist(B,breaks='Sturges',prob=T,col='grey90',border='white',axes=F,
+     ylab='',cex.axis=0.65,main='',xlab='Dist. amostral das médias',
+     cex.lab=0.8,cex.main=0.8,ylim=c(0,1.7),font=2)
+axis(1, at=seq(-0.8,0.8,0.1), cex.axis=0.7)
+lines(density(B),col='darkblue')
+lines(sort(B),dnorm(sort(B), mean(B),sd(B)),col='darkorange')
+legend(0,1.5, legend = c("Empírica", "Teórica"),
+       bty='n',fill=c("darkblue", "darkorange"),
+       xjust = 1, yjust = 1,
+       text.col=c('darkblue','darkorange'),
+       col=c('darkblue','darkorange'))
+title(main=substitute(paste(italic('Amostra de tamanho'),bold(' 30'))),cex.main=1)
+
+
+#====== N 200 ========
+ystar <- NULL
+nBoot <- 200
+#número de amostras bootstrap 
+B <- array(0,dim=c(nBoot, 1)) # array p/ guardar o bootstrap
+for(i in 1:nBoot){
+#laço p/ bootstrap
+    ystar <- sample(y,size=15,replace=F)
+    B[i] <- mean(ystar)
+    }
+
+hist(B,breaks='Sturges',prob=T,col='grey90',border='white',axes=F,
+     ylab='',cex.axis=0.65,main='',xlab='Dist. amostral das médias',
+     cex.lab=0.8,cex.main=0.8,ylim=c(0,1.7),font=2)
+axis(1, at=seq(-0.8,0.8,0.1), cex.axis=0.7)
+lines(density(B),col='darkblue')
+lines(sort(B),dnorm(sort(B), mean(B),sd(B)),col='darkorange')
+legend(0,1.5, legend = c("Empírica", "Teórica"),
+       bty='n',fill=c("darkblue", "darkorange"),
+       xjust = 1, yjust = 1,
+       text.col=c('darkblue','darkorange'),
+       col=c('darkblue','darkorange'))
+title(main=substitute(paste(italic('Amostra de tamanho'),bold(' 200'))),cex.main=1)
+
+#====== N 5000 ========
+ystar <- NULL
+nBoot <- 5000
+#número de amostras bootstrap 
+B <- array(0,dim=c(nBoot, 1)) # array p/ guardar o bootstrap
+for(i in 1:nBoot){
+#laço p/ bootstrap
+    ystar <- sample(y,size=15,replace=F)
+    B[i] <- mean(ystar)
+    }
+
+hist(B,breaks='Sturges',prob=T,col='grey90',border='white',axes=F,
+     ylab='',cex.axis=0.65,main='',xlab='Dist. amostral das médias',
+     cex.lab=0.8,cex.main=0.8,ylim=c(0,1.6),font=2)
+axis(1, at=seq(-0.8,0.8,0.1), cex.axis=0.7)
+lines(density(B),col='darkblue')
+lines(sort(B),dnorm(sort(B), mean(B),sd(B)),col='darkorange')
+legend(0,1.5, legend = c("Empírica", "Teórica"),
+       bty='n',fill=c("darkblue", "darkorange"),
+       xjust = 1, yjust = 1,
+       text.col=c('darkblue','darkorange'),
+       col=c('darkblue','darkorange'))
+title(main=substitute(paste(italic('Amostra de tamanho'),bold(' 5000'))),cex.main=1)
+
+
+```
+
+
+Nota-se que a aproximação para a distribuição gaussiana melhora à medida que o tamanho amostral das média cresce. E este resultado é notável pois dispensa o conhecimento da distribuição da população.

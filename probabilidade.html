@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Introdução a probabilidade</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bioestatística</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="aulas.html">Aulas</a>
+</li>
+<li>
+  <a href="bio.html">Introdução</a>
+</li>
+<li>
+  <a href="descritiva.html">Análise Descritiva</a>
+</li>
+<li>
+  <a href="graficos.html">Recursos Gráficos</a>
+</li>
+<li>
+  <a href="probabilidade.html">Introdução a Probabilidade</a>
+</li>
+<li>
+  <a href="IC.html">Intervalo de Confiança</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Introdução a probabilidade</h1>
+
+</div>
+
+
+<div id="conceitos-basicos-sobre-probabilidade" class="section level1">
+<h1>Conceitos Básicos sobre Probabilidade</h1>
+<p>Nesta seção vamos explorar os recursos do <em>R</em> para resolver problemas de Probabilidade usando conceitos básicos desta teoria até evoluir para as Distribuições de Probabilidade. Sugere-se um prévio conhecimento de Análise estatística descritiva e básico conhecimento de Cálculo.</p>
+<p>A leitura do material abaixo pode auxiliar no desenvolvimento do tema.</p>
+<div id="probabilidade" class="section level2">
+<h2>Probabilidade</h2>
+<p>A teoria da probabilidade é a base sobre a qual toda a estatística é desenvolvida, fornecendo um meio para modelar populações, experimentos ou, praticamente, qualquer outra coisa que possa ser considerada como um fenômeno aleatório. Por meio desses modelos os estatísticos são capazes de fazer inferências sobre populações através do exame de somente uma parte do todo. Em outras palavras é um conjunto de métodos para quantificar/mensurar a incerteza dos fenômenos.</p>
+</div>
+<div id="experimento" class="section level2">
+<h2>Experimento</h2>
+<p>Um experimento é qualquer processo que permite fazer observações. Um experimento pode ser aleatório ou determinístico.</p>
+<p>1- Experimentos aleatórios: são ocorrências que não podem ser previstos com certeza e sim associa-se uma probabilidade</p>
+<p>2- Experimentos determinísticos: são ocorrências previstas com certeza</p>
+</div>
+<div id="espaco-amostral" class="section level2">
+<h2>Espaço Amostral</h2>
+<p>Espaço amostral, <span class="math inline">\(\Omega\)</span>, é o conjunto de todos os resultados possíveis do experimento (Resultado elementar e indivisível).</p>
+<p><strong>obs: Todo resultado do experimento é subconjunto do espaço amostral.</strong></p>
+</div>
+<div id="evento" class="section level2">
+<h2>Evento</h2>
+<p>Um evento é uma coleção de possíveis resultados do experimento, normalmente é um subconjunto de <span class="math inline">\(\Omega\)</span>. Geralmente os eventos são representados por letras maiúsculas (A, B,…).</p>
+</div>
+<div id="sigma-algebra" class="section level2">
+<h2>Sigma-Álgebra</h2>
+<p>Sigma álgebra,<span class="math inline">\(\Lambda\)</span>, é uma família de subconjuntos/eventos <span class="math inline">\(\Omega\)</span>, se satisfazer as seguintes propriedades:</p>
+<p>1- <span class="math inline">\(\emptyset \in \Lambda\)</span></p>
+<p>2- Se <span class="math inline">\(A \in \Lambda \Rightarrow A^{c} \in \Lambda\)</span></p>
+<p>3- <span class="math inline">\(\Omega \in \Lambda\)</span></p>
+<p>4- Se <span class="math inline">\(A_{1}, A_{2},...,\in \Lambda \Rightarrow \displaystyle\cup_{i=1}^{\infty}A_{i} \in \Lambda\)</span></p>
+<blockquote>
+<p>Agora estamos em condição de definir uma função de probabilidade.</p>
+</blockquote>
+</div>
+<div id="definicao-classica-de-probabilidade-quando-omega-e-finito." class="section level2">
+<h2>Definição Clássica de Probabilidade (quando <span class="math inline">\(\Omega\)</span> é finito).</h2>
+<p><span class="math display">\[
+P(A)=\frac{\#A}{\#\Omega}
+\]</span></p>
+</div>
+<div id="definicao-axiomatica-kolmogorov" class="section level2">
+<h2>Definição Axiomática (Kolmogorov)</h2>
+<p>Definição axiomática de probabilidade em Sigma-Álgebra é a função <span class="math inline">\(P\)</span> definida em <span class="math inline">\(\Lambda\)</span> e que satisfaz os axiomas seguintes:</p>
+<p>A1- <span class="math inline">\(P(A)\ge0\)</span></p>
+<p>A2- <span class="math inline">\(P(\Omega)=1\)</span></p>
+<p>A3- Se A e B <span class="math inline">\(\in \Lambda\)</span> e são disjuntos <span class="math inline">\(\Rightarrow P(A \cup B) = P(A)+P(B)\)</span></p>
+<p>Logo qualquer função <span class="math inline">\(P\)</span> que satisfaça os axiomas acima é chamada função de probabilidade.</p>
+</div>
+<div id="espaco-de-probabilidade" class="section level2">
+<h2>Espaço de Probabilidade</h2>
+<p>Espaço de Probabilidade é o trio <span class="math inline">\((\Omega, \Lambda, P)\)</span>, que foram definidos acima.</p>
+<p><strong>Exemplo 1:</strong></p>
+<p>Um dado é lançado três vezes e é observado o evento de sair um número ímpar.</p>
+<p>A= Sair um número ímpar <span class="math display">\[ A= \{1,3,5\}\]</span> <span class="math display">\[ \Omega=\{1,2,3,4,5,6\}\]</span> <span class="math display">\[P(A)=\frac{\#A}{\#\Omega} =\frac{3}{6}=\frac{1}{2}\]</span></p>
+<p><strong>Exemplo 2:</strong></p>
+<p>Um dado é lançado três vezes e é observado o evento de sair um número menor que 3.</p>
+<p>B= Sair um número menor que 3</p>
+<p><span class="math display">\[ B= \{1,2,3\}\]</span> <span class="math display">\[\Omega=\{1,2,3,4,5,6\}\]</span> <span class="math display">\[ P(B)=\frac{\#B}{\#\Omega} =\frac{2}{6}=\frac{1}{3}\]</span></p>
+<p><strong>Exemplo 3:</strong></p>
+<p>Um dado é lançado e é observado o evento de sair um número maio que 10.</p>
+<p>C= Sair um número maior que 10</p>
+<p>C= Evento Impossível</p>
+<p><strong>Exemplo 4</strong></p>
+<p>Um dado é lançado e é observado o evento de sair um número inteiro maior ou igual a 1 e menor ou igual a 6.</p>
+<p>D= Sair um número menor que 3</p>
+<p>D= Evento Certo</p>
+<blockquote>
+<p>À partir dos axiomas de probabilidade, podemos derivar algumas propriedades da função de probabilidade.</p>
+</blockquote>
+<p>Se <span class="math inline">\(P\)</span> é uma função de probabilidade e <span class="math inline">\(A\)</span> é qualquer conjunto <span class="math inline">\(\in\)</span> <span class="math inline">\(\Lambda\)</span>, então:</p>
+<p>1- <span class="math inline">\(P(\emptyset)= 0\)</span>, onde <span class="math inline">\(\emptyset\)</span> é o conjunto vazio</p>
+<p>2- <span class="math inline">\(0 \leq P(A) \leq 1\)</span></p>
+<p>3- <span class="math inline">\(P(A^{c})=1-P(A)\)</span></p>
+<blockquote>
+<p>Se <span class="math inline">\(P\)</span> é uma função de probabilidade e <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> são quaisquer conjuntos <span class="math inline">\(\in\)</span> <span class="math inline">\(\Lambda\)</span>, então:</p>
+</blockquote>
+<p>1- <span class="math inline">\(P(B \cap A^{c})=P(B)-P(A \cap B)\)</span></p>
+<p>2- <span class="math inline">\(P(A \cup B)= P(A)+P(B)-P(A \cap B)\)</span>, se A e B não forem disjuntos</p>
+<p>3- Se <span class="math inline">\(A \subset B\)</span>, então <span class="math inline">\(P(A)\leq P(B)\)</span></p>
+</div>
+<div id="probabilidade-condicional-e-independencia" class="section level2">
+<h2>Probabilidade Condicional e Independência</h2>
+<p>Em muitos casos, estamos em condição de atualizar as informações de um fenômeno aleatório pois uma determinada etapa pode influenciar nas probabilidades de ocorrências das etapas sucessivas, ou seja, calcular <em>probabilidades condicionais</em>.</p>
+</div>
+<div id="probabilidade-condicional" class="section level2">
+<h2>Probabilidade Condicional</h2>
+<p>Dados dois eventos A e B, a probabilidade condicional de A dado que ocorreu B é representada por <span class="math inline">\(P(A \mid B)\)</span> e dada por: <span class="math display">\[
+  P(A \mid B) = \frac{P(A \cap B)}{P(B)}, P(B)&gt;0.
+\]</span></p>
+<p>Da definição de probabilidade condicional, deduzimos a , uma relação bastante útil que é apresentada a seguir: <span class="math display">\[
+  P(A \cap B) = P(A \mid B)P(B), P(B)&gt;0.
+\]</span></p>
+</div>
+<div id="independencia-de-eventos" class="section level2">
+<h2>Independência de Eventos</h2>
+<p>Dois eventos A e B são independentes, se a informação da ocorrência ou não de B não altera a probabilidade da ocorrência de A, isto é: <span class="math display">\[
+  P(A \mid B)=P(A), P(B)&gt;0,
+\]</span></p>
+<p>ou ainda a seguinte forma equivalente:</p>
+<p><span class="math display">\[
+  P(A \cap B)=P(A)P(B).
+\]</span></p>
+</div>
+<div id="particao-do-espaco-amostral" class="section level2">
+<h2>Partição do espaço amostral</h2>
+<div class="figure">
+<img src="aula5/parti%C3%A7%C3%A3o.png" />
+
+</div>
+<p>Os eventos <span class="math inline">\(A_1, A_2, A_3, ...,A_n\)</span>, formam uma partição do espaço amostral, se eles não têm intersecção entre si e se sua união é igual ao espaço amostral, ou seja:</p>
+<p><span class="math display">\[
+A_i \cap A_j = \emptyset
+\]</span> para <span class="math inline">\(i \neq j\)</span> e</p>
+<p><span class="math display">\[
+\bigcup_{i=1}^n A_i = \Omega
+\]</span></p>
+</div>
+<div id="teorema-de-bayes" class="section level2">
+<h2>Teorema de Bayes</h2>
+<p>Suponha que os eventos <span class="math inline">\(A_{1}, A_{2},...,A_{n}\)</span> formem uma partição <span class="math inline">\(\Omega\)</span> e que suas probabilidades sejam conhecidas. Suponha ainda, que para um evento B, se conheçam, as probabilidades <span class="math inline">\(P(B \mid A_{i})\)</span> para todo <span class="math inline">\(i = 1,2,...,n\)</span>. Então, para qualquer j,</p>
+<p><span class="math display">\[
+  P(A_{j} \mid B) = \frac{P(B \mid A_{j})P(A_{j})}{\sum_{i=1}^{n}P(B \mid A_{i})P(A_{i})}
+ \]</span></p>
+<blockquote>
+<p>Vamos ilustrar a aplicação do Teorema de Bayes através do exemplo do doente sadio e o sadio doente(DeGroot e Schervich[02]) que pode ser ecnontrado no livro <strong>Probabilidade e Variáveis Aleatórias</strong>(Magalhães, M. N.) na página 33.</p>
+</blockquote>
+<blockquote>
+<p>Uma das formas de avaliar a eficiência de um teste para detectar uma doença é quantificar a probabilidade de erro. Em geral, testes sofisticados envolvem vários procedimentos laboratoriais e diversos equipamentos. Denominamos <em>falso-positivo</em> ao erro em que o teste indica positivo para um paciente que não tem a doença. Por outro lado, teremos um erro <em>falso-negativo</em> se o teste não acusar a doença num paciente doente. Os erros originam <em>doentes sadios</em> e <em>sadios doentes</em>. As probabilidades dos erros são calculadas condicionalmente à situação do paciente. Seus complementares fornecem as probabilidades de acerto do teste.</p>
+</blockquote>
+<blockquote>
+<p>Para fixar as ideias, considere que um determinado teste resulta positivo para não doentes, com probabilidade <span class="math inline">\(0,1\)</span>. Também com probabilidade <span class="math inline">\(0,1\)</span>, o teste será negativo para um paciente doente. As informações fornecidas se referem aos erros que podem ser cometidos ao realizar o teste. Se a incidência da doença na população é de 1 para cada 10 mil habitantes, qual é a probabilidade de uma pessoa estar realmente doente se o teste deu positivo? Definindo os eventos:</p>
+</blockquote>
+<blockquote>
+<p>D: a pessoa está doente</p>
+</blockquote>
+<blockquote>
+<p>A: o teste é positivo</p>
+</blockquote>
+<blockquote>
+<p>Assim as informações disponíveis são as seguintes:</p>
+</blockquote>
+<p><span class="math display">\[P(D) = 0,0001\]</span> <span class="math display">\[P(A \mid D^c) = 0,1\]</span> <span class="math display">\[P(A^c \mid D) = 0,1\]</span></p>
+<blockquote>
+<p>Ainda podemos escrever os complementares:</p>
+</blockquote>
+<p><span class="math display">\[P(D^c) = 0,9999\]</span> <span class="math display">\[P(A \mid D) = 0,9\]</span></p>
+<blockquote>
+<p>A probabilidade que desejamos calcular é, <span class="math inline">\(P(D \mid A)\)</span></p>
+</blockquote>
+<p><span class="math display">\[P(D \mid A) = \displaystyle{\frac{P(A \mid D)P(D)}{P(A \mid D)P(D) + P(A \mid D^c)P(D^c)}}\]</span></p>
+<p><span class="math display">\[P(D \mid A) = \displaystyle{\frac{0,9 * 0,0001}{0,9 * 0,0001 + 0,1 * 0,9999}}\]</span></p>
+<p><span class="math display">\[P(D \mid A) = 0,0009\]</span></p>
+<blockquote>
+<p>Portanto a probabilidade de estar doente dado que o teste deu positivo é <span class="math inline">\(0,0009\)</span>, ou ainda, é aproximadamente 1 em 1000.</p>
+</blockquote>
+</div>
+</div>
+<div id="exercicios-no-r" class="section level1">
+<h1>Exercícios no R</h1>
+<blockquote>
+<p>1- Uma escola particular pretende oferecer um treinamento esportista aos seus alunos. Dos 300 alunos entrevistados, 142 optaram pelo voleibol, 123 indicaram o basquete e 35 indicaram o futebol. Selecionando aleatoriamente um desses alunos, qual a probabilidade de obter alguém que prefere o voleibol?</p>
+</blockquote>
+<p>Para calcular no R, basta aplicar a definição clássica de probabilidade. <span class="math inline">\((1)\)</span>.</p>
+<pre class="r"><code>n&lt;-300
+volei&lt;-142
+pv&lt;-volei/n
+round(pv,3)</code></pre>
+<pre><code>[1] 0.473</code></pre>
+<blockquote>
+<p>2- Considerando o experimento de lançamento de um dado e os seguintes eventos:</p>
+</blockquote>
+<p><span class="math inline">\(A=\)</span> sair número <span class="math inline">\(5\)</span>, <span class="math inline">\(B=\)</span> sair par e <span class="math inline">\(C=\)</span> sair ímpar.</p>
+<p>Determinar <span class="math inline">\(\Omega\)</span>, <span class="math inline">\(P(A)\)</span>, <span class="math inline">\(P(B)\)</span>, <span class="math inline">\(P(C)\)</span>, <span class="math inline">\(P(A \cup B)\)</span>, <span class="math inline">\(P(A \cup C)\)</span> e <span class="math inline">\(P(A^{c})\)</span>.</p>
+<p>Aqui consideramos a propriedade 2 de uma função de probabilidade.</p>
+<pre class="r"><code>omega&lt;-seq(1:6)
+omega</code></pre>
+<pre><code>[1] 1 2 3 4 5 6</code></pre>
+<pre class="r"><code>PA&lt;-1/length(omega)
+PA</code></pre>
+<pre><code>[1] 0.1666667</code></pre>
+<pre class="r"><code>PB&lt;-3/length(omega)
+PB</code></pre>
+<pre><code>[1] 0.5</code></pre>
+<pre class="r"><code>PC&lt;-3/length(omega)
+PC</code></pre>
+<pre><code>[1] 0.5</code></pre>
+<pre class="r"><code>PAUB&lt;-PA+PB
+PAUB</code></pre>
+<pre><code>[1] 0.6666667</code></pre>
+<pre class="r"><code>PAinC&lt;-1/length(omega)
+PAinC</code></pre>
+<pre><code>[1] 0.1666667</code></pre>
+<pre class="r"><code>PAUC&lt;-PA+PC-PAinC
+PAUC</code></pre>
+<pre><code>[1] 0.5</code></pre>
+<pre class="r"><code>PAc&lt;-1-(PA)
+PAc</code></pre>
+<pre><code>[1] 0.8333333</code></pre>
+<blockquote>
+<p>3- (Bussab <span class="math inline">\(\&amp;\)</span> Moretin, pág. 167, exercício 1):</p>
+</blockquote>
+<p>Dada a função:</p>
+<p><span class="math display">\[
+f(x)=\begin{cases}
+        2e^{-2x}, &amp;\mbox{se}\quad x \geq 0 \\
+        0        , &amp;\mbox{se}\quad x&lt; 0
+     \end{cases}
+\]</span></p>
+<p>(a)- Mostre que <span class="math inline">\(f(x)\)</span> é uma função densidade de probabilidade</p>
+<pre class="r"><code>## Para uma função ser f.d.p. não deve ter valores negativos e sua integral deve
+## ser igual a 1.
+## Definindo f(x) no R.
+f1&lt;-function(x){
+  fx&lt;-ifelse (x&lt;0,0,2*exp(-2*x))
+  return(fx)
+}
+plot(f1,0,5,ylab=&#39;f(x)&#39;,xlab=&#39; &#39;,axes=F,col=&#39;darkblue&#39;)
+axis(1, at=seq(0,5,.2), cex.axis=0.5)
+axis(2, at=seq(0,2,1), cex.axis=0.75)
+box()
+abline(v=seq(0,5,1), h=seq(0,2,1), lty=2, col = &quot;gray70&quot;)</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>#abline (v=0, h=0)
+## Para verificar se a integral da função é igual a 1, usamos a função integrate
+integrate(f1,0,Inf)$value</code></pre>
+<pre><code>[1] 1</code></pre>
+<p>(b)- Calcule a probabilidade de que <span class="math inline">\(X &gt; 1\)</span></p>
+<p>Basta calcular a integral da função de densidade dada até infinito:</p>
+<pre class="r"><code>Pb&lt;-integrate(f1,1,Inf)
+round(Pb$value,4)</code></pre>
+<pre><code>[1] 0.1353</code></pre>
+<p>(c)- Calcule a probabilidade de que <span class="math inline">\(0,2&lt;X&lt;0,8\)</span></p>
+<pre class="r"><code>Pc&lt;-integrate(f1,0.2,0.8)
+round(Pc$value,4)</code></pre>
+<pre><code>[1] 0.4684</code></pre>
+<blockquote>
+<p>As probabilidades calculadas nos ítens b e c estão representadas na figura abaixo. A área hachurada indicada como A1 se refere a probalidade do ítem b, <span class="math inline">\(P(X&gt;1)=\)</span> <code>0.1353</code>. Por sua vez, a área A2 se referere a probabilidade do ítem c, <span class="math inline">\(P(0.2&lt;X&lt;0.8)=\)</span> <code>0.4684</code></p>
+</blockquote>
+<pre class="r"><code>plot(f1,0,5,ylab=&#39;f(x)&#39;,xlab=&#39; &#39;,axes=F,col=&#39;darkblue&#39;)
+axis(1, at=seq(0,5,.2), cex.axis=0.5)
+axis(2, at=seq(0,2,1), cex.axis=0.75)
+box()
+abline(v=seq(0,5,1), h=seq(0,2,1), lty=2, col = &quot;gray70&quot;)
+polygon(x=c(1,seq(1,5,l=20)), y=c(0,f1(seq(1,5,l=20))),density=75)
+polygon(x=c(0.2,seq(0.2,0.8,l=20),0.8), y=c(0,f1(seq(0.2,0.8,l=20)),0),density=75)
+x=c(0.2,seq(0.2,0.8,l=20),0.8)
+y=c(0,f1(seq(0.2,0.8,l=20)),0)
+text(c(1.3,0.5),c(0.08,0.08), c(expression(A1,A2)),col=c(&#39;red&#39;,&#39;red&#39;))</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<blockquote>
+<p>4- (Bussab <span class="math inline">\(\&amp;\)</span> Moretin, pág. 173, exercício 10)</p>
+</blockquote>
+<p>A demanda diária de arroz em um supermercado, em centenas que quilos, é uma variável aleatória <span class="math inline">\(X\)</span> com a seguinte f.d.p.:</p>
+<p><span class="math display">\[
+f(x)=\begin{cases}
+        \frac{2x}{3}    , &amp;\mbox{se}\quad 0 \leq x &lt; 1 \\
+        \frac{-x}{3}+1 , &amp;\mbox{se}\quad 1 \leq x &lt; 3 \\
+        0              , &amp;\mbox{se}\quad x &lt; 0 \quad ou \quad x \geq 3
+     \end{cases}
+\]</span></p>
+<p>(a.) Qual a probabilidade de se vender mais do que 150Kg, num dia escolhido ao acaso?</p>
+<p>Primeiro a função de densidade no R</p>
+<pre class="r"><code>## Definindo f(x) no R
+f2&lt;-function(x){
+  fx&lt;-numeric(length(x))
+  fx[x&lt;0]&lt;-0
+  fx[x&gt;=0 &amp; x&lt;1]&lt;-2*x[x&gt;=0 &amp; x&lt;1]/3
+  fx[x&gt;=1 &amp; x&lt;3]&lt;-(-x[x&gt;=1 &amp; x&lt;3]/3)+1
+  fx[x&gt;3]&lt;-0
+  return(fx)
+}</code></pre>
+<p>Agora calculamos a probabilidade de <span class="math inline">\(X&gt;1,5\)</span>, pois a função mede a venda de arroz em centenas de quilos.</p>
+<pre class="r"><code>## Calculando a probabilidade de x&gt;1,5, pois a função mede a venda de arroz
+## em centenas de quilos.
+Pa&lt;-integrate(f2,1.5,Inf)
+round(Pa$value,4)</code></pre>
+<pre><code>[1] 0.375</code></pre>
+<p>(b)- Em 30 dias, quanto o gerente do supermercado espera vender?</p>
+<p>Vamos primeiro criar uma função no R que calcula a média de uma variável aleatória contínua:</p>
+<pre class="r"><code>## Primeiro definimos a função para calcular média 
+## de uma variável aleatória contínua
+ef2&lt;-function(x){
+    x*f2(x)
+}</code></pre>
+<p>Em seguida calculamos a média diária de venda:</p>
+<pre class="r"><code>## Em seguida calculamos a média diária de venda
+mean.day&lt;-integrate(ef2,0,3)
+round(mean.day$value,4)</code></pre>
+<pre><code>[1] 1.3333</code></pre>
+<p>E por fim multiplicamos por 30 temos o valor esperado de venda mensal:</p>
+<pre class="r"><code>30*mean.day$value</code></pre>
+<pre><code>[1] 40</code></pre>
+<p>(c)- Qual a quantidade de arroz em <span class="math inline">\(95\%\)</span> dos dias?</p>
+<p>Para este cálculo precisamos calcular o quantil de <span class="math inline">\(95\%\)</span> da distribuição de probabilidade:</p>
+<pre class="r"><code>f &lt;- function(x) abs(0.95 - integrate(f2, 0, x)$value)
+optimise(f, c(0, 3))</code></pre>
+<pre><code>$minimum
+[1] 2.452278
+
+$objective
+[1] 7.573257e-08</code></pre>
+</div>
+<div id="definicao-de-variavel-aleatoria" class="section level1">
+<h1>Definição de variável aleatória</h1>
+<p>Uma variável aletória <span class="math inline">\(X\)</span> em um espaço de probabilidade <span class="math inline">\(\Omega, \Lambda, P\)</span> é uma função real definida no espaço <span class="math inline">\(\Omega\)</span>, tal que o evento <span class="math inline">\([X \leq x]\)</span> é um evento aleatório, <span class="math inline">\(\forall x \in \mathbb{R}\)</span>, isto é, <span class="math inline">\(X: \Omega \longrightarrow \mathbb{R}\)</span> é variável aleatória se o evento <span class="math inline">\([X \leq x] \in \Lambda, \forall x \in \mathbb{R}\)</span>. A função <span class="math inline">\(X(\omega)\)</span> é variável aleatória se associa a cada evento no espaço amostral <span class="math inline">\(\Omega\)</span> um número real.</p>
+</div>
+<div id="definicao-de-variavel-aleatoria-discreta" class="section level1">
+<h1>Definição de Variável aleatória discreta</h1>
+<p>Seu campo de variação é um conjunto finito ou infinito enumerável.</p>
+</div>
+<div id="definicao-de-variavel-aleatoria-continua" class="section level1">
+<h1>Definição de Variável aleatória contínua</h1>
+<p>Seu campo de variação é um conjunto infinito(indeterminado) não-enumerável.</p>
+<blockquote>
+<p>Uma vez que uma variável aleatória assume um valor do seu campo de variação com uma certa probabilidade, tem-se que as probabilidades são associadas à valores de uma variável aleatória discreta por uma função de probabilidade e as probabilidades são associadas a intervalos de valores de uma variável aleatória contínua por uma função densidade de probabilidade.</p>
+</blockquote>
+</div>
+<div id="definicao-de-funcao-de-probabilidade-f.p." class="section level1">
+<h1>Definição de função de probabilidade (f.p.)</h1>
+<p>A f.p. de uma variável aleatória discreta, representada por <span class="math inline">\(P(X=x) = p(x)\)</span> é qualquer função tal que <span class="math inline">\(X(\omega) \in \{x_1, x_2, ...\} \forall \omega \in \Omega\)</span>, tem-se <span class="math inline">\(p(x_i) \geq 0\)</span> e <span class="math inline">\(\displaystyle{\sum_{i=1}^\infty}p(x_i)=1\)</span></p>
+</div>
+<div id="definicao-de-funcao-densidade-de-probabilidade-f.d.p." class="section level1">
+<h1>Definição de função densidade de probabilidade (f.d.p.)</h1>
+<p>A f.d.p. de uma variável aleatória contínua, representada por <span class="math inline">\(f_x(x)\)</span> é qualquer função tal que <span class="math inline">\(f_x(x) \geq 0\)</span> e <span class="math inline">\(\displaystyle{\int_{-\infty}^{\infty}} f_x(x) = 1\)</span></p>
+</div>
+<div id="esperanca-matematica" class="section level1">
+<h1>Esperança matemática</h1>
+<p>A esperança matemática de uma variável aleatória é usualmente referida como uma medida de posição da distribuição dessa variável. Valor esperado, pondera os valores assumidos da variável aleatória pelas respectivas probabilidades. É calculada para variáveis aleatórias discretas e contínuas.</p>
+<blockquote>
+<p>Seja <span class="math inline">\(X\)</span> uma variável aleatória discreta, a esperança matemática é:</p>
+</blockquote>
+<p><span class="math display">\[
+\mu = E(x) = \displaystyle{\sum_{i=1}^n} x_i P_x(x) = \displaystyle{\sum_{i=1}^n} x_i P(X=x_i)
+\]</span></p>
+<blockquote>
+<p>Seja <span class="math inline">\(X\)</span> uma variável aleatória contínua, a esperança matemática é:</p>
+</blockquote>
+<p><span class="math display">\[
+\mu = E(x) = \displaystyle{\int_{-\infty}^{\infty}} xf_x(x)dx
+\]</span></p>
+<div id="propriedades-da-esperanca-matematica" class="section level2">
+<h2>Propriedades da esperança matemática</h2>
+<p>Considere K uma constante:</p>
+<ul>
+<li><span class="math inline">\(E(K) = K\)</span></li>
+<li><span class="math inline">\(E(KX) = KE(X)\)</span></li>
+<li><span class="math inline">\(E(X \pm K) = E(X) \pm K\)</span></li>
+<li><span class="math inline">\(E(X \pm \ Y) = E(X) \pm E(Y)\)</span></li>
+<li>Se <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> independentes, <span class="math inline">\(E(XY)=E(X)E(Y)\)</span></li>
+</ul>
+</div>
+</div>
+<div id="variancia" class="section level1">
+<h1>Variância</h1>
+<blockquote>
+<p>Seja <span class="math inline">\(X\)</span> uma variável aleatória discreta, a sua variância é:</p>
+</blockquote>
+<p><span class="math display">\[
+\sigma^2 = Var(X) = E[X-\mu]^2 = E(X^2) - [E(X)]^2
+\]</span></p>
+<p>onde, <span class="math inline">\(E(X^2) = \displaystyle{\sum_{i=1}^n}x_i^2P(X=x_i)\)</span></p>
+<blockquote>
+<p>Seja X uma variável aleatória contínua, a sua variância é:</p>
+</blockquote>
+<p><span class="math display">\[
+\sigma^2 = Var(X) = E[X-\mu]^2 = E(X^2) - [E(X)]^2
+\]</span></p>
+<p>onde, <span class="math inline">\(E(X^2) = \displaystyle{\int_{-\infty}^\infty}x_i^2f_x(X)dx\)</span></p>
+<div id="propriedades-da-variancia" class="section level2">
+<h2>Propriedades da variância</h2>
+<p>Considere K uma constante:</p>
+<ul>
+<li><span class="math inline">\(Var(K)=0\)</span></li>
+<li><span class="math inline">\(Var(KX)=K^2Var(X)\)</span></li>
+<li><span class="math inline">\(Var(K \pm X) = Var(X)\)</span></li>
+<li><span class="math inline">\(V(X \pm Y) = Var(x) + Var(Y) \pm 2 cov(X,Y)\)</span>, em que <span class="math inline">\(cov(X,Y) = E(XY)-E(X)E(Y)\)</span></li>
+</ul>
+</div>
+</div>
+<div id="distribuicoes-de-probabilidade-discreta" class="section level1">
+<h1>Distribuições de Probabilidade Discreta</h1>
+<p>O conhecimento de modelos probabilísticos para variáveis quantitativas é muito importante e esta aula será dedicada a resolução de problemas para variáveis aleaórias discretas. Através do R iremos construir esses modelos e fazer inferências sobre seus parâmetros.</p>
+<p>Vamos explorar os principais modelos de probabilidade para variável aleatória discreta:</p>
+<p>1- Uniforme Discreta</p>
+<p>2- Bernoulli</p>
+<p>3- Binomial</p>
+<p>4- Poison</p>
+<p>5- Geométrica</p>
+<p>6- Hipergeométrica</p>
+<p>Para resolução dos exercícios vamos explorar as seguintes funcionalidades do R para operações com distribuição de probabilidade:</p>
+<p><em>d:</em> calcula a densidade de probabilidade <strong><em><span class="math inline">\(f(x)\)</span></em></strong> no ponto</p>
+<p><em>p:</em> calcula a função de probabilidade acumulada <strong><em><span class="math inline">\(F(x)\)</span></em></strong> no ponto</p>
+<p><em>q:</em> calcula o quantil correspondente a uma dada probabilidade</p>
+<p><em>r:</em> gera uma amostra aleatória da distribuição</p>
+<p>Para usar essas funcionalidades basta combinar essas letras com o nome da função no R referente a distribuição desejada. Por exemplo, calcular o quantil de <span class="math inline">\(95\%\)</span> da distribuição Normal usamos <em>q</em> de quantil e norm de Normal.</p>
+<pre class="r"><code>qnorm(0.95)</code></pre>
+<pre><code>[1] 1.644854</code></pre>
+<div id="distribuicao-uniforme-discreta" class="section level2">
+<h2>Distribuição Uniforme Discreta</h2>
+<p>O modelo uniforme discreto representa situações em que todos os possíveis valores da variável são equiprováveis.</p>
+<p><span class="math inline">\(X \sim U_{d}(E)\)</span>, <span class="math inline">\(E\)</span> é o conjunto de seus valores</p>
+<p><span class="math inline">\(p(x)=\displaystyle\frac{1}{k}\)</span></p>
+<p><span class="math inline">\(E(x)=\displaystyle\frac{1+k}{2}\)</span></p>
+<p><span class="math inline">\(Var(x)=\displaystyle\frac{k^{2}-1}{12}\)</span></p>
+<p>Provavelmente por se tratar de uma distribuição tão simples não há uma função no <span class="math inline">\(R\)</span> para a Uniforme Discreta. Como a teoria diz que em todos os valores da variável que segue uma distribuição Uniforme Discreta têm mesma probabilidade, podemos usar a função <code>sample()</code> para representar esta distribuição.</p>
+<div id="exercicio-4" class="section level3">
+<h3>Exercício 4</h3>
+<p>Uma variável aleatória <span class="math inline">\(X \sim U_{d}(1:10)\)</span>, e queremos selecionar 15 valores.</p>
+<blockquote>
+<p>Como temos uma amostra de tamanho <span class="math inline">\(10\)</span> e queremos selecionar <span class="math inline">\(15\)</span> valores, teremos que fazer uma seleção com reposição e para isso usaremos a função <code>sample()</code> com o argumento <code>replace=TRUE</code>.</p>
+</blockquote>
+<pre class="r"><code>set.seed(1999123)
+sample(1:10,15, replace=TRUE)</code></pre>
+<pre><code> [1]  1  4  1 10  1  8  9  7  2  2  4 10  7 10  8</code></pre>
+</div>
+<div id="exercicio-5" class="section level3">
+<h3>Exercício 5</h3>
+<p>Exemplo de lançamento de um dado.</p>
+<pre class="r"><code>d&lt;-1:6
+fx&lt;-rep(1/6,6)
+fx</code></pre>
+<pre><code>[1] 0.1666667 0.1666667 0.1666667 0.1666667 0.1666667 0.1666667</code></pre>
+<pre class="r"><code>Fx&lt;-d/6
+Fx</code></pre>
+<pre><code>[1] 0.1666667 0.3333333 0.5000000 0.6666667 0.8333333 1.0000000</code></pre>
+<pre class="r"><code>par(mfrow=c(1,2))
+## Gráfico da função de probabilidade
+plot(d, fx, type = &quot;h&quot;, axes=F, xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;p(x)&#39;))),cex.lab=.7,col=&#39;darkblue&#39;)
+title(&#39;Gráfico Função de Probabilidade&#39;,cex.main=.7)
+axis(1, at=seq(0,6,1), cex.axis=0.65)
+axis(2, at=seq(0,1,.1),cex.axis=0.65)
+box()
+
+## Gráfico da função de distribuição
+plot(d, Fx, type = &quot;s&quot;,axes=F, lwd=2, xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;F(x)&#39;))),cex.lab=.7,col=&#39;darkblue&#39;)
+title(&#39;Gráfico Função de Distribuição&#39;,cex.main=.7)
+axis(1, at=seq(0,6,1), cex.axis=0.65)
+axis(2, at=seq(0,1,.1),cex.axis=0.65)
+box()</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+</div>
+<div id="distribuicao-de-bernoulli" class="section level2">
+<h2>Distribuição de Bernoulli</h2>
+<p>Uma variável aleatória que assume apenas valores <span class="math inline">\(0\)</span> e <span class="math inline">\(1\)</span> com função de probabilidade representada por:</p>
+<p><span class="math display">\[X \sim Ber(p)\]</span></p>
+<p><span class="math display">\[
+    p(x)=p^{x}(1-p)^{1-x}
+\]</span></p>
+<p><span class="math display">\[E(x)=p\]</span></p>
+<p><span class="math display">\[Var(x)=p(1-p)\]</span></p>
+<div id="exercicio-1" class="section level3">
+<h3>Exercício 1</h3>
+<p>Calcule a função de probabiliade e função de distribuição da variável <span class="math inline">\(X \sim Ber(0.6)\)</span>:</p>
+<blockquote>
+<p>Pimeiro mostramos graficamente como ficaria a função de probabilidade:</p>
+</blockquote>
+<p><span class="math display">\[p(0)=P(X=0)=1-p=1-0.6=0.4\]</span></p>
+<p><span class="math display">\[p(1)=P(X=1)=p=0.6\]</span></p>
+<pre class="r"><code>x&lt;-c(0,1)
+Px&lt;-c(0.4,0.6)
+plot(x,Px,type=&#39;h&#39;,axes=F,lwd=1,asp=2,xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;P(x)&#39;))),cex.lab=.7)
+axis(1, at=seq(0,1,1), cex.axis=0.65)
+axis(2, at=seq(0,1,.1), cex.axis=0.65)
+box()
+title(&#39;Gráfico Função de Probabilidade&#39;,cex.main=.7)</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<blockquote>
+<p>E agora o gráfico da função distribuição, <em><span class="math inline">\(F(x)=P(X \leq x)\)</span></em>.</p>
+</blockquote>
+<pre class="r"><code>x&lt;-c(0,0,0.5,0.5,1)
+Fx&lt;-c(0,0.4,0.4,1,1)
+plot(x,Fx,type=&#39;s&#39;,axes=F,lwd=2,xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;F(x)&#39;))),cex.lab=.7)
+axis(1, at=seq(0,1,1), cex.axis=0.65)
+axis(2, at=seq(0,1,.1),cex.axis=0.65)
+title(&#39;Gráfico Função de Distribuição&#39;,cex.main=.7)
+box()</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+</div>
+<div id="distribuicao-binomial" class="section level2">
+<h2>Distribuição Binomial</h2>
+<p>Uma variável aleatória segue uma distribuição Binomial quando repetimos um ensaio Bernoulli <span class="math inline">\(n\)</span> vezes, ou seja, quando temos uma amostra de tamanho <span class="math inline">\(n\)</span> de uma distribuição Bernoulli. Um exemplo é um ensaio com caracterśtica dicotômica como a morte ou não de um paciente ou sucesso ou fracasso de um evento.</p>
+<p><span class="math display">\[X \sim Bin(n,p)\]</span></p>
+<p><span class="math display">\[
+p(x)=\binom{n}{x}  p^{x}(1-p)^{n-x}
+\]</span></p>
+<p><span class="math display">\[E(x)=np\]</span></p>
+<p><span class="math display">\[Var(x)=np(1-p)\]</span></p>
+<p><span class="math display">\[
+M_x(t) = (pe^t+1-p)^n
+\]</span></p>
+<div id="exercicio-2" class="section level3">
+<h3>Exercício 2</h3>
+<p>Seja uma variável aleatória com distribuição Binomial, uma amostra de tamanho <span class="math inline">\(10\)</span> e probabilidade de sucesso de <span class="math inline">\(0,35\)</span>. Represente esta variável no R.</p>
+<blockquote>
+<p>Inicialmente vamos gerar os valores que a variável X pode receber.</p>
+</blockquote>
+<pre class="r"><code>x &lt;- 0:10</code></pre>
+<blockquote>
+<p>Próximo passo é gerar as probabiliades para cada valor de x.</p>
+</blockquote>
+<pre class="r"><code>fx &lt;- dbinom(x, 10, 0.35)</code></pre>
+<blockquote>
+<p>Agora calculando a função de distribuição</p>
+</blockquote>
+<pre class="r"><code>Fx &lt;- pbinom(x, 10, 0.35)</code></pre>
+<blockquote>
+<p>A função de probabilidade pode ser representada da seguinte forma:</p>
+</blockquote>
+<pre class="r"><code>plot(x, fx, type = &quot;h&quot;, axes=F, xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;p(x)&#39;))),cex.lab=.7,col=&#39;darkblue&#39;)
+title(&#39;Gráfico Função de Probabilidade&#39;,cex.main=.7)
+axis(1, at=seq(0,10,1), cex.axis=0.65)
+axis(2, at=seq(0,1,.05),cex.axis=0.65)
+box()</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<blockquote>
+<p>E a representação gráfica da função de distribuição</p>
+</blockquote>
+<pre class="r"><code>plot(x, Fx, type = &quot;s&quot;,axes=F, lwd=2, xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;F(x)&#39;))),cex.lab=.7,col=&#39;darkblue&#39;)
+title(&#39;Gráfico Função de Distribuição&#39;,cex.main=.7)
+axis(1, at=seq(0,10,1), cex.axis=0.5)
+axis(2, at=seq(0,1,.05),cex.axis=0.45)
+box()</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<blockquote>
+<p>Agora vamos calcular as seguintes probabilidades:</p>
+</blockquote>
+<p>(a)- <span class="math inline">\(P[X=7]\)</span></p>
+<pre class="r"><code>dbinom(7,10,0.35)</code></pre>
+<pre><code>[1] 0.02120302</code></pre>
+<pre class="r"><code># Outra forma
+fx[8]</code></pre>
+<pre><code>[1] 0.02120302</code></pre>
+<p>(b)- <span class="math inline">\(P[X &lt; 8]\)</span></p>
+<blockquote>
+<p>É a mesma coisa que calcular <span class="math inline">\(P[X&lt;=7]\)</span>, ou seja, a probabilidade acumulada até <span class="math inline">\(X=7\)</span>.</p>
+</blockquote>
+<pre class="r"><code>pbinom(7,10,0.35)</code></pre>
+<pre><code>[1] 0.9951787</code></pre>
+<pre class="r"><code>Fx[8]</code></pre>
+<pre><code>[1] 0.9951787</code></pre>
+<p>(c)- <span class="math inline">\(P[X \geq 8]\)</span></p>
+<blockquote>
+<p>É o mesmo que calcular <span class="math inline">\(P[X&gt;7]\)</span>.</p>
+</blockquote>
+<pre class="r"><code>1-pbinom(7,10,0.35)</code></pre>
+<pre><code>[1] 0.004821265</code></pre>
+<pre class="r"><code>pbinom(7,10,0.35,lower = F)</code></pre>
+<pre><code>[1] 0.004821265</code></pre>
+<pre class="r"><code>1-Fx[8]</code></pre>
+<pre><code>[1] 0.004821265</code></pre>
+<p>d)] <span class="math inline">\(P[3 &lt; X \leq 6]\)</span></p>
+<blockquote>
+<p>É o mesmo que calcular <span class="math inline">\(P[4 \leq X \leq 6]\)</span></p>
+</blockquote>
+<pre class="r"><code>sum(dbinom(4:6, 10, 0.35)) </code></pre>
+<pre><code>[1] 0.4601487</code></pre>
+<pre class="r"><code>sum(fx[5:7])</code></pre>
+<pre><code>[1] 0.4601487</code></pre>
+<pre class="r"><code>pbinom(6, 10, 0.35) - pbinom(3, 10, 0.35) </code></pre>
+<pre><code>[1] 0.4601487</code></pre>
+<pre class="r"><code>Fx[7]-Fx[4]</code></pre>
+<pre><code>[1] 0.4601487</code></pre>
+</div>
+</div>
+<div id="distribuicao-poisson" class="section level2">
+<h2>Distribuição Poisson</h2>
+<p>O modelo Poisson tem sido muito utilizado em experimentos das áreas da saúde, física e biológica em que <span class="math inline">\(\lambda\)</span> mede a taxa de oorrência por unidade de medida, ou seja, o parâmetro <span class="math inline">\(\lambda\)</span> é frequência média ou esperada de ocorrências num determinado intervalo de tempo.</p>
+<p><span class="math display">\[X \sim Pois(\lambda)\]</span></p>
+<p><span class="math display">\[p(x)=\displaystyle\frac{e^{-\lambda}\lambda^{x}}{x!}\]</span></p>
+<p><span class="math display">\[E(x)=\lambda\]</span></p>
+<p><span class="math display">\[Var(x)=\lambda\]</span></p>
+<p><span class="math display">\[
+M_x(t) = e^{\lambda[e^t-1]}
+\]</span> ### Exercício 3</p>
+<p>A emissão de partículas radioativas tem sido modelada através de uma distribuição Poisson. Suponha que o número de partículas, emitidas por minuto, em uma determinada região tem parâmetro <span class="math inline">\(5\)</span>, ou seja, <span class="math inline">\(5\)</span> partículas radioativas são emitidas a cada minuto. Calcule a probabilidade de haver mais de <span class="math inline">\(2\)</span> emissões por minuto.</p>
+<blockquote>
+<p>Primeiro os gráficos da função de probabilidade e função distribuição acumulada.</p>
+</blockquote>
+<pre class="r"><code>x&lt;-1:15
+fx&lt;-dpois(x,5)
+Fx&lt;-ppois(x,5)
+
+par(mfrow=c(1,2))
+## Gráfico da função de probabilidade
+plot(x, fx, type = &quot;h&quot;, axes=F, xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;p(x)&#39;))),cex.lab=.7,col=&#39;darkblue&#39;)
+title(&#39;Gráfico Função de Probabilidade&#39;,cex.main=.7)
+axis(1, at=seq(0,15,1), cex.axis=0.45)
+axis(2, at=seq(0,1,.05),cex.axis=0.45)
+box()
+
+
+## Gráfico da função de distribuição
+plot(x, Fx, type = &quot;s&quot;,axes=F, lwd=2, xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;F(x)&#39;))),cex.lab=.7,col=&#39;darkblue&#39;)
+title(&#39;Gráfico Função de Distribuição&#39;,cex.main=.7)
+axis(1, at=seq(0,15,1), cex.axis=0.45)
+axis(2, at=seq(0,1,.05),cex.axis=0.45)
+box()</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<blockquote>
+<p>Agora vamos calcular a probabilidade acumulada até X=2, 1 menos esse valor é a probabilidade que procuramos, ou seja, <span class="math inline">\(1-P(X=2) = P(X&gt;2)\)</span>.</p>
+</blockquote>
+<pre class="r"><code>1-ppois(2,5)</code></pre>
+<pre><code>[1] 0.875348</code></pre>
+</div>
+<div id="distribuicao-geometrica" class="section level2">
+<h2>Distribuição Geométrica</h2>
+<p>Novamente vamos considerar n ensaios Bernoulli independentes. Uma variável aleatória <span class="math inline">\(X\)</span> seguirá uma distribuição Geométrica quando <span class="math inline">\(X\)</span> for o número de fracassos anteriores ao primeiro sucesso.</p>
+<p><span class="math display">\[
+X \sim Geo(p)
+\]</span></p>
+<p><span class="math display">\[
+p(x) = p(1-p)^x
+\]</span></p>
+<p><span class="math display">\[
+E(x) = \displaystyle{\frac{1-p}{p}}
+\]</span></p>
+<p><span class="math display">\[
+Var(x) = \displaystyle{\frac{1-p}{p^2}}
+\]</span></p>
+<p><span class="math display">\[
+M_x(t) = \displaystyle{\frac{p}{1-(1-p)e^t}}
+\]</span></p>
+</div>
+<div id="distribuicao-hipergeometrica" class="section level2">
+<h2>Distribuição Hipergeométrica</h2>
+<p>Considere um conjunto com <span class="math inline">\(n\)</span> objetos dos quais <span class="math inline">\(m\)</span> são do tipo <span class="math inline">\(I\)</span> e <span class="math inline">\(n-m\)</span> são do tipo <span class="math inline">\(II\)</span>. Uma amostra é escolhida ao acaso so reposição, com tamanho <span class="math inline">\(r(r&lt;n)\)</span> e definimos <span class="math inline">\(X\)</span> como o número de objetos com a característica <span class="math inline">\(I\)</span> na amostra.</p>
+<p><span class="math display">\[
+P(X=k) = \displaystyle{\frac{\left( \begin{array}{c}m \\ k \end{array}\right) \left( \begin{array}{cc}n-m \\ r-k \end{array}\right)}{\left( \begin{array}{c}n \\ r \end{array}\right)}}
+\]</span></p>
+<p><span class="math display">\[
+X \sim Hgeo(m,nr)
+\]</span></p>
+<p><span class="math display">\[
+E(x) = r \displaystyle{\frac{m}{n}}
+\]</span></p>
+<p><span class="math display">\[
+Var(x) = r \displaystyle{\frac{m}{n}\frac{(n-m)}{n} (1-\frac{r-1}{n-1})}
+\]</span></p>
+<p>A função geradora de momentos da hipergeométrica existe, mas ela é escrita dependendo de uma função introduzida por Gauss conhecida como função hipergeométrica. Ela pode ser vista no link abaixo:</p>
+<p><a href="http://www.portalaction.com.br/probabilidades/54-distribuicao-hipergeometrica" class="uri">http://www.portalaction.com.br/probabilidades/54-distribuicao-hipergeometrica</a></p>
+</div>
+</div>
+<div id="distribuicoes-de-probabilidade-continua" class="section level1">
+<h1>Distribuições de Probabilidade Contínua</h1>
+<p>Esta aula será dedicada a resolução de problemas para variáveis aleaórias contínuas. Através do <span class="math inline">\(R\)</span> iremos construir esses modelos e fazer inferências sobre seus parâmetros.</p>
+<p>Vamos explorar os principais modelos de probabilidade para variável aleatória contínua:</p>
+<p>1- Normal</p>
+<p>2- Uniforme Contínua</p>
+<p>3- Exponencial</p>
+<div id="distribuicao-normal" class="section level2">
+<h2>Distribuição Normal</h2>
+<p>A distribuição Normal é definda pelos parâmetros média e variância com a função abaixo:</p>
+<p><span class="math display">\[X \sim N(\mu, \sigma^{2})\]</span></p>
+<p><span class="math display">\[f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\{\frac{-1}{2\sigma^2}(x - \mu)^2\}\]</span></p>
+<p><span class="math display">\[E(x)=\mu\]</span></p>
+<p><span class="math display">\[Var(x)=\sigma^2\]</span></p>
+<p><span class="math display">\[
+M_x(t)=e^{\mu t + \sigma^2t^2}
+\]</span></p>
+<p>Quando <span class="math inline">\(\mu=0\)</span> e <span class="math inline">\(\sigma^2=1\)</span>, dizemos de <span class="math inline">\(X\)</span> segue uma distribuição Normal Padrão.</p>
+<p>O <em>default</em> do <span class="math inline">\(R\)</span>, para as funções da Normal, assume a distribuição Normal Padrão, <span class="math inline">\(X\sim N(0,1)\)</span></p>
+<div id="exercicio" class="section level3">
+<h3>Exercício</h3>
+<p>1- Seja <span class="math inline">\(X \sim N(0,1)\)</span>, calcule a densidade da função quando <span class="math inline">\(X=3\)</span>.</p>
+<pre class="r"><code>dnorm(3)</code></pre>
+<pre><code>[1] 0.004431848</code></pre>
+<blockquote>
+<p>Também podemos simplesmente substituir os valores dos parâmetros, N(0,1), no ponto 3 na função de densidade, ou seja:</p>
+</blockquote>
+<p><span class="math display">\[
+ f(x=3) = \frac{1}{\sqrt{2\pi}} \exp\{\frac{-3^2}{2}\}
+\]</span></p>
+<pre class="r"><code>(1/sqrt(2 * pi)) * exp((-1/2) * (3)^2)</code></pre>
+<pre><code>[1] 0.004431848</code></pre>
+<p>2- Calcule a probabilidade de <span class="math inline">\(P[X \leq 3]\)</span></p>
+<pre class="r"><code>pnorm(3)</code></pre>
+<pre><code>[1] 0.9986501</code></pre>
+<blockquote>
+<p>Isso seria o equivalente a resolver a seguinte integral:</p>
+</blockquote>
+<p><span class="math display">\[\int_{-\infty}^{3} f(x) dx\]</span></p>
+<p><span class="math display">\[\int_{-\infty}^{3} \frac{1}{\sqrt{2\pi\sigma^2}} \exp\{\frac{-1}{2\sigma^2}(x - \mu)^2\} dx\]</span></p>
+<p><span class="math display">\[\int_{-\infty}^{3} \frac{1}{\sqrt{2\pi}} \exp\{\frac{-x^2}{2}\}dx\]</span></p>
+<blockquote>
+<p>Escrevendo a integral acima no R:</p>
+</blockquote>
+<pre class="r"><code>fx&lt;-function(x){
+  f&lt;-(1/sqrt(2*pi))*exp(-x^2/2)
+  return(f)
+}
+
+integrate(fx, -Inf, 3)$value</code></pre>
+<pre><code>[1] 0.9986501</code></pre>
+<p>3- Encontre o quantil da Normal que equivale a <code>99.87</code><span class="math inline">\(\%\)</span> da sua área.</p>
+<blockquote>
+<p>Agora faremos o caminho inverso do exercício anterior:</p>
+</blockquote>
+<pre class="r"><code>qnorm(0.9987)</code></pre>
+<pre><code>[1] 3.011454</code></pre>
+<pre class="r"><code>## ou ainda
+qnorm(0.9986501)</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre class="r"><code>qnorm(0.975)</code></pre>
+<pre><code>[1] 1.959964</code></pre>
+<p>5- Gere 5 valores aleatórios de uma Normal padrão.</p>
+<pre class="r"><code>rnorm(5)</code></pre>
+<pre><code>[1]  0.07889138  0.63257957 -0.66573855  0.30772907  0.16043474</code></pre>
+<blockquote>
+<p>Abaixo representação gráfica de algumas probabilidades de <span class="math inline">\(X \sim N(0,1)\)</span>.</p>
+</blockquote>
+<pre class="r"><code>par(mar=c(4,4,1,1))
+for(q in seq(0, 3,l=5)){
+  curve(dnorm(x, 0, 1), -5, 5, ylab=substitute(paste(italic(&#39;f(x)&#39;))), xlab=&quot;z&quot;)
+  x &lt;- seq(0, q, by=0.01)
+  fx &lt;- dnorm(x)
+  polygon(c(x, rev(x)),
+          c(fx, rep(0, length(fx))),
+          col=&quot;tomato&quot;)
+  abline(v=0, lty=2)
+  Pr &lt;- round(pnorm(q, 0, 1)-0.5, digits=3)
+  qq &lt;- round(q, digits=3)
+  legend(&quot;topleft&quot;, bty=&quot;n&quot;, fill=&quot;grey&quot;,
+         legend=substitute(P(0&lt;~Z&lt;~q)==Pr, list(q=qq, Pr=Pr)))
+}</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-36-1.png" width="672" /><img src="probabilidade_files/figure-html/unnamed-chunk-36-2.png" width="672" /><img src="probabilidade_files/figure-html/unnamed-chunk-36-3.png" width="672" /><img src="probabilidade_files/figure-html/unnamed-chunk-36-4.png" width="672" /><img src="probabilidade_files/figure-html/unnamed-chunk-36-5.png" width="672" /></p>
+<blockquote>
+<p>As funções relaciondas a distribuição Normal possuem os argumentos mean e sd para definir média e desvio padrão da distribuição que podem ser modificados como nos exemplos a seguir.</p>
+</blockquote>
+<blockquote>
+<p>Note nestes exemplos que os argumentos podem ser passados de diferentes formas.</p>
+</blockquote>
+<pre class="r"><code>qnorm(0.975, mean = 100, sd = 8)</code></pre>
+<pre><code>[1] 115.6797</code></pre>
+<pre class="r"><code>qnorm(0.975, m = 100, s = 8)</code></pre>
+<pre><code>[1] 115.6797</code></pre>
+<pre class="r"><code>qnorm(0.975, 100, 8)</code></pre>
+<pre><code>[1] 115.6797</code></pre>
+</div>
+<div id="exercicio-3" class="section level3">
+<h3>Exercício</h3>
+<p>Cálculos de probabilidades usuais, para os quais utilizávamos tabelas estatísticas podem ser facilmente obtidos como no exemplo a seguir.</p>
+<p>Seja X uma variável aleatória <span class="math inline">\(X \sim N(100, 100)\)</span>. Calcular as probabilidades:</p>
+<p>(a)- <span class="math inline">\(P(X &lt; 95)\)</span></p>
+<p>(b)- <span class="math inline">\(P(90 &lt; X &lt; 110)\)</span></p>
+<p>(c)- <span class="math inline">\(P(X &gt; 95)\)</span></p>
+<blockquote>
+<p>Resolvendo o ítem (a):</p>
+</blockquote>
+<pre class="r"><code>## a)
+pnorm(95,100,10)</code></pre>
+<pre><code>[1] 0.3085375</code></pre>
+<blockquote>
+<p>Resolvendo o ítem (b):</p>
+</blockquote>
+<pre class="r"><code>## b)
+pnorm(110, 100, 10) - pnorm(90, 100, 10)</code></pre>
+<pre><code>[1] 0.6826895</code></pre>
+<blockquote>
+<p>Resolvendo o ítem (c):</p>
+</blockquote>
+<pre class="r"><code>## c)
+1-pnorm(95, 100, 10)</code></pre>
+<pre><code>[1] 0.6914625</code></pre>
+<pre class="r"><code>pnorm(95, 100, 10, lower=F)</code></pre>
+<pre><code>[1] 0.6914625</code></pre>
+<blockquote>
+<p>Agora vamos plotar os gráficos da função densidade de probabilidade, <span class="math inline">\(f(x)\)</span> e da função de distribuição, <span class="math inline">\(F(x)\)</span>.</p>
+</blockquote>
+<pre class="r"><code>par(mfrow=c(1,2))
+## Gráfico da função densidade de probabilidade
+x &lt;- seq(70, 130, len = 100)
+fx &lt;-dnorm(x,100,10) 
+plot(x,fx,  axes=F, type=&#39;l&#39;,xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;f(x)&#39;))),cex.lab=.7,col=&#39;tomato&#39;)
+title(&#39;Gráfico Função de Densidade de Probabilidade&#39;,cex.main=.7)
+axis(1, at=seq(70,130,10), cex.axis=0.45)
+axis(2, at=seq(0,1,.01),cex.axis=0.45)
+box()
+
+## Gráfico da função de distribuição
+Fx&lt;-pnorm(x,100,10)
+plot(x, Fx, type = &quot;l&quot;,axes=F, lwd=2, xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;F(x)&#39;))),cex.lab=.7,col=&#39;tomato&#39;)
+title(&#39;Gráfico Função de Distribuição&#39;,cex.main=.7)
+axis(1, at=seq(70,130,10), cex.axis=0.45)
+axis(2, at=seq(0,1,.1),cex.axis=0.45)
+box()</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+</div>
+<div id="exercicio-6" class="section level3">
+<h3>Exercício</h3>
+<p>Agora vamos explorar diferentes densidades da Normal. Basta variar a seus parâmetros. Principalmente a variância.</p>
+<pre class="r"><code>myTitle1 &lt;- bquote (paste(&quot;X ~ Normal(&quot;, mu, &#39;,&#39;, sigma,&quot;)&quot;) )
+
+plot(function(x) dnorm(x, 100, 8), 60, 140, ylab = substitute(paste(italic(&#39;f(x)&#39;))),
+     xlab=&#39;Valores de x&#39;,main=myTitle1)
+plot(function(x) dnorm(x, 90, 8), 60, 140, add = T, col = 2)
+plot(function(x) dnorm(x, 100, 15), 60, 140, add = T, col = 3)
+legend(110, 0.05, c(&quot;N(100,64)&quot;, &quot;N(90,64)&quot;, &quot;N(100,225)&quot;), fill = 1:3)</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+</div>
+</div>
+<div id="distribuicao-uniforme-continua" class="section level2">
+<h2>Distribuição Uniforme Contínua</h2>
+<p>Para a distribuição uniforme contínua usa-se as funções <code>unif()</code>.</p>
+<p><span class="math display">\[X \sim U(a,b)\]</span></p>
+<p><span class="math display">\[f(x)=\displaystyle\frac{1}{b-a}I_{(a,b)}(x)\]</span></p>
+<p><span class="math display">\[E(x)=\displaystyle\frac{a+b}{2}\]</span></p>
+<p><span class="math display">\[Var(x)=\displaystyle\frac{(b-a)^2}{12}\]</span></p>
+<p><span class="math display">\[
+M_x(t) = \displaystyle{\frac{e^{tb}-e^{ta}}{t(b-a)}}
+\]</span></p>
+<div id="exercicio-7" class="section level3">
+<h3>Exercício</h3>
+<blockquote>
+<p>Nos comandos a seguir inspecionamos os argumentos, sorteamos 5 valores da <span class="math inline">\(U(0, 1)\)</span> e calculamos a probabilidade acumulada até 0,75.</p>
+</blockquote>
+<pre class="r"><code>args(runif)</code></pre>
+<pre><code>function (n, min = 0, max = 1) 
+NULL</code></pre>
+<pre class="r"><code>runif(5,0,1)</code></pre>
+<pre><code>[1] 0.9964920 0.9324843 0.6647244 0.8202270 0.8165559</code></pre>
+<pre class="r"><code>punif(0.75,0,1)</code></pre>
+<pre><code>[1] 0.75</code></pre>
+<blockquote>
+<p>E a representação gráfica</p>
+</blockquote>
+<pre class="r"><code>par(mfrow=c(1,2))
+## Gráfico da função densidade de probabilidade
+x &lt;- seq(0, 1, len = 100)
+fx &lt;-dunif(x,0,1)
+plot(x,fx,  axes=F, type=&#39;l&#39;,xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;f(x)&#39;))),cex.lab=.7,col=&#39;tomato&#39;)
+title(&#39;Gráfico Função de Densidade de Probabilidade&#39;,cex.main=.7)
+axis(1, at=seq(0,1,.1), cex.axis=0.45)
+axis(2, at=seq(0,2,.1),cex.axis=0.45)
+box()
+
+## Gráfico da função de distribuição
+Fx&lt;-punif(x,0,1)
+plot(x, Fx, type = &quot;l&quot;,axes=F, lwd=2, xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;F(x)&#39;))),cex.lab=.7,col=&#39;tomato&#39;)
+title(&#39;Gráfico Função de Distribuição&#39;,cex.main=.7)
+axis(1, at=seq(0,1,.1), cex.axis=0.45)
+axis(2, at=seq(0,1,.1),cex.axis=0.45)
+box()</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+</div>
+</div>
+<div id="distribuicao-exponencial" class="section level2">
+<h2>Distribuição Exponencial</h2>
+<p>A função de densidade de probabilidade da distribuição exponencial com parâmetro <span class="math inline">\(\lambda\)</span> e denotada <span class="math inline">\(\exp(\lambda)\)</span>:</p>
+<p><span class="math display">\[X \sim \exp(\lambda)\]</span></p>
+<p><span class="math display">\[f(x)=\lambda e^{-\lambda x}I_{(0,\infty)}(x)\]</span></p>
+<p><span class="math display">\[E(x)=\displaystyle\frac{1}{\lambda}\]</span></p>
+<p><span class="math display">\[Var(x)=\displaystyle\frac{1}{\lambda^2}\]</span></p>
+<p><span class="math display">\[M_x(t) = \displaystyle{\frac{\lambda}{\lambda-t}}\]</span></p>
+<div id="exercicio-8" class="section level3">
+<h3>Exercício</h3>
+<p>Seja uma variável aleatória <span class="math inline">\(X \sim \exp(\lambda=500)\)</span>. Calcular a probabilidade <span class="math inline">\(P(X \geq 400)\)</span>.</p>
+<pre class="r"><code>1-pexp(400,1/500)</code></pre>
+<pre><code>[1] 0.449329</code></pre>
+<pre class="r"><code>pexp(400,1/500,lower=F)</code></pre>
+<pre><code>[1] 0.449329</code></pre>
+<pre class="r"><code>fexp &lt;- function(x, lambda = 500) {
+ fx &lt;- ifelse(x &lt; 0, 0, (1/lambda) * exp(-x/lambda))
+ return(fx)
+ }
+integrate(fexp, 400, Inf)$value</code></pre>
+<pre><code>[1] 0.449329</code></pre>
+<blockquote>
+<p>Agora plotando os gráficos de densidade e distribuição.</p>
+</blockquote>
+<pre class="r"><code>x &lt;- seq(0, 2000, l = 200)
+fx &lt;- dexp(x, rate = 1/500)
+
+par(mfrow=c(1,2))
+plot(x, fx, type = &quot;l&quot;,axes=F,col=&#39;tomato&#39;,xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;f(x)&#39;))),cex.lab=.7)
+ax &lt;- c(400, 400, x[x &gt; 400], 2000, 2000)
+ay &lt;- c(0, dexp(c(400, x[x &gt; 400], 2000), 1/500), 0)
+polygon(ax, ay,col=&#39;tomato&#39;,density=50)
+title(&#39;Gráfico Função Densidade de Probabilidade&#39;,cex.main=.7)
+axis(1, at=seq(0,2000,100), cex.axis=0.5)
+axis(2, at=seq(0,1,.0005),cex.axis=0.5)
+box()
+
+
+
+Fx &lt;- pexp(x, rate = 1/500)
+plot(x, Fx, type = &quot;l&quot;,axes=F,col=&#39;tomato&#39;,xlab=&#39;Valores de x&#39;,
+     ylab=substitute(paste(italic(&#39;f(x)&#39;))),cex.lab=.7)
+title(&#39;Gráfico Função de Distribuição&#39;,cex.main=.7)
+axis(1, at=seq(0,2000,100), cex.axis=0.5)
+axis(2, at=seq(0,1,.05),cex.axis=0.5)
+box()</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+</div>
+</div>
+<div id="distribuicao-qui-quadrado---chi2" class="section level2">
+<h2>Distribuição Qui-quadrado - <span class="math inline">\(\chi^2\)</span></h2>
+<p><span class="math display">\[X \sim \chi_{(\nu)}\]</span></p>
+<p><span class="math display">\[f(x)=\displaystyle\frac{1}{\Gamma(\nu \mid 2) 2^{\nu \mid 2}} x^{(\nu \mid 2)-1} e^{-x \mid 2}\]</span></p>
+<p><span class="math display">\[E(x) = \nu\]</span></p>
+<p><span class="math display">\[Var(x) = 2\nu\]</span></p>
+<p><span class="math display">\[M_x(t) = \displaystyle{(\frac{1}{1-2t})^{\nu/2}}\]</span></p>
+<blockquote>
+<p>Explorando a Distribuição Qui-quadrado</p>
+</blockquote>
+<pre class="r"><code>help(dchisq)
+x&lt;-1:40
+ plot(x,x*0,pch=&quot;&quot;,ylim=range(c(0,0.15)),xlim=range(c(0,40)),
+         xlab=&quot;x&quot;,ylab=&quot;f(x)&quot;,bty=&quot;n&quot;)
+ lines(dchisq(x,1),lty=1,pch=1)
+ lines(dchisq(x,5),lty=2,pch=2)
+ lines(dchisq(x,12),lty=3,pch=3)
+ lines(dchisq(x,25),lty=4,pch=4)
+ lines(dchisq(x,30),lty=5,pch=5)</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<pre class="r"><code> pchisq(3.84,1)</code></pre>
+<pre><code>[1] 0.9499565</code></pre>
+<pre class="r"><code> 1-pchisq(3.84,1)</code></pre>
+<pre><code>[1] 0.05004352</code></pre>
+<pre class="r"><code> qchisq(0.95,1)</code></pre>
+<pre><code>[1] 3.841459</code></pre>
+<pre class="r"><code> gera&lt;-sort(rchisq(5000,5))
+ plot(dchisq(gera,5),type=&#39;l&#39;, lwd=.7)</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-47-2.png" width="672" /></p>
+<blockquote>
+<p>Uma consideração importante a fazer sobre a distribuição Qui-quadrado é sua relação com a distribuição normal padrão. Uma variável aleatória que segue uma distribuição qui-quadrado nada mais é do que uma variável aleatória com distribuição normal padrão elevada ao quadrado.</p>
+</blockquote>
+<blockquote>
+<p>Vamos definir uma variável aleatória que segue uma distribuição normal padrão e gerar 100 valores para esta variável:</p>
+</blockquote>
+<pre class="r"><code>set.seed(19991233)
+x&lt;- seq(-3,3,.1)</code></pre>
+<blockquote>
+<p>Elevamos a variável aleatória <span class="math inline">\(x\)</span> ao quadrado:</p>
+</blockquote>
+<pre class="r"><code>x2&lt;-x^2</code></pre>
+<blockquote>
+<p>Agora vamos representar ambas graficamente</p>
+</blockquote>
+<pre class="r"><code>par(mfrow=c(1,2))
+#myTitle1 &lt;- bquote (paste(&quot;X ~ Normal(&quot;, 0, &#39;,&#39;, 1,&quot;)&quot;) )
+myTitle2 &lt;- bquote (paste(&quot;X ~&quot;, chi^2))
+x22&lt;-sort(x2)
+plot(x22, dnorm(x22),col=&#39;blue&#39;, type=&#39;l&#39;,xlab=&#39;&#39;, ylab=&#39;&#39;,
+     main=&#39;Normal Padrão \n elevado ao quadrado&#39;)
+plot(seq(0,9,.1),dchisq(seq(0,9,.1),1),type=&#39;l&#39;, col=&#39;darkgreen&#39;,
+     xlab=&#39;&#39;, main=myTitle2,ylab=&#39;&#39;)
+text(6,1,&#39;g.l.=1&#39;)</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<blockquote>
+<p>Outra relação que a qui-quadrado possui é com a distribuição exponencial. Uma variável aletória que segue uma distribuição exponencial com <span class="math inline">\(\lambda=2\)</span>, também é um caso particuar de uma qui-quadrado com <span class="math inline">\(\nu=2\)</span>.</p>
+</blockquote>
+<pre class="r"><code>rm(list=ls())
+set.seed(19991233)
+x&lt;- seq(0,5,.1)
+
+par(mfrow=c(1,2))
+myTitle1 &lt;- bquote (paste(&quot;X ~ Exp(&quot;, 2,&quot;)&quot;) )
+myTitle2 &lt;- bquote (paste(&quot;X ~&quot;, chi^2))
+
+plot(x, dexp(x,1/2),col=&#39;blue&#39;, type=&#39;l&#39;,xlab=&#39;&#39;, ylab=&#39;&#39;,
+     main=myTitle1)
+plot(x,dchisq(x,2),type=&#39;l&#39;, col=&#39;darkgreen&#39;,
+     xlab=&#39;&#39;, main=myTitle2,ylab=&#39;&#39;)
+text(4,.4,&#39;g.l.=2&#39;)</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<div id="exercicios-propostos" class="section level3">
+<h3>Exercícios Propostos</h3>
+<blockquote>
+<p>Explore as distribuições de probabilidade contínua abaixo, com os comandos e idéias apresentados nesta aula.</p>
+</blockquote>
+<p>1- Gamma</p>
+<p>2- Weibull</p>
+<p>3- Beta</p>
+<p>4- t-student</p>
+<p>5- F-Snedcor</p>
+</div>
+</div>
+</div>
+<div id="teorema-central-do-limite" class="section level1">
+<h1>Teorema central do limite</h1>
+<p>Nesta aula será apresentado o <strong>Teorema central do limite</strong> que trata do estudo da convergência da soma de <span class="math inline">\(n\)</span> variáveis aleatórias para um modelo gaussiano. O Teorema central do limite possui várias versões e a demonstração de seus resultados serão omitidos aqui, mas alguns de seus teoremas e suas respectivas demonstrações podem ser encontradas no livro <strong>Probabilidade e variáveis aletórias</strong>, Marcos Nascimento Magalhães.</p>
+<p>Agora será apresentado um resultado muito importante decorrente deste teorema. Considere qualquer que seja a distribuição da variável de interesse para uma grande amostra e se calcularmos a média para <span class="math inline">\(n\)</span> amostras de mesmo tamanho, a distribuição dessas médias amostrais seguirá aproximadamente uma distribuição gaussiana, e tenderá a uma distribuição gaussiana à medida que o tamanho de amostra crescer. Então podemos ter uma variável original com uma distribuição discreta como a Binomial ou Poisson, por exemplo, e então se fizermos um gráfico da densidade das médias amostrais irá se aproximar empiricamente da distribuição teórica gaussiana.</p>
+<blockquote>
+<p>Abaixo um exemplo no <span class="math inline">\(R\)</span></p>
+</blockquote>
+<p>Primeiro calculando médias de 10 amostras cada uma com 15 observações de uma certa população que pode seguir qualquer distribuição. A segunda distribuição teremos 30 amostras, depois 200 amostras e por fim 5000. Portanto as amostras com as médias amostrais terão tamanhos 10, 30, 200 e 5000 respectivamente.</p>
+<pre class="r"><code>#====== N 10 ========
+set.seed(1999)
+y &lt;- rnorm(1000)
+ystar &lt;- NULL
+nBoot &lt;- 10
+#número de amostras bootstrap 
+B &lt;- array(0,dim=c(nBoot, 1)) # array p/ guardar o bootstrap
+for(i in 1:nBoot){
+#laço p/ bootstrap
+    ystar &lt;- sample(y,size=15,replace=F)
+    B[i] &lt;- mean(ystar)
+    }
+
+par(mfrow=c(2,2))
+hist(B,breaks=&#39;Sturges&#39;,prob=T,col=&#39;grey90&#39;,border=&#39;white&#39;,axes=F,
+     ylab=&#39;&#39;,cex.axis=0.65,main=&#39;&#39;,xlab=&#39;Dist. amostral das médias&#39;,
+     cex.lab=0.8,cex.main=0.8,ylim=c(0,1.8),font=2)
+axis(1, at=seq(-0.8,0.8,0.1), cex.axis=0.7)
+lines(density(B),col=&#39;darkblue&#39;)
+lines(sort(B),dnorm(sort(B), mean(B),sd(B)),col=&#39;darkorange&#39;)
+legend(0,1.5, legend = c(&quot;Empírica&quot;, &quot;Teórica&quot;),
+       bty=&#39;n&#39;,fill=c(&quot;darkblue&quot;, &quot;darkorange&quot;),
+       xjust = 1, yjust = 1,
+       text.col=c(&#39;darkblue&#39;,&#39;darkorange&#39;),
+       col=c(&#39;darkblue&#39;,&#39;darkorange&#39;))
+title(main=substitute(paste(italic(&#39;Amostra de tamanho&#39;),bold(&#39; 10&#39;))),cex.main=1)
+
+#====== N 30 ========
+ystar &lt;- NULL
+nBoot &lt;- 30
+#número de amostras bootstrap 
+B &lt;- array(0,dim=c(nBoot, 1)) # array p/ guardar o bootstrap
+for(i in 1:nBoot){
+#laço p/ bootstrap
+    ystar &lt;- sample(y,size=15,replace=F)
+    B[i] &lt;- mean(ystar)
+    }
+
+hist(B,breaks=&#39;Sturges&#39;,prob=T,col=&#39;grey90&#39;,border=&#39;white&#39;,axes=F,
+     ylab=&#39;&#39;,cex.axis=0.65,main=&#39;&#39;,xlab=&#39;Dist. amostral das médias&#39;,
+     cex.lab=0.8,cex.main=0.8,ylim=c(0,1.7),font=2)
+axis(1, at=seq(-0.8,0.8,0.1), cex.axis=0.7)
+lines(density(B),col=&#39;darkblue&#39;)
+lines(sort(B),dnorm(sort(B), mean(B),sd(B)),col=&#39;darkorange&#39;)
+legend(0,1.5, legend = c(&quot;Empírica&quot;, &quot;Teórica&quot;),
+       bty=&#39;n&#39;,fill=c(&quot;darkblue&quot;, &quot;darkorange&quot;),
+       xjust = 1, yjust = 1,
+       text.col=c(&#39;darkblue&#39;,&#39;darkorange&#39;),
+       col=c(&#39;darkblue&#39;,&#39;darkorange&#39;))
+title(main=substitute(paste(italic(&#39;Amostra de tamanho&#39;),bold(&#39; 30&#39;))),cex.main=1)
+
+
+#====== N 200 ========
+ystar &lt;- NULL
+nBoot &lt;- 200
+#número de amostras bootstrap 
+B &lt;- array(0,dim=c(nBoot, 1)) # array p/ guardar o bootstrap
+for(i in 1:nBoot){
+#laço p/ bootstrap
+    ystar &lt;- sample(y,size=15,replace=F)
+    B[i] &lt;- mean(ystar)
+    }
+
+hist(B,breaks=&#39;Sturges&#39;,prob=T,col=&#39;grey90&#39;,border=&#39;white&#39;,axes=F,
+     ylab=&#39;&#39;,cex.axis=0.65,main=&#39;&#39;,xlab=&#39;Dist. amostral das médias&#39;,
+     cex.lab=0.8,cex.main=0.8,ylim=c(0,1.7),font=2)
+axis(1, at=seq(-0.8,0.8,0.1), cex.axis=0.7)
+lines(density(B),col=&#39;darkblue&#39;)
+lines(sort(B),dnorm(sort(B), mean(B),sd(B)),col=&#39;darkorange&#39;)
+legend(0,1.5, legend = c(&quot;Empírica&quot;, &quot;Teórica&quot;),
+       bty=&#39;n&#39;,fill=c(&quot;darkblue&quot;, &quot;darkorange&quot;),
+       xjust = 1, yjust = 1,
+       text.col=c(&#39;darkblue&#39;,&#39;darkorange&#39;),
+       col=c(&#39;darkblue&#39;,&#39;darkorange&#39;))
+title(main=substitute(paste(italic(&#39;Amostra de tamanho&#39;),bold(&#39; 200&#39;))),cex.main=1)
+
+#====== N 5000 ========
+ystar &lt;- NULL
+nBoot &lt;- 5000
+#número de amostras bootstrap 
+B &lt;- array(0,dim=c(nBoot, 1)) # array p/ guardar o bootstrap
+for(i in 1:nBoot){
+#laço p/ bootstrap
+    ystar &lt;- sample(y,size=15,replace=F)
+    B[i] &lt;- mean(ystar)
+    }
+
+hist(B,breaks=&#39;Sturges&#39;,prob=T,col=&#39;grey90&#39;,border=&#39;white&#39;,axes=F,
+     ylab=&#39;&#39;,cex.axis=0.65,main=&#39;&#39;,xlab=&#39;Dist. amostral das médias&#39;,
+     cex.lab=0.8,cex.main=0.8,ylim=c(0,1.6),font=2)
+axis(1, at=seq(-0.8,0.8,0.1), cex.axis=0.7)
+lines(density(B),col=&#39;darkblue&#39;)
+lines(sort(B),dnorm(sort(B), mean(B),sd(B)),col=&#39;darkorange&#39;)
+legend(0,1.5, legend = c(&quot;Empírica&quot;, &quot;Teórica&quot;),
+       bty=&#39;n&#39;,fill=c(&quot;darkblue&quot;, &quot;darkorange&quot;),
+       xjust = 1, yjust = 1,
+       text.col=c(&#39;darkblue&#39;,&#39;darkorange&#39;),
+       col=c(&#39;darkblue&#39;,&#39;darkorange&#39;))
+title(main=substitute(paste(italic(&#39;Amostra de tamanho&#39;),bold(&#39; 5000&#39;))),cex.main=1)</code></pre>
+<p><img src="probabilidade_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p>Nota-se que a aproximação para a distribuição gaussiana melhora à medida que o tamanho amostral das média cresce. E este resultado é notável pois dispensa o conhecimento da distribuição da população.</p>
+<div id="referencias" class="section level2">
+<h2>Referências</h2>
+<ul>
+<li><p>Magalhães, M.N., *** Probabilidade e variáveis aleatórias***, segunda edição, editora usp, 2006.</p></li>
+<li><p>Bussab, W., Morettin, P., <strong><em>Estatística Básica</em></strong>, sexta edição.editora saraiva, 2010.</p></li>
+<li><p>Davison, A.C., <strong><em>Statistical Models</em></strong>, Cambridge university press, 2008.</p></li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

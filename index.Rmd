@@ -1,0 +1,79 @@
+---
+title: "DES4024 - Bioestatística"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{R setup, include=FALSE}
+#source("setup_knitr.R")
+```
+
+<div class="alert alert-danger" role="alert">
+**ATENÇÃO!**
+
+- Prova dia: 04/05
+- Seminários dias 11/05 e 18/05
+
+</div>
+
+# Detalhes da oferta da disciplina
+
+- **Curso:** Pós-Graduação em Bioestatística e Odontologia
+- **Período:** Primeiro semestre de 2017
+- **Professor Responsável:** Isolde Previdelli
+- **Horários e Locais:**
+    
+    - Quintas, 13:30 - 17:30h, **Bloco E90**
+- **Frequência**: de acordo com as normas da Universidade, mínimo de $75\%$
+- **Avaliação**: será realizada 1 prova($50\%$), lista de exercícios($20\%$), apresentação de artigos($15\%$) e apresentação de um trabalho($15\%$) que poderá ser submetido aos eventos RBRAS, Workshop de Bioestatística ou Escola de Regressão.
+    - A média final será a soma dos itens.
+- **Datas importantes:**
+    - **06/03**: Início do semestre letivo
+    - **31/05**: Final do semestre letivo
+    
+
+# Programa da disciplina
+
+## Ementa
+
+- Medidas descritivas   e epidemiológicas
+- Introdução a Inferência Estatística
+- Métodos de diagnósticos
+- Medidas de associação
+- Tamanho de amostras
+- Principais testes paramétricos e não paramétricos
+
+## Objetivos
+Esta disciplina irá  discutir os métodos básicos da análise estatística para com aplicação nas Ciências Biológicas e da Saúde, através da apresentação de teoria, exemplos e resolução de exercícios com o uso da linguagem computacional *R* (<https://cran.r-project.org/>).
+Ao final do período o aluno deverá ser capaz de utilizar, com eficiência, as técnicas apresentadas e dar suporte estatístico à leitura crítica de trabalhos científicos.
+
+## Conteúdo programático
+
+1. O papel da Estatística nas áreas da saúde e biológicas.
+2. Organização da pesquisa.
+3. Descrição e apresentação de dados.
+4. Probabilidade.
+5. Avaliação da qualidade de testes diagnósticos.
+6. Modelos Estatísticos: Binomial, Poisson, Normal, t-Student e Qui-Quadrado.
+7. Inferência Estatística: testes de hipóteses, intervalo de confiança, poder do teste.
+8. Comparação de grupos e medidas de efeitos: amostras pareadas e independentes.
+9. Dimensionamento de amostras – Estudos transversais.
+10. Correlação de Pearson e Spearman.
+11. Análise de Variância e de Welch.
+12. Testes de Wilcoxon, Mann Whitney e Kruskall Wallis.
+
+## Referências
+
+- ARMITAGE, P. and BERRY, G.Statistical Method in Medical Research, 2nd ed., Blackwell Scientific, Oxford.
+1987.
+- CAMPBELL, M.J. Statistics at square One. BMJ books. 11 ed. 2009. 192p.
+- CAYTON, D. and HILLS, M., Statistical Models in Epidemiology, Oxford University Press, Oxford. 1993.
+- FINNEY, D.J. , Statistical Method in Biological Assay, 2a ed., Griffin, London.1963.
+- PAGANO M, GAUVREAU K. Princípios de bioestatística. Tradução da 2a ed. norte- americana. São Paulo: Pioneira Thomson Learning, 2004.
+- SIQUEIRA, A. L. e TIBÚRCIO, J. D. Estatística na Área da Saúde. 2011.
+- SOARES, J. F. e SIQUEIRA, A. L. Introdução à Estatística Médica. 1999.
+- SHAHBABA, B. Biostatistics with R, An Introduction to Statistics Through Biological Data, Springer. 2012. 
+
+

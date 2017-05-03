@@ -1,0 +1,221 @@
+---
+title: "Intervalo de Confiança - IC"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      comment=NA,
+                      warning = FALSE,
+                      message=FALSE,
+                      cache = TRUE)
+```
+
+Nas aulas de probabilidade conhecemos as distribuições mais usuais e seus respectivos parâmetros. Ao estimar esses parâmetros apresentamos seus valores pontuais. Esse procedimento não permite julgar qual a possível magnitude do erro que estamos cometendo. A principal restrição da estimação pontual é que quando estimamos um parâmetro através de um único valor numérico toda a informação presente nos dados é resumida através deste número.
+É importante encontrar também um intervalo de valores plausíveis para o parâmetro. Para isso serve a estimação intervalar, ou seja, o intervalo de confiança, que é baseado na distribuição
+amostral do estimador pontual.
+Vamos verificar como utilizar o ***R*** para obter intervalos de confiança para parâmetros de distribuições de probabilidade.
+
+
+
+
+# IC para Média de uma distribuição Normal com variância conhecida
+
+Consideremos uma amostra aleatória simples $X_1 , . . . , X_n$ obtida de uma população com
+distribuição Normal, com média $\mu$ e variância $\sigma^2$ conhecida. Desta forma, a distribuição amostral da média também é Normal com média $\mu$ e variância $\displaystyle{\frac{\sigma^2}{n}}$, ou seja:
+
+$$
+\bar{x} \sim N \left( \mu, \displaystyle{\frac{\sigma^2}{n}} \right)
+$$
+
+Assim temos que:
+
+$$
+Z = \displaystyle{\frac{\bar{x} - \mu}{\displaystyle{\frac{\sigma}{\sqrt{n}}}}} \sim N(0,1)
+$$
+
+isto é, a variável $Z$ tem distribuição normal padronizada.
+
+$$
+I.C. = \left( \bar{x} - Z_{(\alpha / 2)} \displaystyle{\frac{\sigma}{\sqrt{n}}} ; \bar{x} + Z_{(\alpha / 2)} \displaystyle{\frac{\sigma}{\sqrt{n}}} \right)
+$$
+
+
+
+## Exemplo 1
+
+Temos medidas dos comprimentos de 100 plantas que nasceram de sementes que foram
+plantadas ao mesmo tempo. Um histograma dos dados tem uma forma aproximadamente Normal, e a média amostral e o desvio padrão amostral foram $74mm$ e $2.34mm$, respectivamente.
+Construa um intervalo de confiança para o comprimento médio populacional de plantas dessa
+mesma espécie.
+
+```{R}
+n<-100
+z.mean<-74
+z.sd<-2.34
+se<-z.sd/sqrt(100)
+IC.z<-z.mean + qnorm(c(0.025, 0.975)) * se
+IC.z
+```
+
+# IC para Média de uma distribuição Normal com variância desconhecida
+
+Sabemos que o intervalo de confiança para média de uma distribuição normal com variância desconhecida, para uma amostra de tamanho n é dado por:
+
+$$
+I.C. = \left( \bar{x} - t_{(\alpha/2, g.l.)}\displaystyle{\frac{S}{\sqrt{n}}} ; \bar{x} + t_{(\alpha/2, g.l.)}\displaystyle{\frac{S}{\sqrt{n}}} \right)
+$$
+
+## Exemplo 2
+
+O tempo de reação de um novo medicamento pode ser considerado como tendo distribuição Normal e deseja-se fazer inferência sobre a média que é desconhecida obtendo um
+intervalo de confiança. Vinte pacientes foram sorteados e tiveram seu tempo de reação anotado. Os dados foram os seguintes (em minutos):
+
+```{R}
+## Entrando com os dados
+tempo <- c(2.9, 3.4, 3.5, 4.1, 4.6, 4.7, 4.5, 3.8, 5.3, 4.9, 4.8, 5.7, 5.8, 5, 3.4, 5.9,
+6.3, 4.6, 5.5, 6.2)
+## Calculando o I.C. passo a passo
+n<-length(tempo);n
+t.mean<-mean(tempo);t.mean
+t.var<-var(tempo);t.var
+se<-sqrt(t.var/n);se
+## A seguir montamos o intervalo utilizando os quantis da distribuição t, para obter um
+## IC a 95% de confiança.
+IC.m<-t.mean + qt(c(0.025, 0.975), df = n - 1) * se
+IC.m
+
+```
+
+
+>Agora escrevendo uma função
+
+```{R}
+IC <- function(x, conf = 0.95) {
+  n <- length(x)
+  media <- mean(x)
+  variancia <- var(x)
+  se <-sqrt(variancia/n)
+  quantis <- qt(c((1 - conf)/2, 1 - (1 - conf)/2), df = n - 1)
+  ic <- media + quantis * se
+return(ic)
+}
+
+IC(tempo)
+```
+
+## Exemplo 3
+
+Temos uma amostra de 15 árvores, todas com 8 anos de idade numa certa floresta. O diâmetro das árvores, em polegadas, foram medidos à uma altura de 3 pés:
+
+```{R}
+tree<-c(19.4, 21.4, 22.3, 22.1, 20.1, 23.8, 24.6, 19.9, 21.5, 19.1, 18.9, 22.2,
+21.6, 22.7, 20.2)
+
+
+IC(tree, conf=.90)
+IC(tree)
+IC(tree, conf=.99)
+```
+
+
+
+# IC para Proporção
+
+Da mesma forma que um conjunto de médias amostrais são distribuídas nas proximidades
+da média populacional, as proporções amostrais $\widehat{p}$  são distribuídas ao redor da verdadeira proporção populacional $p$.
+
+Devido ao Teorema Central do Limite, para $n$ grande e $p$ não muito próximo de $0$ ou $1$,
+a distribuição de $\widehat{p}$ será aproximadamente normalmente distribuída com média $p$ e uma variância dada por, $\displaystyle{\frac{p(1-p)}{n}}$.
+
+Podemos usar isto na construção de um intervalo de confiança para a verdadeira proporção $p$.
+
+$$
+\left( \widehat{p} - Z_{(\alpha / 2)}\displaystyle{\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}} ; \widehat{p} + Z_{(\alpha / 2)}\displaystyle{\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}}  \right)
+$$
+
+em que o erro padrão (SE) é igual $\displaystyle{\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}}$
+
+Uma regra geral é que este intervalo de confiança é válido quando temos ambos $n\widehat{p}$ e
+$n(1 − \widehat{p})$ maiores do que digamos $10$.
+
+## Exemplo 4:
+
+Um ensaio clínico foi realizado para determinar a preferência entre dois anagélsicos, A
+e B, contra dor de cabeça. $100$ pacientes que sofrem de dor de cabeça crônica receberam em
+dois tempos diferentes o analgésico A e o analgésico B.
+A ordem na qual os pacientes receberam os analgésicos foi determinada ao acaso. Os
+pacientes desconheciam esta ordem.
+Ao final do estudo foi perguntado a cada paciente qual analgésico lhe proporcionou maior
+alívio: o primeiro ou o segundo. Dos 100 pacientes, 45 preferiram A e 55 preferiram B.
+Baseado nestas informações podemos dizer que há prefência por algum dos analgésicos?
+Dizemos que não há preferência por um dos analgésicos quando a proporção dos que
+preferem $A (p_A)$, é igual a proporção dos que preferem $B (p_B )$. Como temos dois resultados
+possíveis, $p_A$ e $p_B$ são iguais quando $p_A = p_B = 0,5$.
+Um intervalo de $95\%$ de confiança para a verdadeira proporção de pacientes que preferem
+o analgésico A é:
+
+
+```{R}
+conf = 0.95
+ic<-function (p, conf = 0.95){
+ n <- length(x)
+ q <- 1-p
+ quantis <- qnorm(1-(1-conf)/2)
+ ic <- c(p - quantis * sqrt((p*q)/n),p + quantis * sqrt((p*q)/n))
+ return(ic)
+}
+x<-c(rep("A",45),rep("B",55))
+p<-45/length(x)
+ic(p,conf=.99)
+ic(p)
+prop.test(p*n, n, correct = FALSE)
+```
+
+# Exemplo 5:
+
+Considere os dados de um estudo investigando a existência de um balanço entre a proporção de peixes machos e fêmeas de uma certa espécie em dois lagos distintos.
+A proporção observada de machos capturados no primeiro lago foi $74.42\%$ dentre $43$
+capturados e no segundo foi $60\%$ dentre $50$.
+Podemos agora construir intervalos de confiança para as percentagens correspondente nas populações dos dois lagos.
+
+```{R}
+n1<-43
+n2<-50
+p1<-0.744
+q1<-1-p1
+p2<-0.6
+ic1<-p1+qnorm(c(0.025, 0.975))*sqrt(p1*q1/n1)
+ic1
+ic2<-p2+qnorm(c(0.025, 0.975))*sqrt(p2*(1-p2)/n2)
+ic2
+```
+
+# IC para variância
+
+Consideremos uma amostra aleatória $X_1..., X_n$ de tamanho $n$ de uma população com distribuição Normal com média $\mu$ e variância $\sigma^2$. Um estimador para $\sigma^2$ é a variância amostral $s^2$. Assim, sabemos que a quantidade pivotal:
+
+$$
+Q = \displaystyle{\frac{(n-1)s^2}{\sigma^2}} \sim \chi_{(n-1)}^{2}
+$$
+
+Logo, o intervalo com nível $100(1-\alpha)\%$ de confiança para $\sigma^2$ será dado por:
+
+$$
+IC(\sigma^2, 1-\alpha) = \left( \displaystyle{\frac{(n-1)s^2}{Q_{(1-\alpha / 2})}, \frac{(n-1)s^2}{Q_{(\alpha / 2})}} \right)
+$$
+
+# Exemplo 6:
+
+Foi observado pacientes de uma determinada clinica para tratamento de sobrepeso. A variável aleatória peso do paciente, supõe ter distribuição Normal. Pretende-se estudar a variabilidade
+do peso dos referidos pacientes. Para isso, uma amostra de tamanho 11 foi obtida, cujos
+valores em Kg são:
+
+```{R}
+peso<-c(98,97,102,100,98,101,102,105,95,102,100)
+n<-length(peso)
+s2<-var(peso)
+ic.sigma2<-(n-1)*s2/qchisq(c(.975, 0.025), n-1)
+ic.sigma2
+```
+

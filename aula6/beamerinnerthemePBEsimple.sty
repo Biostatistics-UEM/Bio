@@ -1,0 +1,97 @@
+% Esse e o arquivo adaptado de:
+% Copyright (c) 2014 by Jesper Kjær Nielsen <jkn@es.aau.dk>
+% para as paginas inicial e final do Tema PBE Simple.
+%
+%
+% Esse programa e um software livre: voce pode reditribuir e/ou
+% modifica-lo sob os termos da Licenca Geral Publica GNU como
+% publicado pela Fundacao de Softwares Livres, ou pela versao 3
+% da licenca, ou (opcionalmente) qualquer versao atual.
+%
+% Esse programa e distribuido na esperença de que possa ser util,
+% mas, SEM QUALQUER GARANTIAS; mesmo sem a garantia implicita de
+% COMERCIALIZACAO ou ADEQUACAO A PROPOSITOS PARTICULARES. Veja a
+% Licenca Publica Geral GNU para mais detalhes.
+%
+% Voce pode encontrar a Licenca Publica Geral em
+% <http://www.gnu.org/licenses/>.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemePBEsimple}[20/05/2015 v1.0 Universidade
+Estadual de Maringá  - Tema para o Beamer]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Opcaoes do tema e definicoes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{tikz}
+\usetikzlibrary{external}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Opcoes especificas do beamer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation> % Refere-se aos primeiros quatro modos (beamer,handout,second and trans). Isso e, todos os modos exceto o modo article
+{
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % MODELOS
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Pagina de Titulo
+  \setbeamertemplate{title page}{%
+	  \vspace{3mm}
+	\begin{minipage}[c][5mm][c]{\textwidth}
+	  \raggedleft
+	  {\usebeamerfont{title}\usebeamercolor[fg]{title}\footnotesize\bf
+	  Universidade Estadual de Maringá \\ Mestrado Acadêmico em Bioestatística}\vspace*{\baselineskip}
+	\end{minipage}
+    \begin{minipage}[c][30mm][c]{\textwidth}
+      \raggedleft
+      {\Huge\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
+      {\LARGE\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}
+      \insertsubtitle}
+     \end{minipage}
+    \vfill
+    \color{red}{
+    \begin{minipage}[c][60mm][c]{\textwidth}%
+      \centering\bf\scshape
+      {\noindent\rule{.8\textwidth}{.5mm}}\vspace*{\baselineskip}
+
+      {\usebeamerfont{author}\insertauthor}\vspace*{\baselineskip}
+
+      {\usebeamerfont{institute}\insertinstitute}\vspace*{\baselineskip}
+
+      {\usebeamerfont{date}\insertdate}\vspace*{\baselineskip}
+
+      {\noindent\rule{.8\textwidth}{.5mm}}
+    \end{minipage}}\vspace*{\baselineskip}
+  }
+
+  % Pagina Final
+  \defbeamertemplate{final page}{text}[1]{%
+	\begin{minipage}[c][30mm][c]{\textwidth}
+	\end{minipage}
+    \begin{minipage}[c][70mm][c]{\textwidth}
+      \centering\bfseries\Huge
+      \vfill
+          #1
+      \vfill
+      {\inserttitlegraphic}\vspace*{\baselineskip}
+    \end{minipage}
+  }
+  \newcommand{\finalpage}[1]{%
+    \setbeamertemplate{final page}[text]{#1}
+    \usebeamertemplate{final page}
+  }
+
+  % Adiciona a imagem de fundo ao background
+  \newcommand{\pbebg}{%
+    \setbeamertemplate{background}{
+    \begin{tikzpicture}[overlay]
+	    \node at (6.4,-4.75) {\includegraphics[width=1.01\paperwidth,height=\paperheight]{PBEgraphics/PBE_titlepage}};
+    \end{tikzpicture}
+    }
+  }
+
+  % Usa numeros em vez de uma figura para as referencias
+  \setbeamertemplate{bibliography item}[text]
+} % Fim das especificacoes de opcoes do beamer
+
+\mode<all>

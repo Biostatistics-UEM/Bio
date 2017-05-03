@@ -1,0 +1,229 @@
+---
+title: "Teste para normalidade e homocedasticidade"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      comment = NA,
+                      warning=NULL,
+                      message=NULL)
+```
+
+# Teste de normalidade
+
+A suposição de normalidade dos dados amostrais é uma condição exigida para a realização de muitas inferências válidas a respeito de parâmetros populacionais. Vários dos diferentes métodos de estimação e testes de hipóteses existentes foram formulados sob a suposição de que a amostra aleatória tenha sido extraída de uma população gaussiana.
+
+Neste material vamos apresentar alguns testes que nos permitem verificar essa suposição. Também é importante salientar que além deles é fundamental observar a distribuição empírica dos dados por exemplo através do gráfico de densidade.
+
+
+Será apresentados alguns exemplos resolvidos com o *R*. É fortemente sugerido a leitura das referências ao final deste matrial para melhor compreensão de cada teste apresentado.
+
+## Teste de Shapiro Wilk. 
+
+Aqui, para fins didáticos, vamos gerar uma amostra de tamanho 100 de uma variável aleatória $X \sim N(\mu=1, \sigma^2=0.16)$. Neste caso a hipótese a ser testada é se os dados seguem uma distribuição gaussiana.
+
+$H_0:$ Os dados seguem uma distribuição gaussiana.
+
+```{R}
+######### criando um vetor
+set.seed(123399)
+x <- rnorm(100,1,.4)
+
+######### Teste de Shapiro Wilks
+
+shapiro.test(x)
+```
+
+Segundo o resultado do teste, temos evidências para dizer que a amostra provém de uma distribuição gaussiana, o que já era de se esperar pois geramos a amostra utilizando a função ``qqnorm()``.
+
+Agora vamos verificar o gráfico de densidade da amostra.
+
+```{R}
+plot(density(x), ylab='Densidade', xlab='Amostra X', main='')
+
+```
+Realmente a amostra parece seguir uma distribuição gaussiana.
+
+
+
+## Teste Anderson-darling
+
+Próximo teste a ser explorado é o de **Anderson-darling**. Para isso precisamos instalar no *R* o pacote ``nortest`` para usar a função ``ad.test()``. Aqui vamos usar a mesma amostra do exercício anterior e será testada a mesma hipótese:
+
+$H_0:$ Os dados seguem uma distribuição gaussiana.
+
+```{R}
+#install.packages('nortest',repos='http://cran-r.c3sl.ufpr.br/')
+library(nortest)
+ad.test(x)
+```
+
+Aqui também não rejeitamos a hipótese que os dados seguem uma distribuição gaussiana.
+
+
+
+## Teste Cramer-von Mises
+
+O teste de Cramer-von Mises também necessita do pacote ``nortest`` para aplicar a função ``cvm.test()`` e novamente testamos:
+
+$H_0:$ Os dados seguem uma distribuição gaussiana.
+
+```{R}
+cvm.test(x)
+```
+
+## Teste Lilliefors
+$H_0:$ Os dados seguem uma distribuição gaussiana. Utilizando a função ``lillie.test()`` do mesmo pacote.
+
+```{R}
+lillie.test(x)
+```
+
+E evidentemente para os testes de Lilliefors e Cramer-vos Mises, não rejeitamos a hipótese que os dados seguem uma distribuição gaussiana.
+
+
+## Teste de Kolmogorov-Smirnov
+
+Este é um dos mais populares na Estatística. Ele tem o intuito de verificar se uma amostra tem aderência a uma determinada distribuição de probabilidade ou comparar duas distrições. A idéia por trás do teste é a comparação da função de distribuição empírica $F(x)$ com uma função de ditribuição teórica, ou a comparação entre duas $F(x)'s$ e verificar a distância entre as funções de distribuição.
+
+Abaixo um exemplo comparando a mesma amostra aleatória anteior com a função de distribuição gaussiana.
+
+```{R}
+  sd(x)
+ks.test(x, "pnorm", 1, .16) 
+```
+
+Aqui a hipótese testada é se a distribuição da variável aleatória $X \sim N(\mu=1, \sigma^2=.4)$
+Pelo resultado notamos que de fato $X \sim N(\mu=1, \sigma^2=.4)$. Quanto menor for a estatística de teste $D$, mais próxima da distribuição teórica assumida, está a distribuição empírica de $X$. Neste caso $D=$```r ks.test(x, "pnorm", 1, .16)$stat``` .
+
+
+Agora vamos comparar duas amostras e testar se ambas possuem distribuições iguais ou não. Para isso vamos gerar uma segunda amostra de mesmos tamanho de $X$, $Y \sim Gamma(\alpha = 1, \beta=4)$
+
+```{R}
+y <- rgamma(100,1, 4)
+```
+
+Além do teste Kolmogorov-Smirnov, vamos plotar o gráfico das duas distribuição e indicar a distância entre ambas. Este gráfico pode ser simplesmente chamado de gráfico $KS$.
+
+```{R}
+#===========
+#Curva K-S
+#===========
+library(latticeExtra)
+
+ks.cal <- function(x,lag){
+  x <- sort(x); n <- length(x)
+  X <- (1/n)*apply(outer(x, lag, function(z,w) z<=w), 2, sum)
+  X
+}
+
+
+
+smir<-ks.test(x,y)
+smir
+
+lag <- seq(min(x,y), max(x,y), l=length(unique(c(x,y))))
+x.ks <- ks.cal(x, lag)
+y.ks <- ks.cal(y, lag)
+
+ks.max <- max(abs(x.ks-y.ks))
+lagmax <- lag[which.max(abs(x.ks-y.ks))]
+coomax <- which.max(abs(x.ks-y.ks))
+abcmax <- c(x.ks[coomax], y.ks[coomax])
+
+ecdfplot(~x+y,
+         panel=function(x, ...){
+           panel.ecdfplot(x, ...)
+           panel.segments(lagmax, abcmax[1], lagmax, abcmax[2])
+           panel.text(lagmax, min(abcmax)+ks.max/2, label=ks.max, pos=2, srt=18)
+})
+
+```
+
+Notamos que pelo resultado do p-valor do teste, ```r smir$p.value```, rejeitamos a hipótese nula, ou seja, há evidências para dizer as duas distribuições são diferentes. Outro indicativo disso é o alto valor da estatística de teste $D=$```r smir$stat ```, que indica uma grande distância entre as duas distribuições, como podemos verificar na gráfico.
+
+
+## Verificação gráfica
+
+Outra forma de vrificar se uma amostra segue uma distribuição gaussiana, é aatravés dos gráfico de envelope
+normal de probabilidade e seu envelope com intervalo de confiança simulado.
+
+Podemos simplesmente fazer usando as funções `qqnorm()` e `qqline()` sem o envelope:
+```{R}
+qqnorm(x)
+qqline(x)
+```
+
+Mas também podemos fazer com o envelope simulado através da função `qqPlot()` do pacote `car`.
+
+```{R}
+library(car)
+qqPlot(x, dist='norm',envelope=.95)
+```
+
+
+Aplicando agora a função `qqPlot()` para a amostra $Y$:
+
+```{R}
+qqPlot(y, dist='norm',envelope=.95)
+```
+
+Notamos que para a amostra $Y$, há vários pontos fora da banda do envelope simulado, indicando que há evidências que esta amostra não segue uma distribuição gaussiana, como já se esperava pois sabemos que $Y \sim Gamma(\alpha=1, \beta=4)$.
+
+# Teste de homocedasticidade
+
+Em análise de variância(ANOVA), há um pressuposto que deve ser atendido que é de os erros terem variância comum, ou seja, homocedasticidade. Isso implica que cada tratamento que se está sendo comparado pelo teste *F*, deve ter aproximadamente a mesma variância para que a ANOVA tenha validade. Quando este pressuposto não é atendido dizemos que as variâncias não são homogêneas, ou ainda, que existe **heterocedasticidade**.
+
+A verificação deste pressuposto também pode ser verificado graficamente através do boxplot para os tratamentos *vs* resíduos. Se existir homocedasticidade espera-se que os boxplots sejam semelhantes.
+
+Veja o seguinte exemplo, os dados abaixo são provenientes de um experimento em que se deseja verificar se há diferença entre as práticas parentais com relação a três grupos de crianças. O primeiro grupo são de crianças com síndrome de down, o segundo grupo são de crianças com síndrome de down em que os pais recebem orientção sobre prtáricas parentais para este grupo especial e o terciro grupo de crianças não possuem síndrome de down. Para medir as práticas parentais há um instrumento psicológico que gera um escore em que os resultados estão guardados na variável `PP`.
+
+Primeiro carregamos os dados:
+
+```{R}
+dados<-read.csv2('http://www.leg.ufpr.br/lib/exe/fetch.php/pessoais:total.csv', h=T)
+summary(factor(dados$Grupo))
+```
+
+Agora vamos ajustar uma ANOVA:
+
+```{R}
+mod<-aov(dados$PP~dados$Grupo)
+summary(mod)
+```
+
+A análise de variância nos diz que não há diferença entre a média dos escores de práricas parentais entre os três grupo de crianças. Mas para que este resultados seja válido precisamo verificar alguns pressupostos tais como independência, normalidade, e homocedasticidade dos erros. Mas como aqui o foco é homocedasticidade, verificaremos apenas este último.
+
+Como temos um número de crianças diferentes em cada grupo iremos usar o teste de Bartlett e de Cochran. Se houvesse número igual de crianças ou núemro de repetições iguais em cada tratamento, além o teste de Bartlett, poderíamos usar o teste de Hartley.
+
+Lembrando que estamos testando a hipótese nula das variâncias serem iguais:
+
+$$H_0: \sigma^2_1=\sigma^2_2=\sigma^2_3$$
+
+Aqui vamos apresentar o boxplot e o teste de Bartlett:
+
+```{R}
+boxplot(mod$res~dados$Grupo)
+bartlett.test(mod$res~dados$Grupo)
+```
+
+Notamos que o teste confirma o que o boxplot nos sugere, homogeneidade das variâncias.
+
+# Referências
+
+- Patrick Royston (1982). An extension of Shapiro and Wilk's W test for normality to large samples.  _Applied Statistics_, *31*, 115-124.
+
+- Patrick Royston (1982). Algorithm AS 181: The W test for Normality. _Applied Statistics_, *31*, 176-180.
+
+- Patrick Royston (1995). Remark AS R94: A remark on Algorithm AS 181: The W test for normality.  _Applied Statistics_, *44*,547-551.
+
+- <https://cran.r-project.org/web/packages/nortest/nortest.pdf>
+
+- Z. W. Birnbaum and Fred H. Tingey (1951), One-sided confidence contours for probability distribution functions.  _The Annals of Mathematical Statistics_, *22*/4, 592-596.
+
+- William J. Conover (1971), _Practical Nonparametric Statistics_. New York: John Wiley & Sons.  Pages 295-301 (one-sample Kolmogorov test), 309-314 (two-sample Smirnov test).
+
+- Durbin, J. (1973), _Distribution theory for tests based on the sample distribution function_.  SIAM. George Marsaglia, Wai Wan Tsang and Jingbo Wang (2003), Evaluating Kolmogorov's distribution.  _Journal of Statistical Software_,*8*/18.  <http://www.jstatsoft.org/v08/i18/>.
+
+- <https://cran.r-project.org/web/packages/SuppDists/SuppDists.pdf>

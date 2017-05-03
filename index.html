@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>DES4024 - Bioestatística</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bioestatística</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="aulas.html">Aulas</a>
+</li>
+<li>
+  <a href="bio.html">Introdução</a>
+</li>
+<li>
+  <a href="descritiva.html">Análise Descritiva</a>
+</li>
+<li>
+  <a href="graficos.html">Recursos Gráficos</a>
+</li>
+<li>
+  <a href="probabilidade.html">Introdução a Probabilidade</a>
+</li>
+<li>
+  <a href="IC.html">Intervalo de Confiança</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">DES4024 - Bioestatística</h1>
+
+</div>
+
+
+<div class="alert alert-danger" role="alert">
+<p><strong>ATENÇÃO!</strong></p>
+<ul>
+<li>Prova dia: 04/05</li>
+<li>Seminários dias 11/05 e 18/05</li>
+</ul>
+</div>
+<div id="detalhes-da-oferta-da-disciplina" class="section level1">
+<h1>Detalhes da oferta da disciplina</h1>
+<ul>
+<li><strong>Curso:</strong> Pós-Graduação em Bioestatística e Odontologia</li>
+<li><strong>Período:</strong> Primeiro semestre de 2017</li>
+<li><strong>Professor Responsável:</strong> Isolde Previdelli</li>
+<li><p><strong>Horários e Locais:</strong></p>
+<ul>
+<li>Quintas, 13:30 - 17:30h, <strong>Bloco E90</strong></li>
+</ul></li>
+<li><strong>Frequência</strong>: de acordo com as normas da Universidade, mínimo de <span class="math inline">\(75\%\)</span></li>
+<li><strong>Avaliação</strong>: será realizada 1 prova(<span class="math inline">\(50\%\)</span>), lista de exercícios(<span class="math inline">\(20\%\)</span>), apresentação de artigos(<span class="math inline">\(15\%\)</span>) e apresentação de um trabalho(<span class="math inline">\(15\%\)</span>) que poderá ser submetido aos eventos RBRAS, Workshop de Bioestatística ou Escola de Regressão.
+<ul>
+<li>A média final será a soma dos itens.</li>
+</ul></li>
+<li><strong>Datas importantes:</strong>
+<ul>
+<li><strong>06/03</strong>: Início do semestre letivo</li>
+<li><strong>31/05</strong>: Final do semestre letivo</li>
+</ul></li>
+</ul>
+</div>
+<div id="programa-da-disciplina" class="section level1">
+<h1>Programa da disciplina</h1>
+<div id="ementa" class="section level2">
+<h2>Ementa</h2>
+<ul>
+<li>Medidas descritivas e epidemiológicas</li>
+<li>Introdução a Inferência Estatística</li>
+<li>Métodos de diagnósticos</li>
+<li>Medidas de associação</li>
+<li>Tamanho de amostras</li>
+<li>Principais testes paramétricos e não paramétricos</li>
+</ul>
+</div>
+<div id="objetivos" class="section level2">
+<h2>Objetivos</h2>
+<p>Esta disciplina irá discutir os métodos básicos da análise estatística para com aplicação nas Ciências Biológicas e da Saúde, através da apresentação de teoria, exemplos e resolução de exercícios com o uso da linguagem computacional <em>R</em> (<a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>). Ao final do período o aluno deverá ser capaz de utilizar, com eficiência, as técnicas apresentadas e dar suporte estatístico à leitura crítica de trabalhos científicos.</p>
+</div>
+<div id="conteudo-programatico" class="section level2">
+<h2>Conteúdo programático</h2>
+<ol style="list-style-type: decimal">
+<li>O papel da Estatística nas áreas da saúde e biológicas.</li>
+<li>Organização da pesquisa.</li>
+<li>Descrição e apresentação de dados.</li>
+<li>Probabilidade.</li>
+<li>Avaliação da qualidade de testes diagnósticos.</li>
+<li>Modelos Estatísticos: Binomial, Poisson, Normal, t-Student e Qui-Quadrado.</li>
+<li>Inferência Estatística: testes de hipóteses, intervalo de confiança, poder do teste.</li>
+<li>Comparação de grupos e medidas de efeitos: amostras pareadas e independentes.</li>
+<li>Dimensionamento de amostras – Estudos transversais.</li>
+<li>Correlação de Pearson e Spearman.</li>
+<li>Análise de Variância e de Welch.</li>
+<li>Testes de Wilcoxon, Mann Whitney e Kruskall Wallis.</li>
+</ol>
+</div>
+<div id="referencias" class="section level2">
+<h2>Referências</h2>
+<ul>
+<li>ARMITAGE, P. and BERRY, G.Statistical Method in Medical Research, 2nd ed., Blackwell Scientific, Oxford.</li>
+</ul>
+<ol start="1987" style="list-style-type: decimal">
+<li></li>
+</ol>
+<ul>
+<li>CAMPBELL, M.J. Statistics at square One. BMJ books. 11 ed. 2009. 192p.</li>
+<li>CAYTON, D. and HILLS, M., Statistical Models in Epidemiology, Oxford University Press, Oxford. 1993.</li>
+<li>FINNEY, D.J. , Statistical Method in Biological Assay, 2a ed., Griffin, London.1963.</li>
+<li>PAGANO M, GAUVREAU K. Princípios de bioestatística. Tradução da 2a ed. norte- americana. São Paulo: Pioneira Thomson Learning, 2004.</li>
+<li>SIQUEIRA, A. L. e TIBÚRCIO, J. D. Estatística na Área da Saúde. 2011.</li>
+<li>SOARES, J. F. e SIQUEIRA, A. L. Introdução à Estatística Médica. 1999.</li>
+<li>SHAHBABA, B. Biostatistics with R, An Introduction to Statistics Through Biological Data, Springer. 2012.</li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

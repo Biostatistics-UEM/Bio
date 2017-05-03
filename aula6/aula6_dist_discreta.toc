@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {portuguese}
+\beamer@sectionintoc {1}{Distribui\IeC {\c c}\IeC {\~a}o de Bernoulli}{3}{0}{1}
+\beamer@sectionintoc {2}{Distribui\IeC {\c c}\IeC {\~a}o Binomial}{4}{0}{2}
+\beamer@sectionintoc {3}{Distribui\IeC {\c c}\IeC {\~a}o Poisson}{5}{0}{3}

@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Análise Descritiva</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bioestatística</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="aulas.html">Aulas</a>
+</li>
+<li>
+  <a href="bio.html">Introdução</a>
+</li>
+<li>
+  <a href="descritiva.html">Análise Descritiva</a>
+</li>
+<li>
+  <a href="graficos.html">Recursos Gráficos</a>
+</li>
+<li>
+  <a href="probabilidade.html">Introdução a Probabilidade</a>
+</li>
+<li>
+  <a href="IC.html">Intervalo de Confiança</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Análise Descritiva</h1>
+
+</div>
+
+
+<p>Geralmente a análises descritivas são as primeiras manipulações realizadas em um estudo quantitativo e tem como principal objetivo resumir, sumarizar e explorar o comportamento dos dados. Isso pode ser feito através de tabelas de frequências, gráficos e medidas de resumo numérico. Antes de apresentarmos cada um desses ítens, primeiro vamos identificar os tipos de variáveis que podemos encontrar em nossos dados.</p>
+<blockquote>
+<p>TABELA 1 – Variável Qualitativa</p>
+</blockquote>
+<table>
+<colgroup>
+<col width="14%" />
+<col width="45%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Tipo</th>
+<th align="left">Descrição</th>
+<th align="left">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Nominal</td>
+<td align="left">São categorias que não podem ser ordenadas</td>
+<td align="left">Estado de saúde de um paciente (saudável ou doente)</td>
+</tr>
+<tr class="even">
+<td align="left">Ordinal</td>
+<td align="left">São categorias que seguem uma ordem natural</td>
+<td align="left">Intensidade de um maratonista (leve, moderada ou forte)</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>TABELA 2 – Variável Quantitativa</p>
+</blockquote>
+<table>
+<colgroup>
+<col width="14%" />
+<col width="45%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Tipo</th>
+<th align="left">Descrição</th>
+<th align="left">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Discreta</td>
+<td align="left">Seu campo de variação é um conjunto finito ou infinito enumerável, em geral são contagens</td>
+<td align="left">Número de ovos de um mosquito encontrados em uma região</td>
+</tr>
+<tr class="even">
+<td align="left">Continua</td>
+<td align="left">Seu campo de variação é um conjunto infinito não-enumerável</td>
+<td align="left">Peso e altura de pacientes de um hospital</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Além disso é importante citar algumas variáveis comumente encontradas que podem receber ambas as classificações definidas acima. Elas podem ser vistas como transformações de variáveis.</p>
+<p><strong>1. Rank/Posto</strong></p>
+<p>Rank pode ser definido como o número que corresponde a posição de cada observação de uma amostra de valores. Os dados são ordenados de forma crescente (ou descrescente) e recebem um rank ou posto com base nessa ordenação. Quando há um empate, ou seja, valores iguais, devem ter postos iguais. Uma maneira encontrada para solucionar tais problemas é considerar, para os casos em que haja empates, a média dos postos. Esse tipo de rank é muito utilizado em alguns testes estatísticos não-paramétricos que serão definidos mais a frente. Abaixo um exemplo com um vetor de 5 valores de uma distribuição Poison(Será definido na seção de Probabilidade), no R usamos a função<code>rank()</code>, para calcular os postos de uma amostra.</p>
+<pre class="r"><code>## Gerando um vetor aleatório com cinco valores de uma ditribuição Poison
+x&lt;-rpois(5,1)
+x</code></pre>
+<pre><code>[1] 4 1 0 0 0</code></pre>
+<pre class="r"><code>rank(x)</code></pre>
+<pre><code>[1] 5 4 2 2 2</code></pre>
+<p>Causas de mortes de uma região ordenadas pela magnitude de mortandade</p>
+<p><strong>2. Porcentagem</strong></p>
+<p>Porcentagem também pode ser chamada de proporção ou frequência relativa simples. É a proporção de indivíduos pertencentes a uma categoria e o número total de indivíduos considerados na amostra. Então ela é expressa mais comumente em percentagem. Exemplo pode ser a expressão do número de óbitos por acidentes de trânsito por faixa etária em um região divido pelo total de óbitos por acidentes de trânsito.</p>
+<p><strong>3. Taxas</strong></p>
+<p>A taxa pode ser vista como o número de casos de um resultado de interesse que ocorre em um determinado período de tempo dividido pelo tamanho da população nesse período. Quando se calcula uma taxa está implícita sempre a noção de risco de acontecimento do fenômeno em estudo. Assim, uma taxa é sempre calculada para determinado período de tempo bem especiﬁcado e para uma área delimitada. Um exemplo para cálculo de taxa pode ser o coeficiente geral de mortalidade que seria a razão entre o número total de óbitos de uma determinada região em um determinado período de tempo dividido pela população total desta região no mesmo período de tempo.</p>
+<p><strong>4. Escores</strong></p>
+<p>Escore é uma pontuação dadas aos indivíduos de uma amostra para mensuar determinado risco ou chance que ocorrer um determinado evento de interesse. Dado o escore ou a pontuação as observações podem ser alocadas em determinadas faixas de classificação que são determinadas por alguma metodologia estatística. Um exemplo é o atendimento em um pronto socorro que após algumas informações serem coletadas, cada índivíduo recebe um escore segundo um modelo estatístico ou outra metodologia matemática e desta forma seu atendimento é classificado como urgente, pouco urgente ou sem urgência.</p>
+<p><strong>5. Variáveis latentes</strong></p>
+<p>São variáveis não observáveis ou que não podem ser medidas diretamente. Desta forma são criadas escalas para poder mensurá-las. A área da estatśtica de trata disso se chama psicometria, disciplina que é ofertada anualmente no mestrado de Bioestatística da UEM <a href="http://www.pbe.uem.br/wp-content/uploads/2013/05/DES4057-Psicometria-usando-Mplus.pdf" class="uri">http://www.pbe.uem.br/wp-content/uploads/2013/05/DES4057-Psicometria-usando-Mplus.pdf</a>. Um exemplo podem ser as variáveis que representam sentimentos como felicidade ou depressão que podem ser medidas através de instrumentos analíticos psicológicos. Um outro exemplo clássico de variável latente é o erro que um modelo de regressão comete, não pode ser mensurado mas estimado através dos resíduos (Modelo de Regressão será visto mais adiante).</p>
+<div id="tabelas-de-frequencia" class="section level2">
+<h2>Tabelas de frequência</h2>
+<p>As tabelas de frequências são ideais para resumir variáveis qualitativas e quantitativas discreta desde que esta última tenha um conjunto pequeno de valores diferentes. Se não for o caso, o recomendado é a criação de faixas de valores ou intervalos de classe e isso vale também para variável quantitativa contínua. Basicamente o que se dispõe nas tabelas de frequências são a frequência absoluta, frequência relativa e, em alguns casos quando for o interesse, a frequência acumulada, tanto absoluta quanto relativa. Veja o exemplo na Tabela 3, utilizando uma amostra de 132 alunos de uma turma da graduação em psicologia de uma Universidade no Paraná em 2015, as frequências acerca do uso de derivados de tabaco e outras substâncias.</p>
+<blockquote>
+<p>TABELA 3 – Frequência do Uso de Derivados do Tabaco e Outras Substâncias</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Substância</th>
+<th align="left">Frequência Absoluta</th>
+<th align="left">Frequência Relativa(%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Derivados do Tabaco</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Sim</td>
+<td align="left">57</td>
+<td align="left">43,18</td>
+</tr>
+<tr class="odd">
+<td align="left">Não</td>
+<td align="left">75</td>
+<td align="left">56,82</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Bebidas Alcoólicas</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Sim</td>
+<td align="left">109</td>
+<td align="left">82,58</td>
+</tr>
+<tr class="even">
+<td align="left">Não</td>
+<td align="left">23</td>
+<td align="left">17,42</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Maconha</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Sim</td>
+<td align="left">36</td>
+<td align="left">27,27</td>
+</tr>
+<tr class="odd">
+<td align="left">Não</td>
+<td align="left">96</td>
+<td align="left">72,73</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Cocaína/Crack</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Sim</td>
+<td align="left">7</td>
+<td align="left">5,30</td>
+</tr>
+<tr class="even">
+<td align="left">Não</td>
+<td align="left">125</td>
+<td align="left">94,70</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Outras Substâncias</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Sim</td>
+<td align="left">21</td>
+<td align="left">15,91</td>
+</tr>
+<tr class="odd">
+<td align="left">Não</td>
+<td align="left">111</td>
+<td align="left">84,09</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Notamos que a maioria dos alunos desta universidade consomem bebidas alcoólicas quando observamos a coluna Frequência Relativa que é contruída da seguinte maneira:</p>
+<p><span class="math inline">\(n_i\)</span>:frequência da classe</p>
+<p><span class="math inline">\(n\)</span>:frequência total</p>
+<p><span class="math inline">\(f_i = \frac{n_i}{n}*100\)</span></p>
+<p>Para a classe Bebidas Alcólicas a conta seria:</p>
+<pre class="r"><code>(109/132)*100</code></pre>
+<pre><code>[1] 82.57576</code></pre>
+</div>
+<div id="graficos" class="section level2">
+<h2>Gráficos</h2>
+<p>Os gráficos são uteis para representação do comportamento da variável em estudo. Eles podem facilitar a interpretação com relação as tabelas. Porém deve se ter cuidado ao optar por esta visualização para que não induza o leitor a interpretações equivocadas. Portanto existe gráficos adequados para cada tipo de variável, ela podendo ser qualitativa ou quantitativa. Com base nas classificações de variáveis descritas nas Tabelas 1 e 2, o próximo passo é identificar qual gráfico será o adequado. Há vários tipos de gráficos para representar variáveis qualitativas. Os mais usados são os gráficos de composição de setores e de barras. Os gráficos de setores são adequados para representar variáveis qualitativas nominais. Sua construção é simplesmente a repartição de um disco, que informalmente é chamado de pizza, em setores cujos tamanhos são proporcionais as frequências relativas de cada categoria da variável nominal.</p>
+<p>Abaixo temos um exemplo sobre este gráfico. Ele foi gerado com dados sobre mortalidade infantil neonatal em Curitiba-PR em 2004. Vamos representar a variável tipo de gestação da mãe.</p>
+<pre class="r"><code># Carregando os dados
+dados&lt;-read.table(&#39;http://leg.ufpr.br/lib/exe/fetch.php/projetos:neo_contr1.txt&#39;,h=T)
+dados$GESTACAO&lt;-as.factor(dados$GESTACAO)
+# Montando tabela com a variável período que o aluno está
+tabela&lt;-data.frame(tipo=c(&#39;T1&#39;,&#39;T2&#39;,&#39;T3&#39;,&#39;T4&#39;,&#39;T5&#39;,&#39;T6&#39;),
+                  n=c(table(dados$GESTACAO)[1],table(dados$GESTACAO)[2],
+                      table(dados$GESTACAO)[3],table(dados$GESTACAO)[4],
+                      table(dados$GESTACAO)[5],table(dados$GESTACAO)[6]))
+
+
+# Fazendo gráfico básico de setores
+pie(tabela$n,main=&#39;Tipo de Gestação&#39;, labels=c(&#39;T1&#39;,&#39;T2&#39;,&#39;T3&#39;,&#39;T4&#39;,&#39;T5&#39;,&#39;T6&#39;),
+    col=heat.colors(4))</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code># Adicionando colunas que serão usadas no gráfico
+tabela$fraction &lt;- tabela$n / sum(tabela$n)
+tabela$ymax &lt;- cumsum(tabela$fraction)
+tabela$ymin &lt;- c(0, head(tabela$ymax, n = -1))
+
+# Carregando pacote
+library(ggplot2)
+
+ 
+# Fazendo o gráfico
+ggplot(data = tabela, aes(fill = tipo, ymax = ymax, ymin = ymin, xmax = 4, xmin = 3)) +
+     geom_rect(colour = &quot;grey30&quot;, show.legend = TRUE) +
+     coord_polar(theta = &quot;y&quot;) +
+     xlim(c(0, 4)) +
+     theme_bw() +
+     theme(panel.grid=element_blank()) +
+     theme(axis.text=element_blank()) +
+     theme(axis.ticks=element_blank()) +
+     geom_text(aes(x = 3.5, y = ((ymin+ymax)/2), label = tipo)) +
+     xlab(&quot;&quot;) +
+     ylab(&quot;&quot;)</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p>Os gráficos de barras são mais adequados para variáveis discretas ou qualitativas ordinais, pois o eixo x sugere uma ordenação natural dos valores. Logo, este gráfico não é adequado para representar variáveis nominais,usá-lo neste casoa pode distorcer a interpretação da análise da variável. Veja o exemplo deste gráfico abaixo representando a quantidade de filhos que é uma variável discreta.</p>
+<pre class="r"><code>## Criando vetor com os dados
+age &lt;- c(0.3, 0.25, 0.2, 0.15, 0.1)
+names(age) &lt;- c(&quot;0 filho&quot;, &quot;1 filho&quot;, &quot;2 filhos&quot;, &quot;3 filhos&quot;,&quot;4 filhos&quot;)
+#barplot(age,col=c(&#39;#6A5ACD&#39;,&#39;#8470FF&#39;,&#39;#483D8B&#39;,&#39;#7B68EE&#39;,&#39;#4682B4&#39;))
+barplot(age,col=c(&#39;#8FBC8F&#39;),border=&#39;#78866B&#39;,main=&#39;Quantidade de Filhos&#39;)</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>O Histograma é ideal para resumir as variáveis contínuas e é um gráfico de barras contíguas que possibilita uma visualização do formato da distribuição dos valores observados da variável. A altura de cada barra é denominada densidade de frequência definida pelo quociente da frequência relativa(ou absoluta) pela amplitude da faixa. E cada barra é uma faixa de valor da variável em sua escala original. Porém com a evolução dos métodos computacionais, também é possível incluir no gráfico a curva de densidade estimada ou densidade da distribuição empírica dos dados que é muito útil para vizualizar melhor o comportamento dos dados.</p>
+<pre class="r"><code>## Gerando um vetor de valores aleatórios de um distribuição normal
+x&lt;-rnorm(1000)
+hist(x,prob=T,main=&#39;Histograma para variável contínua&#39;)
+lines(density(x),col=&#39;red&#39;)
+rug(x)</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Agora vamos apresentar o que é chamado de gráfico sequencial que é usado para representar o comportamento de variáveis quantitativas que variam ao longo do tempo. Este tipo de gráfico é muito útil para verificar longitudinalmente tendências, sazonalidades e outros padrões que podem afetar a a variável de interesse. Esses dados podem ser observados em diferentes instantes do tempo, seja diariamente (preço de ações, relatórios meteorológicos), mensalmente (taxa de desemprego, IPC),trimestralmente (PIB). Primeiro exemplo será com comandos os comandos básicos do R e depois usando os pacotes <code>lattice</code> e <code>ggplot2</code>.</p>
+<pre class="r"><code>rm(list=ls())
+## Gerando três séries de dados com início 1990
+dados &lt;- ts(matrix(rnorm(300), 100, 3), start=c(1990, 1), 
+              frequency=12)
+## Gráfico padrão do R
+plot(dados)</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>## Gráfico com o pacote lattice
+lattice::xyplot(dados)</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<pre class="r"><code>## Plotando as séries todas juntas
+lattice::xyplot(dados, superpose = TRUE) </code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<pre class="r"><code>## Usando o pacote ggplot2
+datas &lt;- seq(as.Date(paste(c(start(dados),1), collapse=&quot;/&quot;)), 
+             by = &quot;month&quot;, length.out = length(dados))
+## É preciso transfromar o objeto ts em um data frame
+dados.df &lt;- data.frame(date = datas, value = dados)
+ggplot2::ggplot(data=dados.df) + geom_line(aes(date, value.Series.1))</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-6-4.png" width="672" /></p>
+</div>
+<div id="medidas-de-resumo-numerico" class="section level2">
+<h2>Medidas de resumo numérico</h2>
+<p>Outra forma de resumir os dados é através das medidas-resumo. A natureza da variável vai orientar qual tipo de medida deve ser utilizada. Aqui será apresentada três tipos de medidas:</p>
+<ol style="list-style-type: decimal">
+<li>Tendência central</li>
+<li>Dispersão(variabilidade)</li>
+<li>Separatrizes</li>
+</ol>
+<div id="medidas-de-tendencia-central" class="section level3">
+<h3>Medidas de tendência central</h3>
+<p>Essas medidas indicam, em geral, um valor central em torno do qual os dados estão distribuídos. As principais medidas de tendência central são a média aritmética, mediana e moda.</p>
+<div id="media-aritmetica" class="section level4">
+<h4>Média aritmética</h4>
+<p>A média aritmética indica o valor em torno do qual há um equilíbrio na distribuição dos dados e pode ser expressa da seguinte forma: <span class="math display">\[
+\bar{x} = \sum_{i=1}^{n} \frac{x_i}{n}
+\]</span> Isto significa que temos que somar todos os valores observados e dividir pelo tamanho da amostra. Há também a média para dados agrupados. Seja a tabela 4 com as frequências absolutas de níveis réricos de colesterol para homens dos EUA, com idade entre 25 e 34 anos, em 1976-1980:</p>
+<blockquote>
+<p>TABELA 4 - Níveis séricos de colesterol para homens dos EUA, idade entre 25 e 34 anos, em 1976-1980</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nível de colesterol</th>
+<th align="left">Número de homens</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">80-119</td>
+<td align="left">13</td>
+</tr>
+<tr class="even">
+<td align="left">160-199</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">200-239</td>
+<td align="left">299</td>
+</tr>
+<tr class="even">
+<td align="left">240-279</td>
+<td align="left">115</td>
+</tr>
+<tr class="odd">
+<td align="left">280-319</td>
+<td align="left">34</td>
+</tr>
+<tr class="even">
+<td align="left">320-359</td>
+<td align="left">9</td>
+</tr>
+<tr class="odd">
+<td align="left">360-399</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">TOTAL</td>
+<td align="left">1067</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Para este caso calculamos a média da seguinte maneira: <span class="math display">\[
+\bar{x} = \sum_{i=1}^{n} \frac{m_i x_i}{\sum_{i=1}^{n} f_i}
+\]</span> em que <span class="math inline">\(m_i\)</span> éo ponto médio do i-ésimo intervalo e <span class="math inline">\(f_i\)</span> é a frequência associada com o i-ésimo intervalo. Portanto a média para os dados da tabela é:</p>
+<pre class="r"><code>(99.5*13+139.5*150+179.5*442+219.5*299+259.5*115+299.5*34+339.5*9+379.5*5)/1067</code></pre>
+<pre><code>[1] 198.844</code></pre>
+<div id="mediana" class="section level5">
+<h5>Mediana</h5>
+<p>A mediana é o valor central em um conjunto de dados após ordenado. Esta medida divide os dados em duas partes iguais, sendo metade dos valores abaixo da mediana e, a outra metade, acima. Consequentemente, se um conjunto de dados contém um total de <em>n</em> observações, no qual <em>n</em> é ímpar, a mediana é o valor do meio ou <span class="math inline">\(\frac{(n+1)}{2}\)</span>. Se <em>n</em> for par, a mediana é usualmente tomada como média dos dois valores mais centrais do intervalo, a <span class="math inline">\(\frac{n}{2}\)</span> e <span class="math inline">\((\frac{n}{2})+1\)</span>-ésima observações. No R a mediana pode ser encontrada facilmente com o comando <code>median()</code>.</p>
+<pre class="r"><code>x&lt;-rpois(20,10)
+sort(x)</code></pre>
+<pre><code> [1]  4  5  8  8  8  8  8  9  9 10 10 11 11 11 12 13 13 14 15 19</code></pre>
+<pre class="r"><code>median(x)</code></pre>
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+<div id="moda" class="section level4">
+<h4>Moda</h4>
+<p>A moda é simplesmente o valor mais frequente no conjunto de dados. Esta é uma medida-resumo que pode ser aplicada a variáveis qualitativas também. Pode ocorrer que em um conjunto de dados tenha mais de um valor mais frequente, dois por exemplo, neste caso chamamos de bimodal, se houver mais de duas chamamos de multimodal. Utlizando o mesmo vetor de valores do exemplo anterior.</p>
+<pre class="r"><code>moda &lt;- function(x) {
+  z &lt;- table(as.vector(x))
+  names(z)[z == max(z)]
+}
+moda(x)</code></pre>
+<pre><code>[1] &quot;8&quot;</code></pre>
+<p>As medidas de tendência central estão diretamente ligadas as medidas de dispersão e analisá-las de forma isoladas muitas vezes podem levar o pesquisador a conclusões erradas.</p>
+</div>
+</div>
+<div id="medidas-de-dispersao" class="section level3">
+<h3>Medidas de dispersão</h3>
+<p>Medidas de dispersão servem para quantificar a variabilidade dos valores em um conjunto de dados. Há várias medidas de dispersão muito úteis e utilizadas e vamos apresentar:</p>
+<ol style="list-style-type: decimal">
+<li>Amplitude total</li>
+<li>Desvio médio absoluto</li>
+<li>Variância</li>
+<li>Desvio padrão</li>
+<li>Coeficiente de variação</li>
+</ol>
+<div id="amplitude-total" class="section level4">
+<h4>Amplitude total</h4>
+<p>Esta medida é obtida a partir da diferença entre o máximo<span class="math inline">\((x_{(n)})\)</span> e mínimo<span class="math inline">\((x_{(1)})\)</span> em um conjunto de dados ordenados. Esta medida possui o valor 0 como limite inferior e é altamente sensível à valores extremos. <span class="math display">\[\Delta = x_{(n)} - x_{(1)}\]</span></p>
+</div>
+<div id="desvio-medio-absoluto" class="section level4">
+<h4>Desvio médio absoluto</h4>
+<p>É o cálculo da média dos desvios absolutos. Para o seu cálculo, primeiramente deve ser calculada a média (<span class="math inline">\(\bar{x}_{obs}\)</span>), posteriormente os desvios das observações em relação a média em módulo, <span class="math inline">\(d_i = \mid x_i -\bar{x}_{obs}\mid\)</span> e por último a média aritmética destes desvios conforme a fórmula a seguir.</p>
+<p><span class="math display">\[
+dma = \sum^{n}_{i=1} \frac{d_i}{n}
+\]</span></p>
+</div>
+<div id="variancia" class="section level4">
+<h4>Variância</h4>
+<p>Variância é a medida de dispersão mais usada e conhecida na Estatística. Ela quantifica a variabilidade dos dados em torno da média, ou seja, mede o quão longe do valor esperado os dados se encontram. O seu cálculo é feito da seguinte maneira:</p>
+<p><span class="math display">\[
+Var(x) = \sum^{n}_{i=1}\frac{(x_i - \bar{x})^2}{n-1}
+\]</span></p>
+</div>
+<div id="desvio-padrao" class="section level4">
+<h4>Desvio Padrão</h4>
+<p>Como podemos perceber o cálculo da variância eleva ao quadrado a soma da diferença dos desvios. Isso faz com a variância não tenha a interpretação na mesma escala em os dados foram medidos. Para contornar isso tiramos a raíz quadrada da variância para que este novo valor esteja na mesma escala e possamos analisar a variabilidade dos dados na mesma escala em que eles foram medidos.</p>
+<p><span class="math display">\[
+  dp(x) = \sqrt{Var(x)} = \sqrt{\sum^{n}_{i=1}\frac{(x_i - \bar{x})^2}{n-1}}
+  \]</span></p>
+</div>
+<div id="coeficiente-de-variacao" class="section level4">
+<h4>Coeficiente de variação</h4>
+<p>O coeficiente de variação é a razão entre o desvio padrão e a média. Esta é uma medida relativa que avalia o percentual de variabilidade em relação a média observada. Uma das grandes vantagens desta medida é a possibilidade de comparar a variabilidade de conjuntos medidos em diferentes escalas e ainda observar o comportamento da variabilidade de uma variável quantitativa entre as categorias de uma variável qualitativa e calcula-se da seguinte forma: <span class="math display">\[
+cv = 100 \frac{dp(x)}{\bar{x}}
+\]</span></p>
+<p>Vamos usar os dados(livro do Pagano) de oito invíduos de Massachusetts que sofreram um episódio inexplicável de intoxicação por vitamina D que exigiu hospitalização; pensou-se que essas ocorrências extraordinárias pudessem resultar de uma excessiva suplementação de leite. Os níveis de Cálcio e Albumina um tipo de proteína no sangue para cada indivíduo no momento da internação no hospital são mostrados abaixo, para calcular cada uma das medidas de variabilidade apresentadas em relação ao nível de cálcio. Como cálcio é um variável quantitativa, todas as medidas de dispersão apresentadas podem ser calculadas.</p>
+<pre class="r"><code>## Os dados
+calcio &lt;- c(2.92, 3.84, 2.37, 2.99, 2.67, 3.17, 3.74, 3.44)
+albumina &lt;- c(43, 42, 42, 40, 42, 38, 34, 42)
+dados &lt;- data.frame(calcio,albumina)
+dados</code></pre>
+<pre><code>  calcio albumina
+1   2.92       43
+2   3.84       42
+3   2.37       42
+4   2.99       40
+5   2.67       42
+6   3.17       38
+7   3.74       34
+8   3.44       42</code></pre>
+<pre class="r"><code>## Amplitude total
+amplitude &lt;- max(dados$calcio)- min(dados$calcio)
+## Desvio médio absoluto
+desvio_medio_abs&lt;-sum(abs(dados$calcio-mean(dados$calcio)))
+## Variância
+variancia&lt;-round(var(dados$calcio),2)
+## Desvio Padrão
+desvio_padrão &lt;- round(sd(dados$calcio),2)
+## Coeficiente de variação
+coef_var.&lt;-round((desvio_padrão/mean(dados$calcio))*100,2)
+resumo &lt;- cbind(amplitude,desvio_medio_abs,variancia,desvio_padrão, coef_var.)
+resumo</code></pre>
+<pre><code>     amplitude desvio_medio_abs variancia desvio_padrão coef_var.
+[1,]      1.47             3.24      0.26          0.51     16.23</code></pre>
+<blockquote>
+<p>Antes de seguirmos para o próximo tópico, vamos ver dois exemplo retirados do livro <strong>Biostatistics with R</strong> do <em>Babak Shahbaba</em>.</p>
+</blockquote>
+<blockquote>
+<p>Exemplo 1: Considere a seguinte amostra com medidas da frequência cardíaca de 5 pessoas e calculamos a média:</p>
+</blockquote>
+<pre class="r"><code>x1&lt;-c(74, 80, 79, 85, 81)
+x1</code></pre>
+<pre><code>[1] 74 80 79 85 81</code></pre>
+<pre class="r"><code>mean(x1)</code></pre>
+<pre><code>[1] 79.8</code></pre>
+<blockquote>
+<p>Agora suponha o primeiro indivíduo seja obsevado novamente e sua frequência agora é 47. A média vai mudar</p>
+</blockquote>
+<pre class="r"><code>x2&lt;-c(47, 80, 79, 85, 81)
+x2</code></pre>
+<pre><code>[1] 47 80 79 85 81</code></pre>
+<pre class="r"><code>mean(x2)</code></pre>
+<pre><code>[1] 74.4</code></pre>
+<blockquote>
+<p>Note que o valor médio para a primeira amostra era <code>79.8</code> e era uma medida que representava bem a amostra. Com a mudança do primeiro valor de 74 para 47, a média é igual <code>74.4</code> e não representa tão bem a amostra muito devido a ponto extremo 47.</p>
+</blockquote>
+<blockquote>
+<p>Outro detalhe que observamos é a mediana igual para as duas amostras, <code>80</code>. Isso mostra que a mediana é uma medida menos sensível a <em>out-liers</em>, ou seja, uma medida mais robusta que a média.</p>
+</blockquote>
+<blockquote>
+<p>Exemplo2: Considere agora duas amostras sobre medidas da pessão do sangue (mmHg) para dois tipos de pacientes:</p>
+</blockquote>
+<ul>
+<li><p>Paciente A, <span class="math inline">\(x = (95, 98, 96, 95, 96)\)</span></p></li>
+<li><p>Paciente B, <span class="math inline">\(y = (85, 106, 88, 105, 96)\)</span></p></li>
+</ul>
+<pre class="r"><code>## Entrando com os dados
+x &lt;- c(95, 98, 96, 95, 96)
+y &lt;- c(85, 106, 88, 105, 96)
+## Calculando as médias e medianas
+mean(x);median(x)</code></pre>
+<pre><code>[1] 96</code></pre>
+<pre><code>[1] 96</code></pre>
+<pre class="r"><code>mean(y);median(y)</code></pre>
+<pre><code>[1] 96</code></pre>
+<pre><code>[1] 96</code></pre>
+<p>Notamos nos comandos acima qie tanto a média, quanto a mediana, <code>96</code>, são iguais para os dois tipos de pacientes. Mas antes de concluir que os dois tipos de pacientes apresentam, em média, pressão do sangue iguais, vamos refificar a variabilidade das duas amostra:</p>
+<pre class="r"><code>### Variância e desvio padrão dos Pacientes A
+var(x);sd(x)</code></pre>
+<pre><code>[1] 1.5</code></pre>
+<pre><code>[1] 1.224745</code></pre>
+<pre class="r"><code>### Variância e desvio padrão dos Pacientes B
+var(y);sd(y)</code></pre>
+<pre><code>[1] 91.5</code></pre>
+<pre><code>[1] 9.565563</code></pre>
+</div>
+</div>
+<div id="separatrizes" class="section level3">
+<h3>Separatrizes</h3>
+<p>São medidas que dividem os dados em um número de partes iguais. Para isso a amostra deve estar ordenada, portanto as separatrizes são aplicadas a variáveis quantitativas e qualitativas ordinais. Podemos citar como separatrizes, os percentis que dividem os dados em 100 partes iguais, os decis separam os dados em 10 partes iguais e os quartis que separam o dados em quatro partes iguais. O primeiro quartil (Q1) estabelece o limite entre as <span class="math inline">\(25\%\)</span> menores observações e as <span class="math inline">\(75\%\)</span> maiores. O segundo quartil (Q2) é igual a mediana e o terceiro quartil (Q3) separa as <span class="math inline">\(75\%\)</span> menores observações das <span class="math inline">\(25\%\)</span> maiores. Há uma forma de representar os quartis que é muito utilizada que é o gráfico boxplot. Abaixo vemos as medidas que o gráfico boxplot nos apresenta assim como os quartis. Vamos chamar a região interquartílica de <em>RIC</em>.</p>
+<div class="figure">
+<img src="figuras/Boxplot.png" />
+
+</div>
+<p>Vamos ver no R como podemos obter os quartis e também o gráfico boxplot com comandos básicos. Para isso vamos utilizar a mesma variável calcio do exemplo anterior.</p>
+<pre class="r"><code>summary(dados$calcio)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.370   2.858   3.080   3.142   3.515   3.840 </code></pre>
+<pre class="r"><code>boxplot.stats(dados$calcio)$stats </code></pre>
+<pre><code>[1] 2.370 2.795 3.080 3.590 3.840</code></pre>
+<pre class="r"><code>quantile(dados$calcio, probs=seq(0,1,.25))</code></pre>
+<pre><code>    0%    25%    50%    75%   100% 
+2.3700 2.8575 3.0800 3.5150 3.8400 </code></pre>
+<p>Com os comandos <code>summary()</code>,<code>boxplot.stas()</code> e <code>quantile()</code>, obtemos os quartis, porém notem que há diferenças nos valores. A explicação para isso é que existem inúmeras maneiras de calcular quartis e todas estão corretas e tudo depende da implementação que a função adota. A função <code>boxplot.stats()</code> do R utiliza os quartis calculados pela função <code>boxplot()</code> que vai plotar o gráfico. A função <code>boxplot.stats()</code> adota uma implementação baseada em “hinges”, ou dobradiças. Uma boa ilustração é dada no site WolframMathWorld:<a href="http://mathworld.wolfram.com/Hinge.html" class="uri">http://mathworld.wolfram.com/Hinge.html</a>. Já a função <code>quantile()</code> possui 8 tipos diferentes de implementações de cálculo de quartil. O <em>default</em> ou padrão é o tipo 7 e o <em>help</em> da função explica cada um deles, basta digitar no consoledo R <code>help(quantile)</code>. A função <code>summary()</code> produz valores iguais aos calculados pelo <em>default</em> da função <code>quantile()</code>.</p>
+<p>Agora vamos ver como esses quartis calculados ficam no gráfico boxplot com os comandos do R.</p>
+<pre class="r"><code>boxplot(dados$calcio, staplewex = 1,horizontal = TRUE)
+text(x = boxplot.stats(dados$calcio)$stats[c(2,3,4)], labels = boxplot.stats(dados$calcio)$stats[c(2,3,4)], y = 1.25)</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Abaixo mais alguns exemplos de boxplot</p>
+<pre class="r"><code>####### &quot;Invenção&quot; de um conjunto de dados
+n=500
+col.1 = rep(NA,n)
+s1.2009 = cumsum(rnorm(n))
+s1.2010 = cumsum(rnorm(n))
+s1.2011 = cumsum(rnorm(n))
+s1.2012 = cumsum(rnorm(n))
+s1.2013 = cumsum(rnorm(n))
+
+dados = data.frame(cbind(col.1, s1.2009,s1.2010,
+                         s1.2011,s1.2012, s1.2013))
+
+
+####### Gráfico:
+
+boxplot(dados[,-1], axes=FALSE) # O parametro axes=FALSE faz com que os eixos não sejam desenhados
+title(col.main=&quot;blue&quot;,main= &#39;Indicador Hemoglobina, \n semestres compreendidos entre 2009 e 2013&#39;)
+
+title(col.lab=&quot;blue&quot;,xlab= &#39;semestres&#39;) # Acrescenta o titulo do eixo X 
+title(col.lab=&quot;blue&quot;,ylab= &#39;Percentual&#39;) # Acrescenta o titulo do eixo Y
+
+box() # Desenha a caixa em torno do gráfico
+axis(2) # Coloca o eixo Y 
+axis(1, 1:5, c(&quot;1s09&quot;, &quot;1s10&quot;, &quot;1s11&quot;, &quot;1s12&quot;, &quot;1s13&quot;)) # Coloca no eixo X, nos pontos 1 a 5, as etiquetas  dos semestres compreendidos entre 1s09 e 1s2013
+
+medias&lt;-apply(dados[,-1],2,mean,na.rm=TRUE) # Calcula as médias
+points(medias,col=&quot;red&quot;,pch=19) # Adiciona os pontos das médias no boxplot</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="assimetria-e-curtose" class="section level3">
+<h3>Assimetria e Curtose</h3>
+<p>Como falamos de quartis e citamos que a mediana é o segundo quartil, também é importante dizer que ela é o segundo momento dos dados. Os momentos são muito importantes em Estatística para caracterizar distribuições de probabilidade. A média ou esperança matemática é o primeiro momento, a variância o segundo momento, com o terceiro momento podemos obter a assimetria e com o quarto momento podemos obter a curtose . Aqui vamos definir assimetria e curtose. O cálculo dos momentos e sua definição formal, assim como a definição de esperança matemática, serão apresentados na seção de probabilidade. Aqui vamos representar o k-ésimo momento por <span class="math inline">\(\mu_k\)</span>. Para descrever a assimetria e o achatamento, medidas de assimetria e de curtose podem ser usadas. A Assimetria analisa a proximidade ou o afastamento de um conjunto de dados quantitativos em relação à distribuição Normal (Gaussiana). Mede o grau de afastamento de uma distribuição em relação a um eixo central (geralmente a média), podendo-se caracterizar curvas assimétricas à direita ou à esquerda, o seu cálculo se dá pela expressão abaixo (na literatura há várias formas de calcular este coeficiente):</p>
+<p><span class="math display">\[As=\frac{\mu_3}{\sigma^3} \]</span></p>
+<p>Dessa forma podemos classificar o coeficiente de assimetria da seguinte forma:</p>
+<ul>
+<li>Se <span class="math inline">\(As=0\)</span>, distribuição é simétrica</li>
+<li>Se <span class="math inline">\(As&gt;0\)</span>, distribuição assimétrica a direita (positiva)</li>
+<li>Se <span class="math inline">\(As&lt;0\)</span>, distribuição assimétrica a esquerda (negativa)</li>
+</ul>
+<p><strong>Fonte: Ferreira, D. F. Estatística Básica. Ed. UFLA, 2005. 664 p.</strong></p>
+<blockquote>
+<p>A assimetria graficamente pode ser representada da seguinte maneira:</p>
+</blockquote>
+<div class="figure">
+<img src="figuras/Assimetria.png" />
+
+</div>
+<p>onde, no caso de populações finitas, o <span class="math inline">\(k\)</span>-ésimo momento central é definido como</p>
+<p><span class="math display">\[ \mu_k = \frac{\sum_{i=1}^{N} (x_i - \mu)^k}{N} \, \,\]</span></p>
+<p>A curtose ou medida de achatamento procura caracterizar a forma da distribuição quanto ao seu achatamento. O termo médio de comparação é dado pela Distribuição Gaussiana, que é um modelo teórico de distribuição a ser estudado no capítulo relacionado à Probabilidades. Quanto ao achatamento, podemos ter as seguintes situações:</p>
+<ul>
+<li>Platicúrticas</li>
+<li>Mesocúrticas</li>
+<li>Leptocúrticas</li>
+</ul>
+<p>A medida de curtose pode ser calculada da seguinte maneira:</p>
+<p><span class="math display">\[k=\frac{\mu_4}{\sigma^4}\]</span></p>
+<p>De acordo com esta medida temos a seguinte classificação:</p>
+<ul>
+<li>k &lt; 0, distribuição Platicúrtica</li>
+<li>k = 0, distribuição Mesocúrtica</li>
+<li>k &gt; 0, distribuição Leptocúrtica</li>
+</ul>
+<div class="figure">
+<img src="figuras/curtose.png" />
+
+</div>
+<p>Agora um exemplo no R com um vetor de dados de uma variável quantitativa contínua:</p>
+<pre class="r"><code>x &lt;-c(21.88, 22.61, 23.28, 25.19, 19.73, 22.50, 26.35, 22.09, 24.63, 19.79, 23.61, 29.91, 29.12, 23.17, 23.38, 21.75, 18.77, 20.38, 20.45, 28.23, 18.17, 30.15, 20.60, 19.99, 24.56, 25.59, 20.66, 23.76, 23.35, 22.77, 21.52, 20.54, 20.30, 23.45, 24.82, 24.30, 21.97, 20.82, 22.78)
+plot(density(x),main=&#39;&#39;,xlab=&#39;&#39;)</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Próximo passo é calcular as medidas de assimetria e curtose:</p>
+<pre class="r"><code>library(moments)
+skewness(x)</code></pre>
+<pre><code>[1] 0.8248495</code></pre>
+<pre class="r"><code>kurtosis(x)</code></pre>
+<pre><code>[1] 3.33151</code></pre>
+<p><strong>Interpretação:</strong> A assimetria aqui é <code>0.8248495</code>. Este valor implica que a distribuição dos dados é levemente assimétrica a direita ou positivamente assimétrica. É assimétrica a direita pois o coeficiente é positivo, e levemente, pois está próximo de zero. Para a kurtose, o valor é <code>3.3315098</code>, implicando que a distribuição dos dados é Leptocúrtica, pois o valor de curtose é maior que 0.</p>
+<p>Abaixo um exemplo de representação gráfica no <em>R</em> dos três tipo de curtose:</p>
+<pre class="r"><code>a &lt;-c(-4,4)
+
+h &lt;-(a[2]-a[1])/1000
+x &lt;-seq(a[1],a[2],by=h)
+z3 &lt;-(1+cos(pi*x/3))/6
+z3[which(x &lt; -3)] &lt;-0
+z3[which(x &gt; 3)] &lt;-0
+z1 &lt;-dnorm(x)
+z2 &lt;-(cosh(pi*x/2)^(-1))/2
+plot(c(-4,4),c(0,0.5), type=&quot;n&quot;, xlab=&quot;x&quot;,
+     ylab=&quot;f(x)&quot;,main=&quot;Exemplos curtose&quot;,cex.main=1)
+lines(x,z3, lwd=2, col=&quot;red4&quot;)
+lines(x,z1, lwd=2, col=&quot;green4&quot;)
+lines(x,z2, lwd=2, col=&quot;blue4&quot;)
+legend(2.0,0.5,c(expression(kappa[1]),expression(kappa[2]),
+                 expression(kappa[3])),bty=&quot;n&quot;,lty=c(1,1,1),
+       col=c(&quot;red4&quot;,&quot;green4&quot;,&quot;blue4&quot;),lwd=c(2,2,2),cex=0.8)
+legend(2.7,0.50,c(&quot;= -0.594&quot;,&quot;= 0&quot;,&quot;= 2&quot;),bty=&quot;n&quot;,cex=0.8)</code></pre>
+<p><img src="descritiva_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

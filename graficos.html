@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Recursos Gráficos</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bioestatística</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="aulas.html">Aulas</a>
+</li>
+<li>
+  <a href="bio.html">Introdução</a>
+</li>
+<li>
+  <a href="descritiva.html">Análise Descritiva</a>
+</li>
+<li>
+  <a href="graficos.html">Recursos Gráficos</a>
+</li>
+<li>
+  <a href="probabilidade.html">Introdução a Probabilidade</a>
+</li>
+<li>
+  <a href="IC.html">Intervalo de Confiança</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Recursos Gráficos</h1>
+
+</div>
+
+
+<div id="grafico-de-dispersao" class="section level1">
+<h1>Gráfico de dispersão</h1>
+<blockquote>
+<p>Abaixo alguns recursos gráficos no <strong>R</strong>. O primeiro gráfico é um gráfico de dispersão para verificar a relalçao entre temperatura e pressão de um conunto de dados do <strong>R</strong> com recursos gráficos básicos.</p>
+</blockquote>
+<pre class="r"><code>#================== RECURSOS GRÁFICOS ==================#
+data(pressure)
+head(pressure)</code></pre>
+<pre><code>  temperature pressure
+1           0   0.0002
+2          20   0.0012
+3          40   0.0060
+4          60   0.0300
+5          80   0.0900
+6         100   0.2700</code></pre>
+<pre class="r"><code>#### Gráfico de dispersão default
+plot(pressure, main = &quot;Pressão versus Temperatura&quot;, sub = &quot;Dados do R&quot;, 
+     xlab=&#39;Temperatura&#39;, ylab=&#39;Pressão&#39;, cex=1,pch=19, col=&#39;red&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="argumentos-graficos" class="section level1">
+<h1>Argumentos gráficos</h1>
+<blockquote>
+<p>Abaixo um alista de argumentos que podem ser usados para gerar gráficos no <strong>R</strong>:</p>
+</blockquote>
+<ul>
+<li>adj: justificação de texto</li>
+<li>ann: inserção de títulos</li>
+<li>bg: cor de fundo</li>
+<li>bty: tipo de caixa do gráfico</li>
+<li>cex: tamanho do texto</li>
+<li>cex.axis: tamanho do ’tick’ dos eixos</li>
+<li>cex.lab: tamanho dos nomes dos eixos</li>
+<li>cex.main: tamanho do título do gráfico</li>
+<li>cex.sub: tamanho do sub-título do gráfico</li>
+<li>col: cor de linhas e símbolos</li>
+<li>col.axis: cor do ‘tick’ dos eixos</li>
+<li>col.lab: cor dos nomes dos eixos</li>
+<li>col.main: cor do título do gráfico</li>
+<li>col.sub: cor do sub-título</li>
+<li>fg: cor das linhas externas</li>
+<li>font: fonte para texto</li>
+<li>font.axis: fonte para ’tick’ dos eixos</li>
+<li>font.lab: fonte para nome dos eixos</li>
+<li>font.main: fonte para o título</li>
+<li>font.sub: fonte para o subtítulo</li>
+<li>gamma: correção para cores</li>
+<li>lab: número de ‘ticks’ nos eixos</li>
+<li>las: rotação de textos nas margens dos eixos</li>
+<li>lty: tipo de linha</li>
+<li>lwd: largura da linha</li>
+<li>mgp: localização de ’ticks’ e nomes de ’ticks’</li>
+<li>pch: tipo de símbolo</li>
+<li>srt: rotação de de texto na região do plot</li>
+<li>tck: comprimento dos ’ticks’ (em relação ao gráfico)</li>
+<li>tcl: comprimento dos ’ticks’ (em relação ao texto)</li>
+<li>tmag: tamanho do título do gráfico (em relação a outros nomes)</li>
+<li>type: tipo de gráfico (pontos, linhas, ambos)</li>
+<li>xaxp: número de ’ticks’ sobre eiso ‘x’</li>
+<li>xaxs: cálculo da amplitude de escal do eixo x</li>
+<li>xaxt: estilo do eixo x (padrão ou nenhum)</li>
+<li>yaxp: número de ’ticks’ sobre eiso ’y’</li>
+<li>yaxs: cálculo da amplitude de escal do eixo y</li>
+<li>yaxt: estilo do eixo y (padrão ou nenhum)</li>
+</ul>
+<blockquote>
+<p>Próximo gráfico explora tipos de fontes e cores:</p>
+</blockquote>
+<pre class="r"><code>x &lt;- 1:10
+y &lt;- 1:10
+par(mfrow=c(1,1))
+plot(x, y, type = &quot;n&quot;)
+text(1.5, 2, &quot;fonte&quot;, font = 1,col=&#39;red&#39;)
+text(3.5, 4, &quot;fonte&quot;, font = 2,col=&#39;blue&#39;)
+text(5.5, 6, &quot;fonte&quot;, font = 3,col=&#39;darkgreen&#39;)
+text(7.5, 8, &quot;fonte&quot;, font = 4,col=&#39;tomato&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>## http://pt.wikipedia.org/wiki/Lista_de_cores
+plot(x, y, type = &quot;n&quot;)
+text(1.5, 2, &quot;fonte&quot;, font = 1,col=&#39;#FFBF00&#39;)
+text(3.5, 4, &quot;fonte&quot;, font = 2,col=&#39;#191970&#39;)
+text(5.5, 6, &quot;fonte&quot;, font = 3,col=&#39;#8B0000&#39;)
+text(7.5, 8, &quot;fonte&quot;, font = 4,col=&#39;#006400&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<blockquote>
+<p>Próximo gráfico explora tipos e espessuras de linhas:</p>
+</blockquote>
+<pre class="r"><code>#### Gráficos de linhas
+
+plot(x, y,type=&#39;n&#39;)
+lines(c(2,8),c(8,8),lty=1, lwd=3)
+lines(c(2,8),c(6,6),lty=2, lwd=3)
+lines(c(2,8),c(4,4),lty=3, lwd=3)
+lines(c(2,8),c(2,2),lty=4, lwd=3)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="graficos-de-setores" class="section level1">
+<h1>Gráficos de Setores</h1>
+<blockquote>
+<p>Agora vamos explorar alguns gráficos de setores que são úteis para representar variáveis qualitativas.</p>
+</blockquote>
+<pre class="r"><code>#### Gráfico de setores
+n &lt;- 200
+pie.sales &lt;- c(0.12, 0.3, 0.26, 0.16, 0.04, 0.12)
+names(pie.sales) &lt;- c(&quot;Blueberry&quot;, &quot;Cherry&quot;,&quot;Apple&quot;, &quot;Boston Cream&quot;, &quot;Other&quot;, &quot;Vanilla Cream&quot;)
+pie(pie.sales)# default</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>pie(rep(1, n), labels = &quot;&quot;, col = rainbow(n), border = NA)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<pre class="r"><code>pie(pie.sales, col = c(&quot;purple&quot;, &quot;violetred1&quot;, &quot;green3&quot;,&quot;cornsilk&quot;, &quot;cyan&quot;, &quot;white&quot;))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
+<pre class="r"><code>pie(pie.sales, clockwise = TRUE, main = &quot;pie(*, clockwise = TRUE)&quot;)
+segments(0, 0, 0, 1, col = &quot;red&quot;, lwd = 2)
+text(0, 1, &quot;init.angle = 90&quot;, col = &quot;red&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-4-4.png" width="672" /></p>
+</div>
+<div id="grafico-de-barras" class="section level1">
+<h1>Gráfico de Barras</h1>
+<blockquote>
+<p>Abaixo alguns exemplos de gráficos de barras também podem ser usados para representar variáveis qualitativas e também variáveis discretas com poucos valores.</p>
+</blockquote>
+<pre class="r"><code>###Gráfico de Barras
+mp &lt;- barplot(VADeaths) # default
+VADeaths</code></pre>
+<pre><code>      Rural Male Rural Female Urban Male Urban Female
+50-54       11.7          8.7       15.4          8.4
+55-59       18.1         11.7       24.3         13.6
+60-64       26.9         20.3       37.0         19.3
+65-69       41.0         30.9       54.6         35.1
+70-74       66.0         54.3       71.1         50.0</code></pre>
+<pre class="r"><code>tot &lt;- colMeans(VADeaths)
+text(mp, tot + 3, format(tot), xpd = TRUE, col = &quot;blue&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>tipo1 &lt;- c(&quot;Media&quot;,&quot;Media&quot;,&quot;Alta&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Media&quot;,
+           &quot;Baixa&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Alta&quot;,&quot;Alta&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,
+           &quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,
+           &quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Alta&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Muito Baixa&quot;,&quot;Media&quot;,&quot;Baixa&quot;,
+           &quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Media&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,
+           &quot;Baixa&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Alta&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Media&quot;,
+           &quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Alta&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Alta&quot;,&quot;Alta&quot;)
+freq.tipo1 &lt;- table(tipo1)
+
+tipo2 &lt;- c(&quot;Muito Alta&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Alta&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,
+           &quot;Muito Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Muito Baixa&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,
+           &quot;Media&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Media&quot;,&quot;Muito Baixa&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,
+           &quot;Muito Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Alta&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,
+           &quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Muito Baixa&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Muito Baixa&quot;,
+           &quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,
+           &quot;Muito Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Muito Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,
+           &quot;Media&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Media&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Baixa&quot;,&quot;Media&quot;,&quot;Muito Baixa&quot;)
+
+freq.tipo2 &lt;- table(tipo2);freq.tipo2</code></pre>
+<pre><code>tipo2
+       Alta       Baixa       Media  Muito Alta Muito Baixa 
+          3          51          22           1          25 </code></pre>
+<pre class="r"><code>freq.tipos &lt;- table(tipo1,tipo2)
+freq.tipos/1000</code></pre>
+<pre><code>             tipo2
+tipo1          Alta Baixa Media Muito Alta Muito Baixa
+  Alta        0.000 0.008 0.005      0.000       0.004
+  Baixa       0.001 0.019 0.006      0.000       0.011
+  Media       0.002 0.019 0.009      0.001       0.009
+  Muito Baixa 0.000 0.005 0.002      0.000       0.001</code></pre>
+<pre class="r"><code>barplot(freq.tipos,beside=TRUE,legend.text=rownames(freq.tipos),main=&#39;Distribuicão&#39;, xlab=&#39;Tipos&#39;,ylab=&#39;freq. por tipo&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<pre class="r"><code>barplot(VADeaths, beside = FALSE,col = c(&quot;lightblue&quot;, &quot;mistyrose&quot;, &quot;lightcyan&quot;,&quot;lavender&quot;, &quot;cornsilk&quot;),
+        legend = c(&#39;A \n B&#39;), ylim = c(0, 200))
+title(main = &quot;Death Rates in Virginia&quot;, font.main = 1)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
+<pre class="r"><code>z &lt;- matrix(c(95,35,25,45), 2, 2)
+colnames(z) &lt;- c(&quot;Natural&quot;,&quot;Cesariano&quot;)
+barplot(z, beside=TRUE, col=c(&quot;#483D8B&quot;, &quot;#7B68EE&quot;),border=&#39;#F5F5F5&#39;,
+        ylim=c(0,100),cex.names=1.75)
+legend(&quot;topright&quot;, xpd=TRUE, ncol=2, legend=c(&quot;Público&quot;, &quot;Privado&quot;),
+       fill=c(&quot;#483D8B&quot;, &quot;#7B68EE&quot;), bty=&quot;n&quot;,cex=1.75)
+title(main = &quot;Tipo de parto e Tipo de hospital&quot;, font.main = 1)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-5-4.png" width="672" /></p>
+<pre class="r"><code>age &lt;- c(0.3, 0.25, 0.2, 0.15, 0.1)
+names(age) &lt;- c(&quot;5 Anos&quot;, &quot;6 Anos&quot;, &quot;7 Anos&quot;, &quot;8 Anos&quot;,&quot;9 Anos&quot;)
+barplot(age,col=c(&#39;#6A5ACD&#39;,&#39;#8470FF&#39;,&#39;#483D8B&#39;,&#39;#7B68EE&#39;,&#39;#4682B4&#39;))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-5-5.png" width="672" /></p>
+<pre class="r"><code>barplot(age,col=c(&#39;#8FBC8F&#39;),border=&#39;#78866B&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-5-6.png" width="672" /></p>
+<pre class="r"><code>medias.t.n &lt;- c(4.0, 5.1, 6.0, 4.1, 5.2, 8.7, 5.2, 4.2, 7.1, 5.7, 8.8, 8.2, 6.8, 5.5, 3.0, 4.8, 5.3, 3.0, 6.5, 5.3,
+                3.1, 9.3, 4.0, 4.4, 7.0, 4.7, 5.5, 7.5, 3.5, 9.5, 4.2, 5.8, 4.0, 6.5, 6.2, 5.1, 5.0, 6.8, 3.8, 4.9,
+                5.3, 3.6, 7.9, 5.3, 6.7, 8.4, 6.0, 4.9, 7.3, 4.5, 9.9, 5.9)
+sort(medias.t.n)</code></pre>
+<pre><code> [1] 3.0 3.0 3.1 3.5 3.6 3.8 4.0 4.0 4.0 4.1 4.2 4.2 4.4 4.5 4.7 4.8 4.9
+[18] 4.9 5.0 5.1 5.1 5.2 5.2 5.3 5.3 5.3 5.3 5.5 5.5 5.7 5.8 5.9 6.0 6.0
+[35] 6.2 6.5 6.5 6.7 6.8 6.8 7.0 7.1 7.3 7.5 7.9 8.2 8.4 8.7 8.8 9.3 9.5
+[52] 9.9</code></pre>
+<pre class="r"><code>tab &lt;- table(cut(medias.t.n, right = T, seq(3,10, by = 1)));tab</code></pre>
+<pre><code>
+ (3,4]  (4,5]  (5,6]  (6,7]  (7,8]  (8,9] (9,10] 
+     7     10     15      7      4      4      3 </code></pre>
+<pre class="r"><code>tab &lt;- (tab*100)/length(medias.t.n)
+tab</code></pre>
+<pre><code>
+    (3,4]     (4,5]     (5,6]     (6,7]     (7,8]     (8,9]    (9,10] 
+13.461538 19.230769 28.846154 13.461538  7.692308  7.692308  5.769231 </code></pre>
+<pre class="r"><code>barplot(tab,col = c(1,2,3,4,8,6,7), density = c(20,20,20,20,20,20,20), main=&quot;Médias Turma Noturna&quot;,
+        xlab=&quot;Notas&quot;, ylab=&quot;Frequência  % Relat.&quot;, axes = F, space =0, xaxt=&quot;n&quot;,cex.main=0.75, font.main=1,
+        font.axis=1, cex.axis=0.75, cex.lab=0.75,font.lab=1, ylim=c(0, 30))
+##     Definindo as marcas no eixo dos  &quot;x&quot;
+axis(2, at = seq(0,35,5), cex.axis = 0.75)
+axis(1, at = seq(3,10, by=1) - 3, labels = c(&quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;,&quot;9&quot;, &quot;10&quot;), cex.axis = 0.75, las=2)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-5-7.png" width="672" /></p>
+</div>
+<div id="boxplot" class="section level1">
+<h1>Boxplot</h1>
+<blockquote>
+<p>O próximo gráfico é o boxplot em que podemos identificar as medidas de quartis e variabilidade da variável:</p>
+</blockquote>
+<pre class="r"><code>###### BoxPlot
+b1 &lt;- rt(1000,10)
+boxplot(b1)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>t &lt;- summary(b1)
+t</code></pre>
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+-4.37800 -0.69840  0.02628  0.02147  0.73990  4.67400 </code></pre>
+<pre class="r"><code>boxplot(b1,border=&#39;black&#39;,main=&#39;Título&#39;,col=&#39;lightskyblue3&#39;,ylim=c(-6,6))
+
+text(t[&#39;Min.&#39;],&#39;Valor Mínimo=-3.99&#39;,pos=1,col=&#39;red&#39;,cex=1)
+text(t[&#39;Max.&#39;],&#39;Valor Máximo=3.88&#39;,pos=3,col=&#39;red&#39;,cex=1)
+text(t[&#39;Median&#39;],&#39;Valor Mediano=0.07&#39;,pos=3,col=&#39;red&#39;,cex=1)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<pre class="r"><code>boxplot(mpg~cyl,data=mtcars, main=&quot;Car Milage Data&quot;,  xlab=&quot;Number of Cylinders&quot;, ylab=&quot;Miles Per Gallon&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<pre class="r"><code>boxplot(len~supp*dose, data=ToothGrowth, notch=FALSE,col=(c(&quot;gold&quot;,&quot;darkgreen&quot;)),main=&quot;Tooth Growth&quot;, xlab=&quot;Suppliment and Dose&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-6-4.png" width="672" /></p>
+</div>
+<div id="histograma" class="section level1">
+<h1>Histograma</h1>
+<blockquote>
+<p>Alguns exemplos de representação de variáveis contínuas com o histograma</p>
+</blockquote>
+<pre class="r"><code>####### Histograma
+var &lt;- c(60.2, 43.3, 51.2, 46.6, 32.5, 41.8, 45.9, 60.6, 32.3, 31.7, 39.4, 41.2, 60.2, 49.0, 40.5, 58.3, 42.7, 61.4, 26.0, 53.3,
+              58.7, 46.4, 39.1, 63.9, 51.5, 53.3, 41.6, 54.9, 55.2, 60.2, 47.3, 39.8, 46.8, 64.4, 57.9, 39.1, 44.8, 65.3, 69.7, 50.4,
+              54.2, 39.4, 46.6, 55.8, 53.6, 61.8, 44.3, 48.5, 53.9, 61.4, 38.1, 47.8)
+hist(var,col=&#39;darkblue&#39;,main=&#39;Título do Gráfico&#39;,ylab=&#39;Frequencia&#39;,xlab=&#39;Variável em sua escala de medida&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>hist(var,col=14,ylim=c(0,10),labels=TRUE,main=&#39;Título \n do Gráfico&#39;, sub=&#39;Texto abaixo do eixo X&#39;,
+     ,ylab=&#39;Frequencia&#39;,xlab=&#39;Variável em sua escala de medida&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<blockquote>
+<p>Este gráfico premite comparar várias densidades empíricas estimadas.</p>
+</blockquote>
+<pre class="r"><code>hist(precip,prob=T,main=&#39;&#39;,border=&#39;seagreen&#39;)
+rug(precip)
+lines(density(precip,bw=&#39;nrd&#39;),col=&#39;red&#39;)
+lines(density(precip,bw=&#39;ucv&#39;),col=&#39;green&#39;)
+lines(density(precip,bw=&#39;SJ-ste&#39;),col=&#39;yellow&#39;)
+lines(density(precip,bw=&#39;SJ-dpi&#39;),col=&#39;blue&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<blockquote>
+<p>Representação gráfica da função densidade de probabilidade de uma variável aleatória que segue uma distribuição normal padrão.</p>
+</blockquote>
+<pre class="r"><code>###Definir média e variância:
+mu &lt;- 0
+sigma &lt;- 1
+
+myx &lt;- seq( mu - 3.5*sigma,  mu+ 3.5*sigma, length.out=500)
+
+myDensity &lt;- dnorm(myx,mean=mu,sd=sigma)
+
+
+# It is challenging to combine plotmath with values of mu and sigma in one expression.
+# Either bquote or substitute can be used.  First use bquote:
+
+myTitle1 &lt;- bquote (paste(&quot;x ~ Normal(&quot;, mu== .(round(mu,2)), &#39;,&#39;, sigma== .(round(sigma,2)),&quot;)&quot;) )
+
+
+## Para Salvar o gráfico em um arquivo
+#saveplot &lt;- TRUE
+
+#if (saveplot == TRUE){
+#  pdf(file=&quot;Normal-2009.pdf&quot;, height=6.5, width=6.5, onefile=F, paper=&quot;special&quot;, pointsize=10)
+
+#}else {
+#  dev.new(height=6.5, width=6.5,pointsize=9)
+#}
+### xpd needed to allow writing outside strict box of graph
+#par(xpd=TRUE, ps=10)
+
+plot(myx, myDensity, type=&quot;l&quot;, xlab=&quot;x&quot;, ylab=&quot;Probability Density &quot;, main=myTitle1, axes=FALSE)
+axis(2, pos= mu - 3.6*sigma)
+axis(1, pos=0)
+lines(c(myx[1],myx[length(myx)]),c(0,0)) ### closes off axes
+
+# bquote creates an expression that text plotters can use
+t1 &lt;-  bquote( mu== .(mu))
+
+# Find a value of myx that is &quot;very close to&quot; mu
+centerX &lt;- max(which (myx &lt;= mu))
+# plot light vertical line under peak of density
+lines( c(mu, mu), c(0, myDensity[centerX]), lty= 14, lwd=.4)
+
+# label the mean in the bottom margin
+mtext(bquote( mu == .(mu)), 1, at=mu, line=-1)
+
+### find position 20% &quot;up&quot; vertically, to use for arrow coordinate
+ss = 0.2 * max(myDensity)
+# Insert interval to represent width of one sigma
+arrows( x0=mu, y0= ss, x1=mu+sigma, y1=ss, code=3, angle=90, length=0.1)
+
+### Write the value of sigma above that interval
+t2 &lt;-  bquote( sigma== .(round(sigma,2)))
+text( mu+0.5*sigma, 1.15*ss, t2)
+
+### Create a formula for the Normal
+normalFormula &lt;- expression (f(x) == frac (1, sigma* sqrt(2*pi)) * e^{~~ - ~~ frac(1,2)~~ bgroup(&quot;(&quot;, frac(x-mu,sigma),&quot;)&quot;)^2})
+# Draw the Normal formula
+text ( mu + 0.5*sigma, max(myDensity)- 0.10 * max(myDensity),  normalFormula, pos=4)
+
+### Theory says we should have 2.5% of the area to the left of: -1.96 * sigma.
+### Find the X coordinate of that &quot;critical value&quot;
+valor=qnorm(.975)
+criticalValue &lt;- mu -valor * sigma
+### Then grab all myx values that are &quot;to the left&quot; of that critical value.
+specialX &lt;-  myx[myx &lt;= criticalValue]
+
+### mark the critical value in the graph
+text ( criticalValue, 0 , label= paste(round(criticalValue,2)), pos=1)
+### Take sequence parallel to values of myx inside critical region
+specialY &lt;- myDensity[myx &lt; criticalValue]
+#  Polygon makes a nice shaded illustration
+polygon(c(specialX[1], specialX, specialX[length(specialX )]), c(0, specialY, 0), density=c(-110),col=&quot;lightgray&quot; )
+
+shadedArea &lt;- round(pnorm(mu - 1.96 * sigma, mean=mu, sd=sigma),4)
+
+
+### I want to insert annotation about area on left side.
+
+al1 &lt;- bquote(Prob(x &lt;= .(round(criticalValue,2))))
+al2 &lt;- bquote(phantom(0) == F( .(round(criticalValue,2)) ))
+al3 &lt;- bquote(phantom(0) == .(round(shadedArea,3)))
+
+### Hard to position this text &quot;just right&quot;
+### Have tried many ideas, this may be least bad.
+### Get center position in shaded area
+medX &lt;- median(specialX)
+### density at that center point:
+denAtMedX &lt;- myDensity[indexMed &lt;- max(which(specialX &lt; medX))]
+
+#text(medX, denAtMedX+0.0055, labels=al1)
+#text(medX, denAtMedX+0.004, labels=al2)
+text(medX, denAtMedX+0.0025, labels=al3)
+
+### point from text toward shaded area
+#arrows( x0=medX, y0=myDensity[indexMed]+0.002 ,x1= mu-2.5 *sigma, y1= 0.40*myDensity[length(specialX)] ,   length=0.1)
+
+
+
+ss &lt;- 0.1 * max(myDensity)
+### Mark interval from mu to mu-1.96*sigma
+arrows( x0=mu, y0= ss, x1=mu-1.96*sigma, y1=ss, code=3, angle=90, length=0.1)
+### Put text above interval
+text( mu - 2.0*sigma,1.15*ss, bquote(paste(.(round(criticalValue,2)),phantom(1)==mu-1.96 * sigma,sep=&quot;&quot;)),pos=4 )
+
+
+
+
+criticalValue &lt;- mu +1.96 * sigma
+### Then grab all myx values that are &quot;to the left&quot; of that critical value.
+specialX &lt;-  myx[myx &gt;= criticalValue]
+
+### mark the critical value in the graph
+text ( criticalValue, 0 , label= paste(round(criticalValue,2)), pos=1)
+### Take sequence parallel to values of myx inside critical region
+specialY &lt;- myDensity[myx &gt; criticalValue]
+#  Polygon makes a nice shaded illustration
+polygon(c(specialX[1], specialX, specialX[length(specialX )]), c(0, specialY, 0), density=c(-110),col=&quot;lightgray&quot; )
+
+shadedArea &lt;- round(pnorm(mu + 1.96 * sigma, mean=mu, sd=sigma, lower.tail=F),4)
+
+
+### Insert simpler comment on right side.
+
+al2 &lt;- bquote(phantom(0) == 1 - F( .(round(criticalValue,2)) ))
+al3 &lt;- bquote(phantom(0) == .(round(shadedArea,3)))
+
+### Hard to position this text &quot;just right&quot;
+### Have tried many ideas, this may be least bad.
+### Get center position in shaded area
+medX &lt;- median(specialX)
+### density at that center point:
+denAtMedX &lt;- myDensity[indexMed &lt;- max(which(specialX &lt; medX))]
+
+
+#text(medX, denAtMedX+0.004, labels=al2)
+text(medX, denAtMedX+0.0025, labels=al3)
+
+### point from text toward shaded area
+#arrows( x0=medX, y0=myDensity[indexMed]+0.002 ,x1= mu+2.5 *sigma, y1= 0.40*myDensity[length(specialX)] ,   length=0.1)
+
+
+
+ss &lt;- 0.05 * max(myDensity)
+### Mark interval from mu to mu+1.96*sigma
+arrows( x0=mu, y0= ss, x1=mu+1.96*sigma, y1=ss, code=3, angle=90, length=0.1)
+### Put text above interval
+text( mu + 1.96*sigma,1.15*ss, bquote(paste(.(round(criticalValue,2)),phantom(1)==mu+1.96 * sigma,sep=&quot;&quot;)),pos=2 )</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>#if (saveplot == TRUE)
+#dev.off()</code></pre>
+</div>
+<div id="graficos-matematicos" class="section level1">
+<h1>Gráficos Matemáticos</h1>
+<blockquote>
+<p>Os próximos exemplos são gráficos que representam funções matemáticas muito usuais em disciplinas como Cálculo e sua reprsentação gráfica como soluções de derivadas pode facilitar o entendimento do aluno sobre o que de fato estes cálculos significam:</p>
+</blockquote>
+<div id="grafico-1" class="section level2">
+<h2>GRÁFICO 1</h2>
+<pre class="r"><code>## Faz o gráfico da função
+x&lt;-2
+plot(function(x) x, 0,4, lty=0,xlab=&#39;x&#39;, ylab=&#39;f (x)&#39;,
+     cex.main=0.75, font.main=1, font.axis=1,cex.lab=0.75,
+     cex.axis=0.75, font.lab=1, mgp=c(2,1,0), axes=F)
+axis(1,at=seq(0,4,1), cex.axis=0.75)
+axis(2,at=seq(0,4,1), cex.axis=0.75)
+box()
+title(main=substitute(paste(&quot;Normal&quot;,italic(&#39; Itálico&#39;))))
+abline(v=seq(0,6,1), h=seq(0,8,1), lty=2, col = &quot;gray70&quot;)
+abline(2,0,0,2, col=&quot;black&quot;) </code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>## Calcula a derivada da função 
+z&lt;-3
+fz&lt;-(z^3/3) - z^2 + 2 
+yo&lt;-eval(fz)
+dfz &lt;- D(expression((z^3/3) - z^2 + 2), &quot;z&quot;)
+df3&lt;-eval(dfz)
+xo&lt;-z
+
+## Faz o gráfico da função
+plot(function(x)(x^3/3-x^2+2),-3,5, col = &quot;black&quot;, lty = 1,
+     xlab=&#39;x&#39;, ylab=&#39;f (x)&#39;,cex.main=0.75, font.main=1, 
+     font.axis=1,cex.lab=0.75, cex.axis=0.5,
+     font.lab=1, main=&quot;Gráficos da Função f(x) e Reta tangente&quot;,
+     mgp=c(2,1,0), axes=F)
+plot(function(x)(yo + df3*(x - xo)), -3,5, add=T, col=&quot;red&quot;, lty = 2,
+     xaxt=&quot;n&quot;, mgp=c(2,1,0))
+axis(1, at=seq(-3,5,1),   cex.axis=0.5)
+axis(2, at=seq(-20,20,2), cex.axis=0.5)
+box(lwd=2)
+abline(v=seq(-3,5,1), h=seq(-20,15,5), lty=2, col = &quot;gray70&quot;)
+abline (v=0, h=0)
+abline (v=xo,h=yo,lty=2, col = &quot;darkblue&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+</div>
+<div id="grafico-2" class="section level2">
+<h2>GRÁFICO 2</h2>
+<pre class="r"><code>## Reta em coordenadas polares 
+t &lt;-seq(0, pi/2, 0.1)
+r &lt;- 2*sqrt(3)/cos(t - pi/3)
+x&lt;-r*cos(t)
+y&lt;-r*sin(t)
+
+## Define as dimensões do gráfico
+plot(x,y,type=&quot;l&quot;,col=&quot;red&quot;, xlab=&quot;x&quot;, ylab=&quot;y&quot;, cex.axis=0.7, main=&quot;Reta em Coordenadas Polares&quot;, cex.main = 1, xaxt=&quot;n&quot;, mgp=c(2,1,0))
+     
+## Desenha o ponto
+points(4*cos(pi/6),4*sin(pi/6), col=&quot;blue&quot;, pch=21, cex = 1.5)
+arrows  (0,0,4*cos(pi/6),4*sin(pi/6), col=&quot;blue&quot;,lwd=1)
+
+## Traça as linhas verticais e horizontais
+axis(1, at=seq(0,10,1), cex.axis=0.7)
+axis(2, at=seq(0,10,1), cex.axis=0.7)  
+abline(v=seq(1,10,1), h=seq(0,10,1), lty=2, col = &quot;gray70&quot;)
+abline(v = 4*cos(pi/6), h = 4*sin(pi/6), lty=2, col = &quot;darkblue&quot;) </code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="grafico-3" class="section level2">
+<h2>GRÁFICO 3</h2>
+<pre class="r"><code>## Calcula a derivada da função 
+z&lt;-1/2
+fz1&lt;- z^2
+yo&lt;-eval(fz1)
+dfz &lt;- D(expression(z^2), &quot;z&quot;)
+dfz&lt;-eval(dfz)
+
+x&lt;-1/2
+fx&lt;- x^2 - 2*x + 1
+yo&lt;-eval(fx)
+
+dfx &lt;- D(expression(x^2 - 2*x + 1), &quot;x&quot;)
+
+dfx&lt;-eval(dfx)
+
+tgteta &lt;- (dfz-dfx)/(1+ dfz*dfx)
+
+teta&lt;-atan(tgteta)
+
+## Faz o gráfico da função
+plot(function(x) x^2 - 2*x + 1, -1,3, lty=1,
+col = &quot;black&quot;,xlab=&#39;x&#39;, ylab=&#39;f (x)&#39;,cex.main=0.75, font.main=1, 
+font.axis=1,cex.lab=0.75, cex.axis=0.75, main=&quot;Curvas e Retas&quot;,
+font.lab=1, mgp=c(2,1,0), axes=F)
+         
+plot(function(x) yo + dfx*(x - z), -1,3, add=T, xaxt=&quot;n&quot;, lty = 2)
+plot(function(x) x^2,  -1,3, col =&quot;black&quot;, add=T, xaxt=&quot;n&quot;, lty = 1)
+plot(function(x) yo + dfz*(x - z), -1,3, add=T, xaxt=&quot;n&quot;, lty = 2)
+
+axis(1, at=seq(-1,3,0.5), cex.axis=0.75)
+axis(2, at=seq(0,4,0.25), cex.axis=0.75)
+box()
+abline(v=seq(-1,5,1), h=seq(-1,5,1), lty=2, col = &quot;gray70&quot;)
+abline(v=0)
+abline(v=x, h=fx, lty=2, col = &quot;tomato&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="grafico-4" class="section level2">
+<h2>GRÁFICO 4</h2>
+<pre class="r"><code>## Calcula a derivada da função 
+dxdt &lt;- D(expression(a*cos(x)), &quot;x&quot;)
+
+dydt&lt;- D(expression(b*sin(x)), &quot;x&quot;)
+
+t&lt;-seq(0, 4*pi, 0.01)
+x&lt;-4*cos(t)
+y&lt;-2*sin(t)
+
+## Faz o gráfico da função
+plot(x,y,type=&quot;l&quot;,col=&quot;red&quot;, xlab=&quot;x&quot;, ylab=&quot;y&quot;, cex.axis=0.7,
+     main=&quot;Circunferência&quot;, cex.main=1, xaxt=&quot;n&quot;, mgp=c(2,1,0)) 
+axis(1, at=seq(-4,4,1), cex.axis=0.7) 
+abline(v=seq(-4,4,1), h=seq(-4,4,1), lty=2, col = &quot;gray70&quot;)
+abline (v=0, h=0)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="grafico-5" class="section level2">
+<h2>GRÁFICO 5</h2>
+<pre class="r"><code>## Calcula a derivada da função 
+t&lt;-seq(0, 2*pi, 0.01)
+r&lt;-10*sin(3*t)
+x&lt;-r*cos(t)
+y&lt;-r*sin(t)
+
+## Faz o gráfico da função
+plot(x,y,type=&quot;l&quot;,col=&quot;red&quot;, xlab=&quot;x&quot;, ylab=&quot;y&quot;, cex.axis=0.7,
+     main=&quot;Título do Gráfico&quot;, cex.main=1, xaxt=&quot;n&quot;, mgp=c(2,1,0)) 
+axis(1, at=seq(-10,10,1), cex.axis=0.7) 
+abline(v=seq(-10,10,1), h=seq(-10,10,1), lty=2, col = &quot;gray70&quot;)
+abline (v=0, h=0)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="grafico-6" class="section level2">
+<h2>GRÁFICO 6</h2>
+<pre class="r"><code>plot(function(x)(x + 1),-1,3, col = &quot;black&quot;, xlab=&#39;x&#39;, ylab=&#39;f(x)&#39;,cex.main=0.75, font.main=1, lty = 2,
+     font.axis=1,cex.lab=0.75, cex.axis=0.5,font.lab=1, main=expression(Área(m^2~.ha^-1)),mgp=c(2,1,0))   
+
+plot(function(x)(1 + x + (1/2)*x^2), -1,3, add=T, col=&quot;red&quot;, mgp=c(2,1,0), lty = 4)
+
+plot(function(x)(1 + x + (1/2)*x^2 + (1/6)*x^3), -1,3, add=T, col=&quot;darkblue&quot;, mgp=c(2,1,0), lty = 9)
+     
+plot(function(x)(exp(x)), -1,3, add=T, col=&quot;darkgreen&quot;, lty = 7, mgp=c(2,1,0))
+          
+axis(1, at=seq(-1,3,1), cex.axis=0.5)
+axis(2, at=seq(-2,6,1), cex.axis=0.5)
+box()
+abline(v=seq(-1,3,1), h=seq(-2,6,1), lty=2, col = &quot;gray70&quot;)
+abline (v=0, h=0)
+
+# Adicionando Legenda
+legend(x = -1, y = 4, col = c(&quot;black&quot;,&quot;red&quot;,&quot;darkblue&quot;, &quot;darkgreen&quot;),lty = c(2,4,9,7),
+cex = 0.7,legend = c(&quot;Linear&quot;, &quot;Quadrático&quot;, &quot;Cúbico&quot;, &quot;Exp(x)&quot;), bty=&#39;n&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="grafico-7" class="section level2">
+<h2>GRÁFICO 7</h2>
+<pre class="r"><code># Gráfico Integral - 01#
+###################################
+
+# Definindo o vetor &quot;x&quot; no intervalo de 0(zero) a 2pi(dois vezes pi) 
+x &lt;- seq(0, 2*pi, length = 100)
+# Plota o seno do ângulo x , axes = F (N?o plotar os valores de x) 
+plot(x, sin(x), type = &quot;n&quot;, mgp=c(2,1,0), ylab = &quot;sen(x)&quot;, cex.lab = 0.75, cex.axis = 0.75, cex.main = 1.25, xaxt=&quot;n&quot;,main=expression(&quot;Gráfico da função seno  e&quot;~~integral(sen~x~dx,0,2*pi)))
+# Selecionando a cor dos pontos e pontos com pch=n, n = 1, 2,...,18, ou pch=&quot;c&quot;
+# onde c é um caracter qualquer
+axis(1, at = seq(0, 2*pi, by = pi/2),labels = c(&quot;0&quot;, expression(pi/2), expression(pi), expression(3*pi/2), expression(2*pi)),cex.axis = 0.75)
+# Traçando as linhas dos gráficos
+lines(x,sin(x), col =1, lty = 1, type = &quot;l&quot;)
+# Traçando pontos no gráfico 
+points(c(0,pi/2,pi,3/2*pi,2*pi),c(sin(0),sin(pi/2),sin(pi),sin(3/2*pi),sin(2*pi)), col = &quot;gold&quot;, pch = 22)
+# Traçando uma linhas horizontal e vertical nos principais valores do seno 
+abline(v = c(0,pi/2,pi,3/2*pi,2*pi), h = c(sin(0),sin(pi/2),sin(pi),sin(3/2*pi),sin(2*pi)), col = &quot;gray70&quot;, lty = 1)
+# Adicionando Legenda
+legend(&quot;bottomright&quot;, col = c(&quot;black&quot;),lty = 1, cex = 1.7, legend = c(&quot;y = sen(x)&quot;),bty=&#39;n&#39;)
+
+# Área sob a cauda à esquerda da direita
+x &lt;- seq(0,2*pi, length = 100)
+fx &lt;- function(x) sin(x)
+fx &lt;- fx(x) 
+polygon(rbind(cbind(rev(x),0),cbind(x,fx)), col=&quot;yellow&quot;, density=20,border = &quot;black&quot;, lty = 2)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="grafico-8" class="section level2">
+<h2>GRÁFICO 8</h2>
+<pre class="r"><code>x&lt;- seq(-1, 5, by = 0.001)
+y&lt;- seq(-1, 5, by = 0.001)
+matplot(x , y, xaxt = &quot;n&quot;, axes = F, type = &quot;n&quot;, ylim = c(-1,5), xlim=c(-1,3))
+  
+## Função  - f(x) 
+fx &lt;- x^2
+## Plota o gráfico f(x) 
+matplot(x , fx, type = &quot;l&quot;, lty = 2, add = T)
+
+## Função  - g(x) 
+gx&lt;- -x^2+4*x
+## Plota o gráfico g(x) 
+matplot(x, gx, mgp=c(2,1,0), type = &quot;l&quot;, xlab = &quot;x&quot; , add=T, ylab = &quot;y&quot;, cex.lab = 0.75, cex.axis = 0.75, cex.main = 2,
+        main=expression(&#39;Coordenadas Polares&#39;:~~r==1 + sin(t)~~~r==3*sin(t)))    
+## Inserindo uma caixa
+box()
+
+## Traçando uma linhas horizontal e vertical nos eixos principais  
+abline(v=seq(-2,4,1), h=seq(-2,4,1), lty=2, col = &quot;gray70&quot;)
+abline(v = 0 , h = 0)
+axis(1, at=seq(-1,3,1), cex.axis=1)
+axis(2, at=seq(-1,5,1), cex.axis=1)
+
+## Pontos de interseção, das curvas f(x) e g(x)
+x &lt;- c(0 , 2)
+y &lt;- x^2 
+matplot(x,y, pch = 7 , add = T)
+ 
+## Áreas entre curvas
+x&lt;- seq(0, 2, by = 0.001)
+y&lt;- seq(0, 4, by = 0.001) 
+fx &lt;- x^2
+gx&lt;- -x^2+4*x  
+# Integração da Área em relação a equação do círculo
+polygon( c(x,rev(x)), c(fx,rev(gx)),col=&quot;gray30&quot;, density=20,
+border = &quot;black&quot;, lty = 2)
+title(&quot;Áreas entre curvas - I&quot;)  </code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="grafico-9" class="section level2">
+<h2>GRÁFICO 9</h2>
+<pre class="r"><code>## Trevo de quatro folhas em coordenadas polares 
+t&lt;-seq(0, 2*pi, 0.001)
+r &lt;- 2*cos(2*t)
+x&lt;-r*cos(t)
+y&lt;-r*sin(t)
+
+## Desenha o trevo de quatro folhas 
+plot(x,y,type=&quot;l&quot;,col=&quot;black&quot;, lty = 1 , xlab=&quot;x&quot;, ylab=&quot;y&quot;, cex.axis=0.7,main=&quot;Trevo de quatro Folhas em Coordenadas Polares&quot;,
+     cex.main = 1, mgp=c(2,1,0))
+   
+## Traça as linhas verticais e horizontais
+abline(v=seq(-2,2,1), h=seq(-2,2,1), lty=2, col = &quot;gray70&quot;)
+abline (v=0, h=0)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="grafico-10" class="section level2">
+<h2>GRÁFICO 10</h2>
+<pre class="r"><code>## Área da elípse na forma paramétrica 
+t&lt;-seq(0, 2*pi, 0.001)
+x&lt;-3*cos(t)
+y&lt;-2*sin(t)
+
+## Desenha o trevo de quatro folhas 
+plot(x,y,type=&quot;l&quot;,col=&quot;black&quot;, lty = 1 , xlab=&quot;x&quot;, ylab=&quot;y&quot;, cex.axis=0.7, main=&quot;Área da Elípse - Equações na Forma Paramétrica&quot;,
+     cex.main = 1, mgp=c(2,1,0))
+polygon(rbind(cbind(rev(x),y),cbind(x,y)), col=&quot;gray80&quot;, border = &quot;gray80&quot;,density = 100)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+<div id="grafico-11---funcao-gama" class="section level2">
+<h2>GRÁFICO 11 - Função Gama</h2>
+<pre class="r"><code>###################################################
+###  Função Gama 
+###################################################
+curve(gamma(x),from=0.1,to=5,ylab=&quot;&quot;)
+mtext(expression(Gamma(alpha)),side=2,at=12,line=2)
+abline(h=c(1,2,6,24,120),col=&quot;gray&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="grafico-12" class="section level2">
+<h2>GRÁFICO 12</h2>
+<pre class="r"><code>#### Persp
+x &lt;- seq(-10, 10, length=50)
+y &lt;- x
+f &lt;- function(x,y) { r &lt;- sqrt(x^2+y^2)
+r = 10 * sin(r)/r
+}
+z &lt;- outer(x, y, f)
+
+z[is.na(z)] &lt;- 1
+a&lt;-persp(x, y, z, theta = 30, phi = 30, expand = 0.5, col = &quot;lightblue&quot;,shade=.5,xlab = &quot;X&quot;, ylab = &quot;Y&quot;, zlab = &quot;Z&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<pre class="r"><code># Faz uma imagem no R2
+image(x,y,z)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
+</div>
+<div id="grafico-13" class="section level2">
+<h2>GRÁFICO 13</h2>
+<pre class="r"><code>#####scatterplot3d
+#install.packages(&#39;scatterplot3d&#39;)
+library(scatterplot3d)
+ta &lt;-seq(0, 2*pi, length = 150)
+x &lt;- c(sin(ta)%*% t(rep(3, 150)))
+y &lt;- c(rep(3,150) %*% t(sin(ta)))
+z &lt;- c(rep(3,150) %*% t(cos(ta)))   
+
+scatterplot3d(x, y, z,main=&quot;Cilindro&quot;, pch=20, highlight.3d = F, type = &quot;l&quot;,
+color= &quot;gray90&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<pre class="r"><code># Emprego da função scatterplot3d
+s3d &lt;- scatterplot3d(x, y, z,main=&quot;Cone de Revolução&quot;, pch=1, highlight.3d=FALSE, axis=TRUE, box=T, color=&quot;gray70&quot;,
+                     xlim=c(-3,3), ylim=c(-3,3),zlim=c(-3,3), angle=45, lty.grid=1, grid = TRUE, cex.lab=0.7, cex.axis=0.8,
+                     font.axis=0.8, col.grid=&quot;gray70&quot;, type=&quot;l&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+</div>
+<div id="grafico-14" class="section level2">
+<h2>GRÁFICO 14</h2>
+<pre class="r"><code>x &lt;- seq(0, 10,length = 1000)
+y &lt;- 1/x
+matplot(x, y,  axes=F, type=&quot;n&quot;, xlim=c(1, 7), ylim=c(0, 1), xlab=&quot;x&quot;, ylab=&quot;f (x)&quot;,cex.main=0.85,font.main=1,font.axis=1,
+        cex.lab=0.75, font.lab=1, mgp=c(2,1,0), main=expression(Gráfico~das~funções:~1/x~~e~~1/x^2))
+
+# Traçando o gráfico da função: 1/x 
+x  &lt;- x[x &gt;= 1  &amp;  x &lt;= 7]
+fx &lt;- 1/x
+matplot(x, fx, type = &quot;l&quot;, lty=1, add=T)
+#  Adicionando texto no corpo do gráfico da função f(x0 = 1/x
+text(5, 0.26, expression(1/x), cex=0.7)
+
+# Traçando o gráfico das funções: 1/x e  1/x^2
+gx = 1/x^2
+matplot(x, gx, type = &quot;l&quot;, lty=2, add=T)
+#  Adicionando texto no corpo do gráfico: funções
+text(3.5, 0.16, expression(1/x^2), cex=0.7)
+# Plotando o beta
+abline(v = 6, lty = 3)
+
+# Definindo os eixos coordenados
+axis(1, at=seq(1,7,1), cex.axis=0.7, labels = expression(1,2,3,4,5,beta,&quot;&quot;))
+axis(2, at=seq(0,1,0.5), cex.axis=0.7)
+box()
+abline (v=0, h=0)
+abline (v=1, lty = 2)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+</div>
+<div id="outros-graficos" class="section level1">
+<h1>Outros Gráficos</h1>
+<pre class="r"><code>### &lt;code r&gt;
+a &lt;- c(3.4, 4.3)
+b &lt;- c(.53, .56)
+
+aRange &lt;- c(0, 6)
+bRange &lt;- c(0, .6)
+
+a1 &lt;- t(scale(a-aRange[1], center=F, scale=diff(aRange)))
+b1 &lt;- t(scale(b-bRange[1], center=F, scale=diff(bRange)))
+
+plot1 &lt;- barplot(-a1, col=8, bor=&quot;light gray&quot;, horiz=T, beside=F, xlim=c(-1,1), axes=F, space=NULL, 
+                 names.arg=c(&quot;1985-1991&quot;,&quot;1991-1999&quot;), cex.names=.75, ylab=&quot;Time Interval&quot;)
+plot2 &lt;- barplot(b1,  col=8, bor=&quot;light gray&quot;, horiz=T, beside=F, xlim=c(-1,1), axes=F, space=NULL, add=T)
+
+axis(1, cex.axis=.75, seq(-1,0,len=2), rev(aRange))
+axis(3, cex.axis=.75, seq(0,1,len=2), bRange)
+abline(v=0, lty=1)
+abline(v=.54/.6, lwd=1, col=&quot;red&quot;, lty=2)
+
+text(x=-a1+.1, y=plot1, labels=round(a,2), cex=.6, col=1, xpd=TRUE)
+text(x=b1-.1,  y=plot2, labels=round(b,2),   cex=.6, col=1, xpd=TRUE)
+
+title(xlab=&quot;Interval change Area (percent of map)&quot;, cex.lab=.75, adj=0)
+title(xlab=&quot;Anual change Area (percent of map)&quot;, cex.lab=.75, adj=1)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<pre class="r"><code>### &lt;/code&gt;
+
+### &lt;code r&gt;
+aRange &lt;- c(-10,0)
+bRange &lt;- c(100000,200000)
+
+set.seed(765)
+a &lt;- runif(5, -10, -1)
+b &lt;- runif(5, 110000, 200000)
+
+a1 &lt;- t(scale(a-aRange[1], center=F, scale=diff(aRange)))
+b1 &lt;- t(scale(b-bRange[1], center=F, scale=diff(bRange)))
+
+plot1 &lt;- barplot(rbind(a1, b1), col=c(2,3), horiz=T, beside=T, xlim=c(0,1),
+                 names.arg=LETTERS[1:5], axes=F)
+axis(1, cex.axis=.75, seq(0,1,len=2), c(-10,0))
+axis(3, cex.axis=.75, seq(0,1,len=2), c(&quot;100.000&quot;, &quot;200.000&quot;))
+abline(v=c(.25,.5,.75), lty=2)
+text(x=a1-.025, y=plot1[1,], labels=round(a,2), cex=.6, col=1, xpd=TRUE)
+text(x=b1-.025, y=plot1[2,], labels=round(b),   cex=.6, col=1, xpd=TRUE)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<pre class="r"><code>sapply(c(&#39;ggplot2&#39;,&#39;plyr&#39;,&#39;reshape2&#39;,&#39;scales&#39;),library,char=T)</code></pre>
+<pre><code>      ggplot2          plyr             reshape2         scales          
+ [1,] &quot;moments&quot;        &quot;moments&quot;        &quot;moments&quot;        &quot;moments&quot;       
+ [2,] &quot;knitrBootstrap&quot; &quot;knitrBootstrap&quot; &quot;knitrBootstrap&quot; &quot;knitrBootstrap&quot;
+ [3,] &quot;rmarkdown&quot;      &quot;rmarkdown&quot;      &quot;rmarkdown&quot;      &quot;rmarkdown&quot;     
+ [4,] &quot;ggmap&quot;          &quot;ggmap&quot;          &quot;ggmap&quot;          &quot;ggmap&quot;         
+ [5,] &quot;spdep&quot;          &quot;spdep&quot;          &quot;spdep&quot;          &quot;spdep&quot;         
+ [6,] &quot;Matrix&quot;         &quot;Matrix&quot;         &quot;Matrix&quot;         &quot;Matrix&quot;        
+ [7,] &quot;rgdal&quot;          &quot;rgdal&quot;          &quot;rgdal&quot;          &quot;rgdal&quot;         
+ [8,] &quot;maptools&quot;       &quot;maptools&quot;       &quot;maptools&quot;       &quot;maptools&quot;      
+ [9,] &quot;sp&quot;             &quot;sp&quot;             &quot;sp&quot;             &quot;sp&quot;            
+[10,] &quot;nlme&quot;           &quot;nlme&quot;           &quot;nlme&quot;           &quot;nlme&quot;          
+[11,] &quot;ggdendro&quot;       &quot;ggdendro&quot;       &quot;ggdendro&quot;       &quot;ggdendro&quot;      
+[12,] &quot;latticeExtra&quot;   &quot;latticeExtra&quot;   &quot;latticeExtra&quot;   &quot;latticeExtra&quot;  
+[13,] &quot;RColorBrewer&quot;   &quot;RColorBrewer&quot;   &quot;RColorBrewer&quot;   &quot;RColorBrewer&quot;  
+[14,] &quot;lattice&quot;        &quot;lattice&quot;        &quot;lattice&quot;        &quot;lattice&quot;       
+[15,] &quot;scales&quot;         &quot;scales&quot;         &quot;scales&quot;         &quot;scales&quot;        
+[16,] &quot;reshape2&quot;       &quot;reshape2&quot;       &quot;reshape2&quot;       &quot;reshape2&quot;      
+[17,] &quot;plyr&quot;           &quot;plyr&quot;           &quot;plyr&quot;           &quot;plyr&quot;          
+[18,] &quot;ggplot2&quot;        &quot;ggplot2&quot;        &quot;ggplot2&quot;        &quot;ggplot2&quot;       
+[19,] &quot;scatterplot3d&quot;  &quot;scatterplot3d&quot;  &quot;scatterplot3d&quot;  &quot;scatterplot3d&quot; 
+[20,] &quot;stats&quot;          &quot;stats&quot;          &quot;stats&quot;          &quot;stats&quot;         
+[21,] &quot;graphics&quot;       &quot;graphics&quot;       &quot;graphics&quot;       &quot;graphics&quot;      
+[22,] &quot;grDevices&quot;      &quot;grDevices&quot;      &quot;grDevices&quot;      &quot;grDevices&quot;     
+[23,] &quot;utils&quot;          &quot;utils&quot;          &quot;utils&quot;          &quot;utils&quot;         
+[24,] &quot;datasets&quot;       &quot;datasets&quot;       &quot;datasets&quot;       &quot;datasets&quot;      
+[25,] &quot;methods&quot;        &quot;methods&quot;        &quot;methods&quot;        &quot;methods&quot;       
+[26,] &quot;base&quot;           &quot;base&quot;           &quot;base&quot;           &quot;base&quot;          </code></pre>
+<pre class="r"><code># data
+set.seed(1234)
+x &lt;- 1:20
+y1 &lt;- rnorm(20, 5, 1)
+y2 &lt;- rnorm(20,20, 2)
+y3 &lt;- rnorm(20,5, 3)
+# plot
+par(mar=c(5,4,4,5)+.1)
+plot(x,y1,type=&quot;l&quot;,col=&quot;red&quot;, ylab = &quot;Y1/Y3&quot;)
+points (x,y3, col = &quot;green4&quot;, pch = 19)
+
+par(new=TRUE)
+plot(x, y2, type=&quot;l&quot;,col=&quot;blue&quot;,xaxt=&quot;n&quot;,yaxt=&quot;n&quot;,xlab=&quot;&quot;,ylab=&quot;&quot;)
+axis(4)
+mtext(&quot;y2&quot;,side=4,line=3)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-24-3.png" width="672" /></p>
+<pre class="r"><code>#install.packages(&#39;latticeExtra&#39;)
+library(latticeExtra)
+library(lattice)
+
+data(SeatacWeather)
+head(SeatacWeather)</code></pre>
+<pre><code>    month day year max.temp record.max normal.max min.temp record.min
+1 January   1 2007       43         58         45       34         10
+2 January   2 2007       56         56         45       45          6
+3 January   3 2007       48         58         45       43          6
+4 January   4 2007       42         61         45       37         14
+5 January   5 2007       43         55         45       31         15
+6 January   6 2007       44         57         45       36         14
+  normal.min precip record.precip normal.precip time.max time.min
+1         35   0.13          1.37          0.17     1509       13
+2         35   1.77          1.51          0.17     1000      135
+3         35   1.01          1.01          0.17     1411      713
+4         36   0.06          1.56          0.17     1535     1732
+5         36   0.19          1.33          0.17     1312       55
+6         36     NA          1.22          0.17       23      809</code></pre>
+<pre class="r"><code>tempatures &lt;- xyplot(min.temp + max.temp ~ day | month, data = SeatacWeather, type = &quot;l&quot;, layout = c(3, 1))
+tempatures</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-24-4.png" width="672" /></p>
+<pre class="r"><code>rainfall &lt;- xyplot(precip ~ day | month, data = SeatacWeather, type = &quot;h&quot;, lwd = 4)
+rainfall</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-24-5.png" width="672" /></p>
+<pre class="r"><code>rain &lt;- barchart(precip ~ day | month,data = SeatacWeather, layout = c(3,1))
+rain</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-24-6.png" width="672" /></p>
+<pre class="r"><code>doubleYScale(tempatures, rainfall, style1 = 0, style2 = 3, add.ylab2 = TRUE,text = c(&quot;min. T&quot;, &quot;max. T&quot;, &quot;rain&quot;), columns = 3)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-24-7.png" width="672" /></p>
+</div>
+<div id="dendograma" class="section level1">
+<h1>Dendograma</h1>
+<pre class="r"><code>###### Dendograma
+
+set.seed(1234)
+P &lt;- vector()
+DF &lt;- as.data.frame(matrix(rep(NA, 100), nrow=10))
+names(DF) &lt;- c(paste(&quot;M&quot;,1:10, sep=&quot;&quot;))
+for(i in 1:10) {
+DF[,i] &lt;- rnorm(10, 10, 3)
+}
+rownames (DF) &lt;- paste(&quot;O&quot;, 1:10, sep = &quot;&quot;)
+
+library(ggplot2)
+library(ggdendro)
+hclt &lt;- hclust(dist(DF))
+p &lt;- ggdendrogram(hclt, rotate=FALSE, size=2, theme_dendro = FALSE, color=&quot;tomato&quot;)
+print(p)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<pre class="r"><code>dhc &lt;- as.dendrogram(hclt)
+# Rectangular lines
+ddata &lt;- dendro_data(dhc, type=&quot;rectangle&quot;)
+p &lt;- ggplot(segment(ddata)) + geom_segment(aes(x=x, y=y, xend=xend, yend=yend), col = &quot;purple&quot;, size = 2)+ coord_flip() + scale_y_reverse(expand=c(0.2, 0))+ theme_bw()
+print(p)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-25-2.png" width="672" /></p>
+</div>
+<div id="pacote-ggplot" class="section level1">
+<h1>Pacote <code>ggplot</code></h1>
+<pre class="r"><code>library(ggplot2)
+head(mtcars)</code></pre>
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<pre class="r"><code>p &lt;- qplot(wt, mpg, col = hp, data = mtcars)
+p + coord_cartesian(ylim = c(0, 40))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<pre class="r"><code>p + scale_colour_continuous(breaks = c(100, 300))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<pre class="r"><code>p + guides(colour = &quot;colourbar&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-3.png" width="672" /></p>
+<pre class="r"><code># Use a different data frame
+m &lt;- mtcars[1:10, ]
+p %+% m</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-4.png" width="672" /></p>
+<pre class="r"><code>### Adding objects to a theme object
+# Compare these results of adding theme objects to other theme objects
+add_el &lt;- theme_grey() + theme(text = element_text(family = &quot;Times&quot;))
+rep_el &lt;- theme_grey() %+replace% theme(text = element_text(family = &quot;Times&quot;))
+
+#df &lt;- data.frame(x = 1, y = 1, colour = 1, label = 1, pch = 1)
+#aes_auto(df)
+#aes_auto(names(df))
+#df &lt;- data.frame(xp = 1, y = 1, colour = 1, txt = 1, foo = 1)
+#aes_auto(df, x = xp, label = txt)
+#aes_auto(names(df), x = xp, label = txt)
+#df &lt;- data.frame(foo = 1:3)
+#aes_auto(df, x = xp, y = yp)
+#aes_auto(df)
+
+c &lt;- ggplot(mtcars, aes(factor(cyl)))
+c + geom_bar()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-5.png" width="672" /></p>
+<pre class="r"><code>c + geom_bar(fill = &quot;red&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-6.png" width="672" /></p>
+<pre class="r"><code>c + geom_bar(colour = &quot;red&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-7.png" width="672" /></p>
+<pre class="r"><code>c + geom_bar(fill = &quot;white&quot;, colour = &quot;red&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-8.png" width="672" /></p>
+<pre class="r"><code>k &lt;- ggplot(mtcars, aes(factor(cyl), fill = factor(vs)))
+k + geom_bar()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-9.png" width="672" /></p>
+<pre class="r"><code>b &lt;- ggplot(economics, aes(x = date, y = unemploy))
+b + geom_line()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-10.png" width="672" /></p>
+<pre class="r"><code>b + geom_line(colour = &quot;green&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-11.png" width="672" /></p>
+<pre class="r"><code>b + geom_point()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-12.png" width="672" /></p>
+<pre class="r"><code>b + geom_point(colour = &quot;red&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-13.png" width="672" /></p>
+<pre class="r"><code># For large datasets with overplotting the alpha
+# aesthetic will make the points more transparent
+df &lt;- data.frame(x = rnorm(5000), y = rnorm(5000))
+h &lt;- ggplot(df, aes(x,y))
+h + geom_point()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-14.png" width="672" /></p>
+<pre class="r"><code>h + geom_point(alpha = 0.5)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-15.png" width="672" /></p>
+<pre class="r"><code>h + geom_point(alpha = 1/10)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-16.png" width="672" /></p>
+<pre class="r"><code>#If a geom uses both fill and colour, alpha will only modify the fill colour
+c + geom_bar(fill = &quot;dark grey&quot;, colour = &quot;black&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-17.png" width="672" /></p>
+<pre class="r"><code>c + geom_bar(fill = &quot;dark grey&quot;, colour = &quot;black&quot;, alpha = 1/3)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-18.png" width="672" /></p>
+<pre class="r"><code>j &lt;- b + geom_line()
+yrng &lt;- range(economics$unemploy)
+j &lt;- j + geom_rect(aes(NULL, NULL, xmin = start, xmax = end, fill = party),
+                   ymin = yrng[1], ymax = yrng[2], data = presidential)
+
+library(scales) # to access the alpha function
+j + scale_fill_manual(values = alpha(c(&quot;blue&quot;, &quot;red&quot;), .3))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-19.png" width="672" /></p>
+<pre class="r"><code># By default, the group is set to the interaction of all discrete variables in the
+# plot. This often partitions the data correctly, but when it does not, or when
+# no discrete variable is used in the plot, you will need to explicitly define the
+# grouping structure, by mapping group to a variable that has a different value
+# for each group.
+# For most applications you can simply specify the grouping with
+# various aesthetics (colour, shape, fill, linetype) or with facets.
+p &lt;- ggplot(mtcars, aes(wt, mpg))
+# A basic scatter plot
+p + geom_point(size = 4)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-20.png" width="672" /></p>
+<pre class="r"><code># The colour aesthetic
+p + geom_point(aes(colour = factor(cyl)), size = 4)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-21.png" width="672" /></p>
+<pre class="r"><code># Or you can use shape to distinguish the data
+p + geom_point(aes(shape = factor(cyl)), size = 4)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-22.png" width="672" /></p>
+<pre class="r"><code># Using fill
+a &lt;- ggplot(mtcars, aes(factor(cyl)))
+a + geom_bar()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-23.png" width="672" /></p>
+<pre class="r"><code>a + geom_bar(aes(fill = factor(cyl)))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-24.png" width="672" /></p>
+<pre class="r"><code>a + geom_bar(aes(fill = factor(vs)))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-25.png" width="672" /></p>
+<pre class="r"><code># Using linetypes
+library(reshape2) # for melt
+library(plyr) # for colwise
+rescale01 &lt;- function(x) (x - min(x)) / diff(range(x))
+ec_scaled &lt;- data.frame(
+  date = economics$date,
+  colwise(rescale01)(economics[, -(1:2)]))
+ecm &lt;- melt(ec_scaled, id = &quot;date&quot;)
+f &lt;- ggplot(ecm, aes(date, value))
+f + geom_line(aes(linetype = variable))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-26.png" width="672" /></p>
+<pre class="r"><code># Using facets
+k &lt;- ggplot(diamonds, aes(carat, ..density..)) + geom_histogram(binwidth = 0.2)
+k + facet_grid(. ~ cut)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-27.png" width="672" /></p>
+<pre class="r"><code># There are three common cases where the default is not enough, and we
+# will consider each one below. In the following examples, we will use a simple
+# longitudinal dataset, Oxboys, from the nlme package. It records the heights
+# (height) and centered ages (age) of 26 boys (Subject), measured on nine
+# occasions (Occasion).
+# Multiple groups with one aesthetic
+library(nlme)
+h &lt;- ggplot(Oxboys, aes(age, height))
+# A single line tries to connect all the observations
+h + geom_line()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-28.png" width="672" /></p>
+<pre class="r"><code># The group aesthetic maps a different line for each subject
+h + geom_line(aes(group = Subject))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-29.png" width="672" /></p>
+<pre class="r"><code># Different groups on different layers
+h &lt;- h + geom_line(aes(group = Subject))
+# Using the group aesthetic with both geom_line() and geom_smooth()
+# groups the data the same way for both layers
+h + geom_smooth(aes(group = Subject), method = &quot;lm&quot;, se = FALSE)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-30.png" width="672" /></p>
+<pre class="r"><code># Changing the group aesthetic for the smoother layer
+# fits a single line of best fit across all boys
+h + geom_smooth(aes(group = 1), size = 2, method = &quot;lm&quot;, se = FALSE)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-31.png" width="672" /></p>
+<pre class="r"><code># Overriding the default grouping
+# The plot has a discrete scale but you want to draw lines that connect across
+# groups. This is the strategy used in interaction plots, profile plots, and parallel
+# coordinate plots, among others. For example, we draw boxplots of height at
+# each measurement occasion
+boysbox &lt;- ggplot(Oxboys, aes(Occasion, height))
+boysbox + geom_boxplot()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-32.png" width="672" /></p>
+<pre class="r"><code># There is no need to specify the group aesthetic here; the default grouping
+# works because occasion is a discrete variable. To overlay individual trajectories
+# we again need to override the default grouping for that layer with aes(group = Subject)
+boysbox &lt;- boysbox + geom_boxplot()
+boysbox + geom_line(aes(group = Subject), colour = &quot;blue&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-33.png" width="672" /></p>
+<pre class="r"><code># Use the order aesthetic to change stacking order of bar charts
+w &lt;- ggplot(diamonds, aes(clarity, fill = cut))
+w + geom_bar()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-34.png" width="672" /></p>
+<pre class="r"><code>w + geom_bar(aes(order = desc(cut)))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-35.png" width="672" /></p>
+<pre class="r"><code># Can also be used to change plot order of scatter plots
+d &lt;- ggplot(diamonds, aes(carat, price, colour = cut))
+d + geom_point()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-36.png" width="672" /></p>
+<pre class="r"><code>d + geom_point(aes(order = sample(seq_along(carat))))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-37.png" width="672" /></p>
+<pre class="r"><code>dmod &lt;- lm(price ~ cut, data = diamonds)
+summary(dmod)</code></pre>
+<pre><code>
+Call:
+lm(formula = price ~ cut, data = diamonds)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -4258  -2741  -1494   1360  15348 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  4062.24      25.40 159.923  &lt; 2e-16 ***
+cut.L        -362.73      68.04  -5.331  9.8e-08 ***
+cut.Q        -225.58      60.65  -3.719    2e-04 ***
+cut.C        -699.50      52.78 -13.253  &lt; 2e-16 ***
+cut^4        -280.36      42.56  -6.588  4.5e-11 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 3964 on 53935 degrees of freedom
+Multiple R-squared:  0.01286,   Adjusted R-squared:  0.01279 
+F-statistic: 175.7 on 4 and 53935 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>cuts &lt;- data.frame(cut = unique(diamonds$cut), predict(dmod, data.frame(cut =unique(diamonds$cut)), se = TRUE)[c(&quot;fit&quot;, &quot;se.fit&quot;)])
+cuts</code></pre>
+<pre><code>        cut      fit   se.fit
+1     Ideal 3457.542 27.00121
+2   Premium 4584.258 33.75352
+3      Good 3928.864 56.59175
+4 Very Good 3981.760 36.06181
+5      Fair 4358.758 98.78795</code></pre>
+<pre class="r"><code>se &lt;- ggplot(cuts, aes(x = cut, y = fit, ymin = fit - se.fit,ymax = fit + se.fit, colour = cut))
+se + geom_pointrange()</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-38.png" width="672" /></p>
+<pre class="r"><code>library(plyr)
+abc &lt;- adply(matrix(rnorm(100), ncol = 5), 2, quantile, c(0, .25, .5, .75, 1))
+b &lt;- ggplot(abc, aes(x = X1, ymin = &quot;0%&quot;, lower = &quot;25%&quot;,
+                     middle = &quot;50%&quot;, upper = &quot;75%&quot;, ymax = &quot;100%&quot;))
+#b + geom_boxplot(stat = &quot;identity&quot;)
+p &lt;- ggplot(mtcars, aes(wt, mpg)) + geom_point()
+p + annotate(&quot;rect&quot;, xmin = 2, xmax = 3.5, ymin = 2, ymax = 25,
+             fill = &quot;dark grey&quot;, alpha = .5)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-39.png" width="672" /></p>
+<pre class="r"><code># Geom_segment examples
+library(grid)
+p + geom_segment(aes(x = 2, y = 15, xend = 2, yend = 25),
+                 arrow = arrow(length = unit(0.5, &quot;cm&quot;)))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-40.png" width="672" /></p>
+<pre class="r"><code>p + geom_segment(aes(x = 2, y = 15, xend = 3, yend = 15),
+                 arrow = arrow(length = unit(0.5, &quot;cm&quot;)))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-41.png" width="672" /></p>
+<pre class="r"><code>p + geom_segment(aes(x = 5, y = 30, xend = 3.5, yend = 25),
+                 arrow = arrow(length = unit(0.5, &quot;cm&quot;)))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-42.png" width="672" /></p>
+<pre class="r"><code># You can also use geom_segment to recreate plot(type = &quot;h&quot;) :
+counts &lt;- as.data.frame(table(x = rpois(100, 5)))
+counts$x &lt;- as.numeric(as.character(counts$x))
+with(counts, plot(x, Freq, type = &quot;h&quot;, lwd = 10))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-43.png" width="672" /></p>
+<pre class="r"><code>qplot(x, Freq, data = counts, geom = &quot;segment&quot;, yend = 0, xend = x,
+      size = I(10))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-44.png" width="672" /></p>
+<pre class="r"><code>p &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p + annotate(&quot;text&quot;, x = 4, y = 25, label = &quot;Some text&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-45.png" width="672" /></p>
+<pre class="r"><code>p + annotate(&quot;text&quot;, x = 2:5, y = 25, label = &quot;Some text&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-46.png" width="672" /></p>
+<pre class="r"><code>p + annotate(&quot;rect&quot;, xmin = 3, xmax = 4.2, ymin = 12, ymax = 21,
+             alpha = .2)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-47.png" width="672" /></p>
+<pre class="r"><code>p + annotate(&quot;segment&quot;, x = 2.5, xend = 4, y = 15, yend = 25,
+             colour = &quot;blue&quot;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-48.png" width="672" /></p>
+<pre class="r"><code>p + annotate(&quot;pointrange&quot;, x = 3.5, y = 20, ymin = 12, ymax = 28,
+             colour = &quot;red&quot;, size = 1.5)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-49.png" width="672" /></p>
+<pre class="r"><code>p + annotate(&quot;text&quot;, x = 2:3, y = 20:21, label = c(&quot;my label&quot;, &quot;label 2&quot;))</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-26-50.png" width="672" /></p>
+</div>
+<div id="mapas" class="section level1">
+<h1>Mapas</h1>
+<pre class="r"><code>rm(list=ls())
+### o mapa foi carregado do site do IBGE em
+### ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2014/PR/
+#download.file(&#39;ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2014/PR/pr_municipios.zip&#39;,
+#              destfile=&#39;pr_municipios.zip&#39;)
+#unzip(&#39;pr_municipios.zip&#39;)
+#dir()
+#file.info(&#39;pr_municipios.zip&#39;)
+#file.exists(&#39;pr_municipios.zip&#39;)
+#file.remove(&quot;pr_municipios.zip&quot;)
+#file.exists(&#39;pr_municipios.zip&#39;)
+
+
+
+### salve os arquivos. Pelo menos aqueles com extensao .shp, .shx e .dbf
+
+### carregando pacotes necessários
+library(maptools)
+library(rgdal)
+library(sp)
+library(spdep)
+### lendo o mapa do Paraná
+PR&lt;-readOGR(&#39;.&#39;,layer=&#39;41MUE250GC_SIR&#39;)</code></pre>
+<pre><code>OGR data source with driver: ESRI Shapefile 
+Source: &quot;.&quot;, layer: &quot;41MUE250GC_SIR&quot;
+with 399 features
+It has 2 fields</code></pre>
+<pre class="r"><code>getwd()</code></pre>
+<pre><code>[1] &quot;/home/felipe/Documentos/PBE/Estagio_Docencia/site&quot;</code></pre>
+<pre class="r"><code>### visualizando
+plot(PR)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<pre class="r"><code>### atributos dos municipios (variáveis)
+names(PR)</code></pre>
+<pre><code>[1] &quot;NM_MUNICIP&quot; &quot;CD_GEOCMU&quot; </code></pre>
+<pre class="r"><code>head(PR$CD_GEOCODM)</code></pre>
+<pre><code>NULL</code></pre>
+<pre class="r"><code>### bounding box
+bbox(PR)</code></pre>
+<pre><code>        min       max
+x -54.61930 -48.02354
+y -26.71712 -22.51630</code></pre>
+<pre class="r"><code>### atributos/elementos do objeto
+names(attributes(PR))</code></pre>
+<pre><code>[1] &quot;data&quot;        &quot;polygons&quot;    &quot;plotOrder&quot;   &quot;bbox&quot;        &quot;proj4string&quot;
+[6] &quot;class&quot;       &quot;comment&quot;    </code></pre>
+<pre class="r"><code>### inspecionando os atributos (dados) dos munic?pios
+dim(PR@data)</code></pre>
+<pre><code>[1] 399   2</code></pre>
+<pre class="r"><code>####
+### Obtenção dos dados de densidade demográfica do PR
+### - no site do IBGE &lt;http://cidades.ibge.gov.br/download/mapa_e_municipios.php?lang=&amp;uf=pr&gt;
+
+# Obtenção dos dados sobre analfabetismo no PR
+# - no site do datasus &lt;http://tabnet.datasus.gov.br/cgi/tabcgi.exe?ibge/censo/cnv/alfpr.def&gt;
+
+### lendo dados de desnidade demográfica de 2010
+alf &lt;- read.csv2(&quot;PR.IBGE.csv&quot;,h=T)
+dim(alf)</code></pre>
+<pre><code>[1] 400   8</code></pre>
+<pre class="r"><code>alf[1:10,]</code></pre>
+<pre><code>           Municípios  Código          Gentílico Pop2010 Áreaterritorial
+1              Abatiá 4100103          abatiense    7764          228.72
+2        Adrianópolis 4100202    adrianopolitano    6376         1349.35
+3         AgudosdoSul 4100301    agudense-do-sul    8270          192.26
+4  AlmiranteTamandaré 4100400      tamandareense  103204          194.74
+5    AltamiradoParaná 4100459        altamirense    4306          386.95
+6         AltoParaíso 4128625     altoparaisense    3206          967.77
+7          AltoParaná 4100608    alto-paranaense   13663          407.72
+8         AltoPiquiri 4100707    alto-piquirense   10179          447.67
+9             Altônia 4100509          altoniano   20516          661.56
+10      AlvoradadoSul 4100806 alvoradense-do-sul   10283          424.25
+   Densdemográfica Sérierevisada Taxa_de_analfabetismo
+1             34.0        120340                  16.4
+2              4.7         77345                  15.9
+3             43.0        115994                   8.2
+4            530.0       1020708                   5.8
+5             11.1         52861                  18.1
+6              3.3         53379                  15.8
+7             33.5        236319                  10.0
+8             22.7        192495                  13.1
+9             31.0        225602                  11.1
+10            24.2        178789                  10.4</code></pre>
+<pre class="r"><code>head(alf)</code></pre>
+<pre><code>          Municípios  Código       Gentílico Pop2010 Áreaterritorial
+1             Abatiá 4100103       abatiense    7764          228.72
+2       Adrianópolis 4100202 adrianopolitano    6376         1349.35
+3        AgudosdoSul 4100301 agudense-do-sul    8270          192.26
+4 AlmiranteTamandaré 4100400   tamandareense  103204          194.74
+5   AltamiradoParaná 4100459     altamirense    4306          386.95
+6        AltoParaíso 4128625  altoparaisense    3206          967.77
+  Densdemográfica Sérierevisada Taxa_de_analfabetismo
+1            34.0        120340                  16.4
+2             4.7         77345                  15.9
+3            43.0        115994                   8.2
+4           530.0       1020708                   5.8
+5            11.1         52861                  18.1
+6             3.3         53379                  15.8</code></pre>
+<pre class="r"><code>alf2&lt;-alf[1:399,6]
+names(alf2)</code></pre>
+<pre><code>NULL</code></pre>
+<pre class="r"><code>### Necessário colocar dados na mesma ordem do mapa
+
+### extraindo o código de municipios dos dados
+codmund &lt;- alf$Código
+
+### extraindo o código do mapa
+cod6map &lt;-PR@data[,2]
+
+### rank dos códigos no mapa
+rkmap &lt;- rank(cod6map)
+
+### códigos dos dados na ordem do mapa
+ocodd &lt;- codmund[order(codmund)[rkmap]]
+
+### verificando se estão na mesma ordem
+table(cod6map==ocodd)</code></pre>
+<pre><code>
+TRUE 
+ 399 </code></pre>
+<pre class="r"><code>### ordenando os dados de alfabetização
+odat &lt;- alf2[order(codmund)[rkmap] ]
+
+### criando 5 categorias
+cat5 &lt;- findInterval(odat[], c(0, 25, 50, 100, 150))
+table(cat5)</code></pre>
+<pre><code>cat5
+  1   2   3   4   5 
+198 124  48   9  20 </code></pre>
+<pre class="r"><code>### cinco cores
+cores5 &lt;- rev(heat.colors(5))
+cores5</code></pre>
+<pre><code>[1] &quot;#FFFF80FF&quot; &quot;#FFFF00FF&quot; &quot;#FFAA00FF&quot; &quot;#FF5500FF&quot; &quot;#FF0000FF&quot;</code></pre>
+<pre class="r"><code>par(mar=c(1.0,1.0,1.0,0))
+plot(PR, col=cores5[cat5])
+legend(&quot;topright&quot;, leglabs(c(0,25,50,100,150, 10000), &quot;&lt;&quot;, &quot;&gt;&quot;),
+       fill=cores5, bty=&quot;n&quot;)
+title(&#39;\n Taxa de Densidade Demográfica \n do Paraná - 2010&#39;)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
+<pre class="r"><code>### data padronized
+dados_pad &lt;- data.frame(alf[,c(8)])
+
+### neighboorhod list
+pr.nb &lt;- poly2nb(PR)
+
+### calculing costs
+lcosts &lt;- nbcosts(pr.nb, dados_pad)
+
+### making listw
+nb.w &lt;- nb2listw(pr.nb, lcosts, style=&quot;S&quot;)
+
+### find a minimum spanning tree
+mst.pr &lt;- mstree(nb.w,1)
+
+### the mstree plot
+par(mar=c(0,0,0,0))
+plot(mst.pr, coordinates(PR), col=2,
+     cex.lab=.7, cex.circles=0.035, fg=&quot;blue&quot;)
+plot(PR, border=gray(.5), add=TRUE)</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-27-3.png" width="672" /></p>
+<pre class="r"><code>### three groups with no restriction
+group.res &lt;- skater(mst.pr[,1:2], dados_pad, 4, 20, rep(1,nrow(PR@data)))
+
+### groups frequency
+table(group.res$groups)</code></pre>
+<pre><code>
+  1   2   3   4   5 
+138  66  67  24 104 </code></pre>
+<pre class="r"><code>### the skater plot, using other colors
+plot(group.res, coordinates(PR), cex.circles=0.035, cex.lab=.7,
+     groups.colors=colors()[(1:length(group.res$ed))*10])</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-27-4.png" width="672" /></p>
+<pre class="r"><code>### the Spatial Polygons plot
+plot(PR, col=rev(heat.colors(5))[group.res$groups])</code></pre>
+<p><img src="graficos_files/figure-html/unnamed-chunk-27-5.png" width="672" /></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
