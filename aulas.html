@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -21,8 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -31,10 +31,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -232,21 +234,26 @@ $(document).ready(function () {
 
 <p>Abaixo o histórico das aulas.</p>
 <ul>
-<li><strong>06/03</strong>: Introdução <a href="aula1/aula1_Intro.pdf">Slides</a></li>
-<li><strong>07/03</strong>: Pesquisa/Estatística <a href="aula2/aula2_conceitos.pdf">Slides</a></li>
-<li><strong>08/03</strong>: Apresentação dos dados e medidas resumo <a href="aula3/aula3_descritiva.pdf">Slide1 -</a> <a href="aula3/Taxas_Padron.pdf">Slide2</a></li>
-<li><strong>09/03</strong>: Análise Bivariada <a href="aula4/aula4_Bivariada.pdf">Slides</a></li>
-<li><strong>23/03</strong>: Medidas de associação e Introdução a Probabilidade <a href="aula5/aula5_medidas_ass.pdf">Slides -</a> <a href="aula5/MH.pdf">Mantel-Haenszel</a></li>
-<li><strong>30/03</strong>: Testes de diagnósticos, Curva ROC e Distribuição discreta (Binomial e Poisson) <a href="aula6/aula6_variavel_aleatoria.pdf">Variável aleatória -</a> <a href="aula6/aula6_dist_discreta.pdf">Variável aleatória discreta</a></li>
-<li><strong>06/04</strong>: Distribuição contínua (Normal) e distribuição amostral para média e proporção<a href="aula7/tcl.html">Teorema Central do Linmite -</a> <a href="http://bit.ly/2osNaxL">Conceitos de distribuição amostral e erro padrão</a></li>
-<li><strong>13/04</strong>: Intervalo de confiança e tamanho da amostra para estudos transversais</li>
-<li><strong>13/04</strong>: Teste de hipótese para média, diferença de médias, normalidade e homocedasticidade <a href="aula9/Teste_Hipotese.pdf">Teste de hipótese -</a> <a href="aula9/effectsize.html">Poder do Teste e Tamanho do efeito -</a> <a href="aula8/teste_normalidade_homocedasticidade.html">Normalidade e Homocedasticidade</a></li>
-<li><strong>20/04</strong>: Teste de hipótese para proporção, diferença de proporção</li>
-<li><strong>20/04</strong>: Análise de Variância</li>
-<li><strong>27/04</strong>: Testes não-paramétricos</li>
-<li><strong>04/05</strong>: Prova</li>
-<li><strong>11/05</strong>: Seminários</li>
-<li><strong>18/05</strong>: Seminários</li>
+<li><strong>12/03</strong>: Introdução <a href="aula1/aula1_Intro.pdf">Slides</a></li>
+<li><strong>14/03</strong>: Pesquisa/Estatística <a href="aula2/aula2_conceitos.pdf">Slides</a></li>
+<li><strong>15/03</strong>: Apresentação dos dados e medidas resumo <a href="aula3/aula3_descritiva.pdf">Slide1 -</a> <a href="aula3/Taxas_Padron.pdf">Slide2</a></li>
+<li><strong>19/03</strong>: Aula magna</li>
+<li><strong>20/03</strong>: Análise Bivariada <a href="aula4/aula4_Bivariada.pdf">Slides</a></li>
+<li><strong>21/03</strong>: Medidas de associação e Introdução a Probabilidade <a href="aula5/aula5_medidas_ass.pdf">Slides -</a> <a href="aula5/MH.pdf">Mantel-Haenszel</a></li>
+<li><strong>22/03</strong>: Testes de diagnósticos, Curva ROC e Distribuição discreta (Binomial e Poisson) <a href="aula6/aula6_variavel_aleatoria.pdf">Variável aleatória -</a> <a href="aula6/aula6_dist_discreta.pdf">Variável aleatória discreta</a></li>
+<li><strong>26/03</strong>: Distribuição contínua (Normal) e distribuição amostral para média e proporção<a href="aula7/tcl.html">Teorema Central do Linmite -</a> <a href="http://bit.ly/2osNaxL">Conceitos de distribuição amostral e erro padrão</a></li>
+<li><strong>28/03</strong>: Intervalo de confiança e tamanho da amostra para estudos transversais</li>
+<li><strong>28/03</strong>: Teste de hipótese para média, diferença de médias, normalidade e homocedasticidade <a href="aula9/Teste_Hipotese.pdf">Teste de hipótese -</a> <a href="aula9/effectsize.html">Poder do Teste e Tamanho do efeito -</a> <a href="aula8/teste_normalidade_homocedasticidade.html">Normalidade e Homocedasticidade</a></li>
+<li><strong>29/03</strong>: Teste de hipótese para proporção, diferença de proporção</li>
+<li><strong>29/03</strong>: Análise de Variância</li>
+<li><strong>02/04</strong>: Testes não-paramétricos</li>
+<li><strong>05/04</strong>: Prova</li>
+<li><strong>09/04</strong>: Seminários</li>
+<li><strong>11/04</strong>: Seminários</li>
+<li><strong>12/04</strong>: Seminários</li>
+<li><strong>16/04</strong>:</li>
+<li><strong>18/04</strong>:</li>
+<li><strong>19/04</strong>:</li>
 </ul>
 
 
@@ -272,7 +279,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

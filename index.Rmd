@@ -12,26 +12,26 @@ output:
 
 <div class="alert alert-danger" role="alert">
 **ATENÇÃO!**
-
-- Prova dia: 04/05
-- Seminários dias 11/05 e 18/05
+- Dia 19/03 haverá a aula magna
 
 </div>
 
 # Detalhes da oferta da disciplina
 
 - **Curso:** Pós-Graduação em Bioestatística e Odontologia
-- **Período:** Primeiro semestre de 2017
+- **Período:** Primeiro semestre de 2018
 - **Professor Responsável:** Isolde Previdelli
 - **Horários e Locais:**
     
-    - Quintas, 13:30 - 17:30h, **Bloco E90**
+    - Segundas, 08:30 - 12:00, **Bloco E90**
+    - Quartas, 13:30 - 17:00, **Bloco E90**
+    - Quintas, 08:30 - 12:00, **Bloco E90**
 - **Frequência**: de acordo com as normas da Universidade, mínimo de $75\%$
 - **Avaliação**: será realizada 1 prova($50\%$), lista de exercícios($20\%$), apresentação de artigos($15\%$) e apresentação de um trabalho($15\%$) que poderá ser submetido aos eventos RBRAS, Workshop de Bioestatística ou Escola de Regressão.
     - A média final será a soma dos itens.
 - **Datas importantes:**
-    - **06/03**: Início do semestre letivo
-    - **31/05**: Final do semestre letivo
+    - **12/03**: Início das aulas
+    - **19/04**: Final das aulas
     
 
 # Programa da disciplina

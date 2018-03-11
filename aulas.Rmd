@@ -7,33 +7,37 @@ output:
 
 Abaixo o histórico das aulas.
 
-- **06/03**: Introdução
+- **12/03**: Introdução
   [Slides](aula1/aula1_Intro.pdf)
-- **07/03**: Pesquisa/Estatística
+- **14/03**: Pesquisa/Estatística
   [Slides](aula2/aula2_conceitos.pdf)
-- **08/03**: Apresentação dos dados e medidas resumo
+- **15/03**: Apresentação dos dados e medidas resumo
   [Slide1 -](aula3/aula3_descritiva.pdf)
   [Slide2](aula3/Taxas_Padron.pdf)
-- **09/03**: Análise Bivariada
+- **19/03**: Aula magna
+- **20/03**: Análise Bivariada
   [Slides](aula4/aula4_Bivariada.pdf)
-- **23/03**: Medidas de associação e Introdução a Probabilidade
+- **21/03**: Medidas de associação e Introdução a Probabilidade
   [Slides -](aula5/aula5_medidas_ass.pdf)
   [Mantel-Haenszel](aula5/MH.pdf)
-- **30/03**: Testes de diagnósticos, Curva ROC e Distribuição discreta (Binomial e Poisson)
+- **22/03**: Testes de diagnósticos, Curva ROC e Distribuição discreta (Binomial e Poisson)
   [Variável aleatória -](aula6/aula6_variavel_aleatoria.pdf)
   [Variável aleatória discreta](aula6/aula6_dist_discreta.pdf)
-- **06/04**: Distribuição contínua (Normal) e distribuição amostral para média e proporção[Teorema Central do Linmite -](aula7/tcl.html)
+- **26/03**: Distribuição contínua (Normal) e distribuição amostral para média e proporção[Teorema Central do Linmite -](aula7/tcl.html)
   [Conceitos de distribuição amostral e erro padrão](http://bit.ly/2osNaxL)
-- **13/04**: Intervalo de confiança e tamanho da amostra para estudos transversais
-- **13/04**: Teste de hipótese para média, diferença de médias, normalidade e homocedasticidade
+- **28/03**: Intervalo de confiança e tamanho da amostra para estudos transversais
+- **28/03**: Teste de hipótese para média, diferença de médias, normalidade e homocedasticidade
   [Teste de hipótese -](aula9/Teste_Hipotese.pdf)
   [Poder do Teste e Tamanho do efeito -](aula9/effectsize.html)
   [Normalidade e Homocedasticidade](aula8/teste_normalidade_homocedasticidade.html)
-- **20/04**: Teste de hipótese para proporção, diferença de proporção 
-- **20/04**: Análise de Variância
-- **27/04**: Testes não-paramétricos
-- **04/05**: Prova
-- **11/05**: Seminários
-- **18/05**: Seminários
-
+- **29/03**: Teste de hipótese para proporção, diferença de proporção 
+- **29/03**: Análise de Variância
+- **02/04**: Testes não-paramétricos
+- **05/04**: Prova
+- **09/04**: Seminários
+- **11/04**: Seminários
+- **12/04**: Seminários
+- **16/04**: 
+- **18/04**: 
+- **19/04**: 
 
